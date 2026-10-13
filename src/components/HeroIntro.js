@@ -2,7 +2,6 @@ import React from "react";
 import logo from "../images/logo-pocket-wordmark.png";
 import photographer1 from "../images/photographer-1.png";
 import photographer2 from "../images/photographer-2.png";
-import heroVideo from "../images/product-pink.png";
 
 const HeroIntro = () => {
   return (
@@ -56,23 +55,11 @@ const HeroIntro = () => {
           *Click on Video to toggle sound
         </p>
 
-        {/* Hero video */}
-        <div className="mt-2 w-full aspect-[16/8] relative overflow-hidden">
-          <img
-            src={heroVideo}
-            alt="Showreel"
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 flex items-center justify-center">
-            <button
-              aria-label="Play video"
-              className="w-20 h-20 bg-pocketTeal/80 hover:bg-pocketTeal rounded-full flex items-center justify-center transition-colors"
-            >
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="white">
-                <polygon points="8,5 8,19 19,12" />
-              </svg>
-            </button>
-          </div>
+        {/* Hero video — text placeholder */}
+        <div className="mt-2 w-full aspect-[16/8] bg-pocketGrey/30 rounded-md flex items-center justify-center">
+          <span className="text-white font-poppins text-base md:text-lg">
+            [ Hero video placeholder ]
+          </span>
         </div>
       </div>
     </section>
