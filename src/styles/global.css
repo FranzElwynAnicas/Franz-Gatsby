@@ -1,3 +1,40 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply font-inter bg-pocketWhite text-pocketBlack antialiased;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-inter font-black;
+  }
+}
+
+@layer components {
+  .pocket-container {
+    @apply max-w-pocket mx-auto px-6 md:px-10 lg:px-16;
+  }
+  .pocket-heading-xl {
+    @apply text-4xl md:text-6xl lg:text-7xl font-black leading-[1.05] tracking-tight;
+  }
+  .pocket-heading-lg {
+    @apply text-3xl md:text-5xl lg:text-6xl font-black leading-[1.1] tracking-tight;
+  }
+  .pocket-body {
+    @apply text-base md:text-lg leading-relaxed;
+  }
+}
+
+@layer utilities {
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
