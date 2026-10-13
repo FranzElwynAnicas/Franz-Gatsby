@@ -1,21 +1,61 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { UilPlayCircle } from "@iconscout/react-unicons";
+import useDragScroll from "../hooks/useDragScroll";
 
 const categories = [
-  { title: "Beauty" },
-  { title: "Food&Drink" },
-  { title: "Product" },
-  { title: "Events" },
-  { title: "Crowdfunding" },
-  { title: "Tv Ads" },
-  { title: "HR" },
-  { title: "Education" },
-  { title: "Explainers" },
-  { title: "Social First" },
+  { title: "Beauty", video: "/videos/beauty.mp4" },
+  { title: "Food&Drink", video: "/videos/fooddrink.mp4" },
+  { title: "Product", video: "/videos/product.mp4" },
+  { title: "Events", video: "/videos/events.mp4" },
+  { title: "Crowdfunding", video: "/videos/crowdfunding.mp4" },
 ];
 
+const VideoCard = ({ title, video }) => {
+  const videoRef = useRef(null);
+  const [playing, setPlaying] = useState(false);
+
+  const togglePlay = () => {
+    if (!videoRef.current) return;
+    if (playing) {
+      videoRef.current.pause();
+      setPlaying(false);
+    } else {
+      videoRef.current.play();
+      setPlaying(true);
+    }
+  };
+
+  return (
+    <div className="w-[500px] md:w-[712px] aspect-[712/400] bg-pocketBlack rounded-xl relative overflow-hidden">
+      <video
+        ref={videoRef}
+        className="w-full h-full object-cover cursor-pointer"
+        src={video}
+        loop
+        playsInline
+        preload="metadata"
+        onClick={togglePlay}
+      />
+
+      {!playing && (
+        <button
+          onClick={togglePlay}
+          aria-label={`Play ${title} video`}
+          className="absolute inset-0 flex items-center justify-center bg-black/20 hover:bg-black/30 transition-colors"
+        >
+          <div className="w-16 h-16 md:w-20 md:h-20 bg-pocketTeal rounded-full flex items-center justify-center hover:scale-105 transition-transform">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="white" className="ml-1">
+              <polygon points="8,5 8,19 19,12" />
+            </svg>
+          </div>
+        </button>
+      )}
+    </div>
+  );
+};
+
 const VideoCategories = () => {
-  const scrollRef = useRef(null);
+  const scrollRef = useDragScroll();
 
   const scrollBy = (direction) => {
     if (!scrollRef.current) return;
@@ -29,21 +69,18 @@ const VideoCategories = () => {
   return (
     <section className="w-full min-h-screen bg-pocketLightGrey flex items-center overflow-hidden">
       <div className="w-full py-20">
-        {/* Top row — starts at 12.5% from left */}
-        <div className="pl-[12.5%] pr-8 flex items-center justify-between mb-12">
+        <div className="pl-[12.5%] pr-8 md:pr-16 flex items-center justify-between mb-12">
           <div className="flex items-center gap-4">
             <UilPlayCircle size="56" color="#179CBD" />
             <span className="text-pocketGrey font-inter text-2xl md:text-3xl lg:text-[40px] font-medium">
               Video Production
             </span>
           </div>
-
           <button className="bg-pocketTeal text-white font-bold text-lg rounded-full w-24 h-24 md:w-32 md:h-32 flex items-center justify-center hover:opacity-90 transition-opacity shrink-0">
             Let's Talk
           </button>
         </div>
 
-        {/* Carousel — also starts at 12.5% from left */}
         <div className="pl-[12.5%]">
           <div
             ref={scrollRef}
@@ -55,11 +92,7 @@ const VideoCategories = () => {
                 <h3 className="text-4xl md:text-5xl lg:text-[80px] font-black text-pocketBlack leading-none tracking-[-0.05em] mb-10">
                   {cat.title}
                 </h3>
-                <div className="w-[500px] md:w-[712px] aspect-[712/400] bg-pocketGrey/40 rounded-xl flex items-center justify-center">
-                  <span className="text-white font-poppins text-sm md:text-base">
-                    [{cat.title} video placeholder]
-                  </span>
-                </div>
+                <VideoCard title={cat.title} video={cat.video} />
               </div>
             ))}
 
@@ -71,8 +104,7 @@ const VideoCategories = () => {
           </div>
         </div>
 
-        {/* Controls — same left offset */}
-        <div className="pl-[12.5%] pr-8 mt-8">
+        <div className="pl-[12.5%] pr-8 md:pr-16 mt-8">
           <p className="text-sm md:text-base text-pocketGrey mb-3">
             *Drag to play the next Video, Click to toggle sound
           </p>

@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 
 const reviews = [
   {
@@ -29,7 +29,10 @@ const reviews = [
 
 const ReviewsSection = () => {
   const scrollRef = useRef(null);
+  const videoRef = useRef(null);
+  const [playing, setPlaying] = useState(false);
 
+  // Auto-slide reviews
   useEffect(() => {
     const timer = setInterval(() => {
       if (!scrollRef.current) return;
@@ -45,6 +48,17 @@ const ReviewsSection = () => {
     return () => clearInterval(timer);
   }, []);
 
+  const togglePlay = () => {
+    if (!videoRef.current) return;
+    if (playing) {
+      videoRef.current.pause();
+      setPlaying(false);
+    } else {
+      videoRef.current.play();
+      setPlaying(true);
+    }
+  };
+
   const allReviews = [...reviews, ...reviews];
 
   return (
@@ -52,6 +66,7 @@ const ReviewsSection = () => {
       <div className="w-full py-20">
         <div className="pl-[12.5%] pr-8 md:pr-16">
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-10 lg:gap-16 items-start mb-16">
+            {/* LEFT: Heading + Google rating */}
             <div>
               <h2 className="text-4xl md:text-6xl lg:text-[80px] font-extrabold leading-[1.1] tracking-[-0.03em] text-pocketGrey">
                 Go behind the
@@ -77,20 +92,41 @@ const ReviewsSection = () => {
               </div>
             </div>
 
+            {/* RIGHT: Behind-the-scenes video */}
             <div>
               <p className="text-pocketGrey text-base font-medium mb-3">
                 *Click on Video to toggle sound
               </p>
-              <div className="w-full aspect-[16/9] bg-pocketGrey/30 rounded-md flex items-center justify-center">
-                <span className="text-white font-poppins text-sm md:text-base">
-                  [ Behind the scenes video ]
-                </span>
+              <div className="w-full aspect-[16/9] relative overflow-hidden rounded-md bg-pocketGrey/30">
+                <video
+                  ref={videoRef}
+                  className="w-full h-full object-cover cursor-pointer"
+                  src="/videos/review.mp4"
+                  loop
+                  playsInline
+                  preload="metadata"
+                  onClick={togglePlay}
+                />
+
+                {!playing && (
+                  <button
+                    onClick={togglePlay}
+                    aria-label="Play video"
+                    className="absolute inset-0 flex items-center justify-center bg-black/20 hover:bg-black/30 transition-colors"
+                  >
+                    <div className="w-16 h-16 md:w-20 md:h-20 bg-pocketTeal rounded-full flex items-center justify-center hover:scale-105 transition-transform">
+                      <svg width="26" height="26" viewBox="0 0 24 24" fill="white" className="ml-1">
+                        <polygon points="8,5 8,19 19,12" />
+                      </svg>
+                    </div>
+                  </button>
+                )}
               </div>
             </div>
           </div>
         </div>
 
-        {/* Reviews — full-width scroll, left spacer for alignment */}
+        {/* Reviews — full-width scroll */}
         <div
           ref={scrollRef}
           className="flex gap-6 overflow-x-auto pb-6 scrollbar-hide"

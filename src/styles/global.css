@@ -36,5 +36,10 @@
   .scrollbar-hide {
     -ms-overflow-style: none;
     scrollbar-width: none;
+    cursor: grab;
+  }
+  .scrollbar-hide.dragging {
+    cursor: grabbing;
+    user-select: none;
   }
 }
