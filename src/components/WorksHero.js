@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import nursem from "../images/nursem.png";
+import nursem from "../images/Nursem.png";
 
 /* ─── Category pills data ─── */
 const categories = [
