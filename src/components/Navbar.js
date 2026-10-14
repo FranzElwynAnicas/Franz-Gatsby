@@ -1,15 +1,16 @@
 import React from "react";
+import { Link } from "gatsby";
 import logo from "../images/logo-pocket-light.png";
 
-const Navbar = () => {
-  const navLinks = [
-    { label: "Home", active: true },
-    { label: "About" },
-    { label: "Works" },
-    { label: "Services" },
-    { label: "Pricing" },
-  ];
+const navLinks = [
+  { label: "Home", to: "/" },
+  { label: "About", to: "/about" },
+  { label: "Works", to: "/works" },
+  { label: "Services", to: "/services" },
+  { label: "Pricing", to: "/pricing" },
+];
 
+const Navbar = ({ activePage = "Home" }) => {
   return (
     <header className="w-full py-6 flex justify-center items-center px-4 sticky top-0 z-50">
       <nav
@@ -24,42 +25,58 @@ const Navbar = () => {
         }}
       >
         {/* Logo */}
-        <img
-          src={logo}
-          alt="Pocket Creatives"
-          style={{ height: "42px", width: "auto" }}
-        />
+        <Link to="/">
+          <img
+            src={logo}
+            alt="Pocket Creatives"
+            style={{ height: "42px", width: "auto" }}
+          />
+        </Link>
 
         {/* Links */}
         <div className="hidden md:flex items-center ml-auto" style={{ gap: "8px" }}>
-          {navLinks.map((link) => (
-            <a
-              key={link.label}
-              href={`#${link.label.toLowerCase()}`}
-              className={`rounded-full transition-colors whitespace-nowrap ${
-                link.active
-                  ? "bg-pocketYellow text-pocketBlack font-semibold"
-                  : "text-pocketBlack hover:text-pocketTeal"
-              }`}
-              style={{ fontSize: "17px", padding: "9px 20px" }}
-            >
-              {link.label}
-            </a>
-          ))}
+          {navLinks.map((link) => {
+            const isActive = link.label === activePage;
+            return (
+              <Link
+                key={link.label}
+                to={link.to}
+                className={`rounded-full whitespace-nowrap transition-colors duration-200 ${
+                  isActive
+                    ? "bg-pocketYellow text-pocketBlack font-semibold"
+                    : "text-pocketBlack font-semibold hover:bg-pocketYellow hover:text-pocketBlack"
+                }`}
+                style={{ fontSize: "17px", padding: "9px 20px" }}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
         </div>
 
         {/* Contact */}
-        <a
-          href="#contact"
+        <Link
+          to="/contact"
           className="hidden md:inline-block bg-pocketTeal text-white font-bold rounded-full hover:opacity-90 whitespace-nowrap"
           style={{ fontSize: "17px", padding: "9px 22px" }}
         >
           Contact
-        </a>
+        </Link>
 
         {/* Clock */}
-        <button aria-label="Recent" className="text-pocketGrey shrink-0" style={{ padding: "4px" }}>
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <button
+          aria-label="Recent"
+          className="text-pocketGrey shrink-0"
+          style={{ padding: "4px" }}
+        >
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+          >
             <circle cx="12" cy="12" r="10" />
             <polyline points="12 6 12 12 16 14" />
           </svg>
