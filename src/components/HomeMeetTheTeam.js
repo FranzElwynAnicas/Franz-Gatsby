@@ -47,7 +47,7 @@ const tabs = [
   { id: "rauchan", firstName: "Rauchan" },
 ];
 
-const MeetTheTeam = () => {
+const HomeMeetTheTeam = () => {
   const [activeId, setActiveId] = useState("steven");
   const active = members[activeId] || null;
 
@@ -186,4 +186,4 @@ const MeetTheTeam = () => {
   );
 };
 
-export default MeetTheTeam;
+export default HomeMeetTheTeam;

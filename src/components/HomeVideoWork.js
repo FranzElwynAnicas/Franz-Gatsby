@@ -1,6 +1,6 @@
 import React from "react";
 
-const VideoWorkSection = () => {
+const HomeVideoWork = () => {
   return (
     <section className="w-full min-h-screen bg-pocketYellow flex items-center relative">
       <div className="w-full px-6 md:px-16 lg:px-24">
@@ -46,4 +46,4 @@ const VideoWorkSection = () => {
   );
 };
 
-export default VideoWorkSection;
+export default HomeVideoWork;

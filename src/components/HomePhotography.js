@@ -12,7 +12,7 @@ const categories = [
   { label: "Jewellery" },
 ];
 
-const PhotographySection = () => {
+const HomePhotography = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
@@ -82,4 +82,4 @@ const PhotographySection = () => {
   );
 };
 
-export default PhotographySection;
+export default HomePhotography;

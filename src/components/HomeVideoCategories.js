@@ -54,7 +54,7 @@ const VideoCard = ({ title, video }) => {
   );
 };
 
-const VideoCategories = () => {
+const HomeVideoCategories = () => {
   const scrollRef = useDragScroll();
 
   const scrollBy = (direction) => {
@@ -136,4 +136,4 @@ const VideoCategories = () => {
   );
 };
 
-export default VideoCategories;
+export default HomeVideoCategories;

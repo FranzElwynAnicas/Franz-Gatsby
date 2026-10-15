@@ -54,7 +54,7 @@ const LogoCard = ({ src, alt }) => (
   </div>
 );
 
-const PartnersGrid = () => {
+const HomePartnersGrid = () => {
   const [page, setPage] = useState(0);
 
   useEffect(() => {
@@ -111,4 +111,4 @@ const PartnersGrid = () => {
   );
 };
 
-export default PartnersGrid;
+export default HomePartnersGrid;

@@ -27,7 +27,7 @@ const reviews = [
   },
 ];
 
-const ReviewsSection = () => {
+const HomeReviews = () => {
   const scrollRef = useRef(null);
   const videoRef = useRef(null);
   const [playing, setPlaying] = useState(false);
@@ -155,4 +155,4 @@ const ReviewsSection = () => {
   );
 };
 
-export default ReviewsSection;
+export default HomeReviews;

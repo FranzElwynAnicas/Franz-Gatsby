@@ -65,7 +65,7 @@ const columns = [
   },
 ];
 
-const ServicesCheckSection = () => {
+const HomeServicesCheck = () => {
   return (
     <section className="w-full min-h-screen bg-pocketYellow flex items-center">
       <div className="w-full py-20">
@@ -107,4 +107,4 @@ const ServicesCheckSection = () => {
   );
 };
 
-export default ServicesCheckSection;
+export default HomeServicesCheck;

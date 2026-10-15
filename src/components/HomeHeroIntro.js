@@ -3,7 +3,7 @@ import logo from "../images/logo-pocket-wordmark.png";
 import photographer1 from "../images/photographer-1.png";
 import photographer2 from "../images/photographer-2.png";
 
-const HeroIntro = () => {
+const HomeHeroIntro = () => {
   const videoRef = useRef(null);
   const [playing, setPlaying] = useState(false);
 
@@ -109,4 +109,4 @@ const HeroIntro = () => {
   );
 };
 
-export default HeroIntro;
+export default HomeHeroIntro;

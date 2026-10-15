@@ -112,7 +112,7 @@ const FullscreenLightbox = ({ item, onClose }) => {
   );
 };
 
-const BeautyVideography = () => {
+const WorksBeautyVideography = () => {
   const [activeItem, setActiveItem] = useState(null);
 
   return (
@@ -167,4 +167,4 @@ const BeautyVideography = () => {
   );
 };
 
-export default BeautyVideography;
+export default WorksBeautyVideography;
