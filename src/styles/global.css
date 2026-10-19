@@ -5,9 +5,13 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;   /* Prevents horizontal scroll on mobile */
   }
   body {
     @apply font-inter bg-pocketWhite text-pocketBlack antialiased;
+    overflow-x: hidden;   /* Prevents horizontal scroll on mobile */
+    width: 100%;
+    max-width: 100vw;
   }
   h1, h2, h3, h4, h5, h6 {
     @apply font-inter font-black;

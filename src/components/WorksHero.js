@@ -35,8 +35,6 @@ const items = [
   { type: "image", src: nursem, label: "Nursem", tag: "Photo" },
 ];
 
-const CARD_HEIGHT = 420; // px — all cards share this height, widths vary
-
 const MarqueeCard = ({ item }) => {
   const videoRef = useRef(null);
 
@@ -53,8 +51,8 @@ const MarqueeCard = ({ item }) => {
 
   return (
     <div className="shrink-0 flex-none">
-      {/* Image / video — fixed height, natural width */}
-      <div style={{ height: `${CARD_HEIGHT}px` }} className="overflow-hidden">
+      {/* Image / video — responsive height, natural width */}
+      <div className="overflow-hidden h-[250px] md:h-[420px]">
         {item.type === "video" ? (
           <video
             ref={videoRef}
@@ -76,8 +74,8 @@ const MarqueeCard = ({ item }) => {
         )}
       </div>
 
-      {/* Label row — more vertical breathing room above */}
-      <div className="flex justify-between items-center mt-6 px-1 gap-6">
+      {/* Label row */}
+      <div className="flex justify-between items-center mt-4 md:mt-6 px-1 gap-4 md:gap-6">
         <span className="text-pocketGrey text-sm font-medium whitespace-nowrap">
           {item.label}
         </span>
@@ -96,36 +94,36 @@ const WorksHero = ({ title = "BEAUTY" }) => {
     <section className="w-full bg-pocketLightGrey overflow-hidden pt-10 pb-16">
       {/* 1. Heading */}
       <h1
-        className="text-center text-pocketTeal font-extrabold tracking-[-0.05em] leading-none mb-6"
-        style={{ fontSize: "40px" }}
+        className="text-center font-extrabold tracking-[-0.05em] leading-none mb-6 text-pocketBlack md:text-pocketTeal"
+        style={{ fontSize: "clamp(32px, 5vw, 40px)" }}
       >
         View By Category
       </h1>
 
       {/* 2. Category pills */}
-      <div className="flex flex-wrap justify-center gap-x-8 gap-y-3 px-6 max-w-[1300px] mx-auto mb-14">
+      <div className="flex flex-wrap justify-center gap-x-4 gap-y-3 md:gap-x-8 md:gap-y-3 px-6 max-w-[1300px] mx-auto mb-10 md:mb-14">
         {categories.map((cat) => (
           <button
             key={cat.label}
-            className={`font-medium tracking-[-0.05em] leading-none transition-colors ${
+            className={`font-medium tracking-[-0.05em] leading-none transition-colors text-[18px] md:text-[20px] ${
               cat.active
                 ? "text-pocketYellow"
-                : "text-pocketGrey hover:text-pocketYellow"
+                : "text-pocketBlack md:text-pocketGrey hover:text-pocketYellow"
             }`}
-            style={{ fontSize: "20px" }}
           >
             {cat.label}
           </button>
         ))}
       </div>
 
-      {/* 3. Infinite marquee — bigger gap between cards, no hover pause */}
-      <div className="pl-[12.5%] w-full overflow-hidden mb-16 mt-4">
+      {/* 3. Infinite marquee — padding removed on mobile */}
+      <div className="w-full md:pl-[12.5%] overflow-hidden mb-10 md:mb-16 mt-4">
         <div
           className={`marquee-wrap ${paused ? "paused" : ""}`}
           style={{ overflow: "hidden" }}
         >
-          <div className="marquee-track flex items-start gap-16 w-max">
+          {/* Gap reduced on mobile */}
+          <div className="marquee-track flex items-start gap-6 md:gap-16 w-max">
             {[...items, ...items].map((item, idx) => (
               <MarqueeCard key={`a-${idx}`} item={item} />
             ))}
@@ -137,7 +135,7 @@ const WorksHero = ({ title = "BEAUTY" }) => {
       </div>
 
       {/* 4. Category title + pause */}
-      <div className="pl-[12.5%] pr-8 md:pr-16 flex items-center justify-between">
+      <div className="px-6 md:pl-[12.5%] md:pr-16 flex flex-col md:flex-row md:items-center justify-between gap-4 md:gap-0">
         <h2
           className="text-pocketTeal font-extrabold tracking-[-0.05em] leading-none uppercase"
           style={{ fontSize: "clamp(48px, 6vw, 80px)" }}
@@ -145,31 +143,37 @@ const WorksHero = ({ title = "BEAUTY" }) => {
           {title}
         </h2>
 
-        <button
-          aria-label={paused ? "Play" : "Pause"}
-          onClick={() => setPaused((p) => !p)}
-          className="w-10 h-10 rounded-full bg-pocketYellow flex items-center justify-center shrink-0 hover:opacity-90 transition-opacity"
-        >
-          {paused ? (
-            <svg
-              width="12"
-              height="14"
-              viewBox="0 0 12 14"
-              fill="white"
-              className="ml-0.5"
-            >
-              <polygon points="0,0 12,7 0,14" />
-            </svg>
-          ) : (
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="white">
-              <rect x="2" y="1" width="3.5" height="12" rx="0.5" />
-              <rect x="8.5" y="1" width="3.5" height="12" rx="0.5" />
-            </svg>
-          )}
-        </button>
+        <div className="flex items-center justify-between w-full md:w-auto">
+          {/* Mobile-only helper text */}
+          <p className="block md:hidden text-pocketGrey text-sm font-medium">
+            Tap on a Video/Photo for larger view
+          </p>
+
+          <button
+            aria-label={paused ? "Play" : "Pause"}
+            onClick={() => setPaused((p) => !p)}
+            className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-pocketYellow flex items-center justify-center shrink-0 hover:opacity-90 transition-opacity ml-auto md:ml-0"
+          >
+            {paused ? (
+              <svg
+                width="10"
+                height="12"
+                viewBox="0 0 12 14"
+                fill="white"
+                className="ml-0.5 md:ml-0.5 md:w-[12px] md:h-[14px]"
+              >
+                <polygon points="0,0 12,7 0,14" />
+              </svg>
+            ) : (
+              <svg width="12" height="12" viewBox="0 0 14 14" fill="white" className="md:w-[14px] md:h-[14px]">
+                <rect x="2" y="1" width="3.5" height="12" rx="0.5" />
+                <rect x="8.5" y="1" width="3.5" height="12" rx="0.5" />
+              </svg>
+            )}
+          </button>
+        </div>
       </div>
 
-      {/* Marquee keyframes — hover pause removed */}
       <style>{`
         @keyframes marquee {
           from { transform: translate3d(0, 0, 0); }

@@ -45,7 +45,13 @@ const PAGES = [
 ];
 
 const LogoCard = ({ src, alt }) => (
-  <div className="w-full aspect-[2/1] bg-white rounded-2xl shadow-[0_4px_6px_rgba(0,0,0,0.18)] flex items-center justify-center px-6 py-4">
+  <div
+    className="bg-white flex items-center justify-center w-full aspect-[2/1] px-2 py-2 rounded-2xl sm:w-[200px] sm:h-[100px] sm:aspect-auto sm:px-6 sm:py-4"
+    style={{
+      borderRadius: "16px",
+      boxShadow: "0px 4px 4px 0px #00000040",
+    }}
+  >
     <img
       src={src}
       alt={alt}
@@ -69,27 +75,37 @@ const HomePartnersGrid = () => {
       <div className="pocket-container grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
         {/* Left — text */}
         <div>
-        <h2 className="text-[28px] md:text-[34px] lg:text-[40px] font-medium leading-[1.15] tracking-[-0.02em] mb-8 text-pocketGrey">
+          {/* Mobile: Figma 3-line break */}
+          <h2 className="text-[28px] md:text-[34px] lg:text-[40px] font-medium leading-[1.15] tracking-[-0.02em] text-pocketGrey lg:hidden">
+            As you can see, we've
+            <br />
+            <span className="text-pocketYellow font-black">partnered</span> with a lot of
+            <br />
+            amazing people
+          </h2>
+
+          {/* Desktop: original break */}
+          <h2 className="text-[28px] md:text-[34px] lg:text-[40px] font-medium leading-[1.15] tracking-[-0.02em] text-pocketGrey hidden lg:block">
             As you can see, we've{" "}
             <span className="text-pocketYellow font-black">partnered</span>
             <br />
             with a lot of amazing people
-            <br />
-            <br />
-            <span className="text-pocketTeal font-extrabold">
+          </h2>
+
+          <h2 className="text-[28px] md:text-[34px] lg:text-[40px] font-medium leading-[1.15] tracking-[-0.02em] text-pocketTeal font-extrabold mt-6 md:mt-8 mb-8">
             in many different Industries:
-            </span>
-        </h2>
-        <p className="text-pocketGrey text-base md:text-[20px] font-medium leading-loose max-w-lg">
+          </h2>
+
+          <p className="text-pocketGrey text-base md:text-[20px] font-medium leading-loose max-w-lg md:max-w-[560px] md:line-clamp-3">
             Lorem ipsum dolor sit amet consectetur. Placerat quisque feugiat
             porta quam ornare. In nec lacinia consectetur placerat vestibulum
             sem odio. In feugiat elit fames eget lobortis turpis scelerisque
             tincidunt. Enim.
-        </p>
+          </p>
         </div>
 
         {/* Right — 3x3 paged slider */}
-        <div className="relative overflow-hidden">
+        <div className="relative overflow-hidden w-full">
           <div
             className="flex transition-transform duration-700 ease-in-out"
             style={{ transform: `translateX(-${page * 100}%)` }}
@@ -97,7 +113,7 @@ const HomePartnersGrid = () => {
             {PAGES.map((logos, pageIdx) => (
               <div
                 key={pageIdx}
-                className="shrink-0 w-full grid grid-cols-3 gap-3 md:gap-4"
+                className="shrink-0 w-full grid grid-cols-3 gap-2 sm:gap-3 md:gap-4 place-items-center p-2 sm:p-3"
               >
                 {logos.map((logo, idx) => (
                   <LogoCard key={idx} src={logo.src} alt={logo.alt} />

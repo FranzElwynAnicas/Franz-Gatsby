@@ -16,22 +16,25 @@ const HomePhotography = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <section className="w-full min-h-screen bg-pocketLightGrey flex items-center">
-      <div className="w-full py-20">
-        <div className="pl-[12.5%] pr-8 md:pr-16">
-          {/* Top row: label + Let's Talk */}
-          <div className="flex items-center justify-between mb-16">
-            <div className="flex items-center gap-4">
+    <section className="w-full min-h-screen bg-pocketLightGrey flex items-center overflow-hidden">
+      <div className="w-full py-16 md:py-20">
+        {/* Symmetrical padding on mobile, offset on desktop */}
+        <div className="px-6 md:pl-[12.5%] md:pr-16">
+          
+          {/* Top row: icon + Photography label (+ Let's Talk on desktop only) */}
+          <div className="flex items-center justify-between mb-8 md:mb-16">
+            <div className="flex items-center gap-3 md:gap-4">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="56"
-                height="56"
+                width="40"
+                height="40"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="#179CBD"
                 strokeWidth="1.8"
                 strokeLinecap="round"
                 strokeLinejoin="round"
+                className="md:w-14 md:h-14"
               >
                 <circle cx="12" cy="12" r="9" />
                 <circle cx="12" cy="12" r="3.5" />
@@ -41,24 +44,32 @@ const HomePhotography = () => {
                 Photography
               </span>
             </div>
-            <button className="bg-pocketTeal text-white font-bold text-base md:text-lg rounded-full w-20 h-20 md:w-28 md:h-28 flex items-center justify-center hover:opacity-90 transition-opacity shrink-0">
+            
+            {/* Hidden on mobile, visible on desktop */}
+            <button className="hidden md:flex bg-pocketTeal text-white font-bold text-base md:text-lg rounded-full w-20 h-20 md:w-28 md:h-28 items-center justify-center hover:opacity-90 transition-opacity shrink-0">
               Let's Talk
             </button>
           </div>
 
-          {/* Main content: list left, image right */}
-          <div className="grid grid-cols-1 lg:grid-cols-[440px_1fr] gap-10 lg:gap-24 items-start">
-            <ul className="flex flex-col w-full">
+          {/* Main content: 
+              Mobile = image first then list (flex-col-reverse)
+              Desktop = list left, image right (grid) 
+          */}
+          <div className="grid grid-cols-1 lg:grid-cols-[440px_1fr] gap-8 lg:gap-24 items-start">
+            
+            {/* The list - On mobile it will appear second due to flex-col-reverse on the parent */}
+            <ul className="flex flex-col w-full order-2 lg:order-1">
               {categories.map((cat, idx) => (
                 <li
                   key={cat.label}
                   onMouseEnter={() => setActiveIndex(idx)}
-                  className="border-b border-pocketGrey/60"
+                  onClick={() => setActiveIndex(idx)} // Added for mobile tap
+                  className="border-b border-pocketTeal/40 md:border-pocketGrey/60"
                 >
                   <button
-                    className={`text-left w-full py-5 text-2xl md:text-3xl lg:text-[40px] font-extrabold tracking-[-0.02em] transition-colors leading-none ${
+                    className={`text-left w-full py-4 md:py-5 text-xl md:text-3xl lg:text-[40px] font-extrabold tracking-[-0.02em] transition-colors leading-none ${
                       activeIndex === idx
-                        ? "text-pocketYellow"
+                        ? "text-pocketTeal md:text-pocketYellow"
                         : "text-pocketGrey hover:text-pocketYellow"
                     }`}
                   >
@@ -68,7 +79,8 @@ const HomePhotography = () => {
               ))}
             </ul>
 
-            <div className="w-full aspect-[3/2] overflow-hidden">
+            {/* The image - On mobile it appears first */}
+            <div className="w-full aspect-[4/3] md:aspect-[3/2] overflow-hidden order-1 lg:order-2">
               <img
                 src={photoBeauty}
                 alt={categories[activeIndex].label}
@@ -76,6 +88,7 @@ const HomePhotography = () => {
               />
             </div>
           </div>
+
         </div>
       </div>
     </section>

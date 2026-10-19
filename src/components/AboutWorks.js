@@ -169,10 +169,10 @@ const AboutWorks = () => {
   });
 
   return (
-    <section className="w-full bg-pocketWhite py-24 overflow-hidden">
-      <div className="mx-auto max-w-[1920px] px-[12%]">
+    <section className="w-full bg-pocketWhite py-12 md:py-24 overflow-hidden">
+      <div className="mx-auto max-w-[1920px] px-6 md:px-[12%]">
         <h2
-          className="text-center font-bold leading-none text-pocketTeal mb-14"
+          className="text-center font-bold leading-none text-black md:text-pocketTeal mb-14"
           style={{
             fontSize: "clamp(56px, 6.25vw, 120px)",
             letterSpacing: "-0.05em",

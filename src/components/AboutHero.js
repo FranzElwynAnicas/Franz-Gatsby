@@ -1,9 +1,11 @@
 import React, { useState, useRef } from "react";
 import aboutLogo from "../images/aboutlogo.png";
+import { useContactModal } from "../contexts/ContactModalContext";
 
 const AboutHero = () => {
   const [playing, setPlaying] = useState(false);
   const videoRef = useRef(null);
+  const { open } = useContactModal();
 
   const togglePlay = () => {
     if (!videoRef.current) return;
@@ -13,7 +15,6 @@ const AboutHero = () => {
       v.pause();
       setPlaying(false);
     } else {
-      // Unmute when the user clicks to play
       v.muted = false;
       v.volume = 1;
       v.play().catch(() => {});
@@ -22,35 +23,84 @@ const AboutHero = () => {
   };
 
   return (
-    <section id="about" className="w-full bg-pocketWhite pt-[140px] pb-16">
-      <div className="mx-auto max-w-[1920px] px-[18%]">
-        {/* Heading + Logo */}
-        <h1
-          className="font-normal leading-none m-0"
-          style={{
-            fontSize: "clamp(56px, 6.25vw, 120px)",
-            letterSpacing: "-0.05em",
-            color: "#526E87",
-          }}
-        >
-          About us at
-        </h1>
+    <section id="about" className="w-full bg-pocketWhite pt-[100px] md:pt-[140px] pb-16">
+      <div className="mx-auto max-w-[1920px] px-6 md:px-[12%] lg:px-[18%]">
 
-        <img
-          src={aboutLogo}
-          alt="Pocket Creatives"
-          className="w-full"
-          style={{
-            maxWidth: "1049px",
-            height: "auto",
-            display: "block",
-            marginTop: "-10px",
-          }}
-        />
+        {/* ─── MOBILE ONLY: text-based hero heading ─── */}
+        <div className="block md:hidden">
+          <h1
+            className="m-0"
+            style={{
+              fontFamily: "Inter, sans-serif",
+              fontWeight: 400,
+              fontStyle: "normal",
+              fontSize: "60px",
+              lineHeight: "100%",
+              letterSpacing: "-0.05em",
+              color: "#000000",
+            }}
+          >
+            About us at
+          </h1>
+          <h1
+            className="m-0"
+            style={{
+              fontFamily: "Inter, sans-serif",
+              fontWeight: 800,
+              fontStyle: "normal",
+              fontSize: "60px",
+              lineHeight: "100%",
+              letterSpacing: "-0.05em",
+              color: "#55C8E4",
+            }}
+          >
+            Pocket
+          </h1>
+          <h1
+            className="m-0"
+            style={{
+              fontFamily: "Inter, sans-serif",
+              fontWeight: 800,
+              fontStyle: "normal",
+              fontSize: "60px",
+              lineHeight: "100%",
+              letterSpacing: "-0.05em",
+              color: "#FCBE17E5",
+            }}
+          >
+            Creatives
+          </h1>
+        </div>
 
-        {/* Two-column grid */}
+        {/* ─── DESKTOP ONLY: original heading + logo image ─── */}
+        <div className="hidden md:block">
+          <h1
+            className="font-normal leading-none m-0"
+            style={{
+              fontSize: "clamp(56px, 6.25vw, 120px)",
+              letterSpacing: "-0.05em",
+              color: "#526E87",
+            }}
+          >
+            About us at
+          </h1>
+
+          <img
+            src={aboutLogo}
+            alt="Pocket Creatives"
+            className="w-full"
+            style={{
+              maxWidth: "1049px",
+              height: "auto",
+              display: "block",
+              marginTop: "-10px",
+            }}
+          />
+        </div>
+
+        {/* Two-column grid — stacks on mobile */}
         <div
-          className="grid items-start gap-10 lg:grid-cols-[598px_1fr]"
+          className="grid grid-cols-1 lg:grid-cols-[598px_1fr] items-start gap-10"
           style={{ marginTop: "40px" }}
         >
           {/* LEFT — video */}
@@ -59,11 +109,11 @@ const AboutHero = () => {
               type="button"
               onClick={togglePlay}
               aria-label="Toggle video sound"
-              className="group relative block w-full overflow-hidden bg-pocketBlack"
+              className="group relative block w-full overflow-hidden bg-pocketBlack cursor-pointer"
             >
               <video
                 ref={videoRef}
-                className="h-[352px] w-full object-cover cursor-pointer"
+                className="h-[220px] md:h-[280px] lg:h-[352px] w-full object-cover cursor-pointer"
                 src="/videos/lighting.mp4"
                 loop
                 playsInline
@@ -71,7 +121,7 @@ const AboutHero = () => {
               />
             </button>
             <p
-              className="mt-3 text-base font-medium leading-8"
+              className="mt-3 text-sm md:text-base font-medium leading-8"
               style={{ color: "#526E87" }}
             >
               *Click on Video to toggle sound
@@ -79,9 +129,9 @@ const AboutHero = () => {
           </div>
 
           {/* RIGHT — paragraph + CTA */}
-          <div className="flex flex-col items-end justify-center h-[352px]">
+          <div className="flex flex-col items-start lg:items-end justify-center lg:h-[352px]">
             <p
-              className="text-right text-xl font-medium leading-[2]"
+              className="text-left lg:text-right text-base md:text-xl font-medium leading-[1.8] md:leading-[2]"
               style={{ color: "#526E87", maxWidth: "517px" }}
             >
               Find out more about our production team, what we stand for and why
@@ -89,9 +139,10 @@ const AboutHero = () => {
               shoot.
             </p>
 
-            <a
-              href="#contact"
-              className="mt-8 inline-flex h-[66px] w-[253px] items-center justify-center gap-5"
+            <button
+              type="button"
+              onClick={open}
+              className="mt-8 inline-flex h-[56px] md:h-[66px] w-full md:w-[253px] items-center justify-center gap-3 md:gap-5 cursor-pointer"
               style={{
                 background: "#55C8E4",
                 boxShadow: "3px 3px 6px 0px #526E87",
@@ -110,8 +161,8 @@ const AboutHero = () => {
                 <rect x="2" y="4" width="20" height="16" rx="1" />
                 <path d="m22 6-10 7L2 6" />
               </svg>
-              <span className="text-xl font-medium">I'D LIKE TO CHAT</span>
-            </a>
+              <span className="text-base md:text-xl font-medium">I'D LIKE TO CHAT</span>
+            </button>
           </div>
         </div>
       </div>

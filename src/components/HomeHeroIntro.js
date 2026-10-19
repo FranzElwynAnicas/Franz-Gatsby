@@ -28,58 +28,75 @@ const HomeHeroIntro = () => {
   };
 
   return (
-    <section className="w-full bg-pocketWhite pt-6 pb-16">
-      <div className="pocket-container">
+    // Added overflow-hidden here to clip any accidental wide elements
+    <section className="w-full bg-pocketWhite pt-6 pb-16 overflow-hidden">
+      <div className="pocket-container w-full">
+        
         {/* Logo + photographers row */}
-        <div className="flex items-end justify-between gap-6">
+        <div className="flex items-end self-center md:self-auto max-w-full">
           <img
             src={logo}
             alt="Pocket Creatives"
-            className="h-16 md:h-20 lg:h-24 w-auto object-contain"
+            className="h-12 md:h-20 lg:h-24 w-auto object-contain self-start max-w-full"
           />
-          <div className="flex items-end">
+          
+          {/* Added max-w-full and justify-center to keep it contained */}
+          <div className="flex items-end self-center md:self-auto max-w-full">
             <img
               src={photographer1}
               alt="Photographer"
-              className="w-28 md:w-36 lg:w-40 h-auto object-cover"
+              className="w-24 md:w-36 lg:w-40 h-auto object-cover"
             />
             <img
               src={photographer2}
               alt="Videographer"
-              className="w-28 md:w-36 lg:w-40 h-auto object-cover -ml-3 md:-ml-4"
+              className="w-24 md:w-36 lg:w-40 h-auto object-cover -ml-2 md:-ml-4"
             />
           </div>
         </div>
 
         {/* Divider */}
-        <div className="border-b border-pocketGrey my-6"></div>
+        <div className="border-b border-pocketGrey my-5 md:my-6 w-full"></div>
 
-        {/* Intro text */}
-        <h1 className="text-[26px] md:text-[32px] lg:text-[42px] font-normal leading-[1.4] tracking-[-0.03em] text-pocketGrey">
-          <span className="whitespace-nowrap">
-            We're a{" "}
-            <span className="text-pocketYellow font-bold">fast</span>{" "}
-            <span>&amp;</span>{" "}
-            <span className="text-pocketYellow font-bold">friendly</span>{" "}
-            <span className="text-pocketTeal font-bold">Video Production</span>{" "}
-            <span>and</span>{" "}
-            <span className="text-pocketTeal font-bold">Photography</span>{" "}
-            <span>company</span>
+        {/* Intro text - Forced exact line breaks on mobile */}
+        <h1 className="text-[28px] md:text-[32px] lg:text-[42px] font-normal leading-[1.3] md:leading-[1.4] tracking-[-0.02em] w-full break-words">
+          
+          <span className="block md:inline">
+            <span className="text-pocketBlack font-normal">A</span>{" "}
+            <span className="text-pocketTeal font-bold">fast &amp; friendly</span>{" "}
+            <span className="text-pocketBlack font-bold">Video</span>
           </span>
-          <br />
-          <span>with</span>{" "}
-          <span className="text-pocketYellow font-bold">bags of experience</span>{" "}
-          <span>&amp; who</span>{" "}
-          <span className="text-[#FF1E00]">❤️</span>{" "}
-          <span>what we do :)</span>
+
+          <span className="block md:inline">
+            <span className="text-pocketBlack font-bold">Production</span>{" "}
+            <span className="text-pocketBlack font-normal">and</span>{" "}
+            <span className="text-pocketBlack font-bold">Photography</span>
+          </span>
+
+          <span className="block md:inline">
+            <span className="text-pocketBlack font-normal">company with</span>{" "}
+            <span className="text-pocketBlack font-bold">bags of</span>
+          </span>
+
+          <span className="block md:inline">
+            <span className="text-pocketBlack font-bold">experience</span>{" "}
+            <span className="text-pocketBlack font-normal">and who</span>{" "}
+            <span className="text-[#FF1E00]">❤️</span>{" "}
+            <span className="text-pocketBlack font-normal">what</span>
+          </span>
+
+          <span className="block md:inline">
+            <span className="text-pocketBlack font-normal">we do. :)</span>
+          </span>
+
         </h1>
 
-        <p className="mt-6 text-xs text-pocketGrey">
-          *Click on Video to toggle sound
+        <p className="mt-5 text-[13px] text-pocketGrey">
+          *Tap Video to toggle sound
         </p>
 
-        {/* Hero video — user clicks to play */}
-        <div className="mt-2 w-full aspect-[16/8] relative overflow-hidden rounded-md bg-pocketGrey/30">
+        {/* Hero video */}
+        <div className="mt-3 w-full aspect-[4/3] md:aspect-[16/9] relative overflow-hidden rounded-[4px] bg-pocketGrey/30">
           <video
             ref={videoRef}
             className="w-full h-full object-cover cursor-pointer"
@@ -89,15 +106,14 @@ const HomeHeroIntro = () => {
             onClick={togglePlay}
           />
 
-          {/* Play button overlay — hides when playing */}
           {!playing && (
             <button
               onClick={handlePlay}
               aria-label="Play video"
-              className="absolute inset-0 flex items-center justify-center bg-black/20 hover:bg-black/30 transition-colors"
+              className="absolute inset-0 flex items-center justify-center bg-black/10 hover:bg-black/20 transition-colors"
             >
-              <div className="w-20 h-20 md:w-24 md:h-24 bg-pocketTeal rounded-full flex items-center justify-center hover:scale-105 transition-transform">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="white" className="ml-1">
+              <div className="w-16 h-16 md:w-24 md:h-24 bg-pocketTeal rounded-full flex items-center justify-center hover:scale-105 transition-transform">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="white" className="ml-1 md:w-8 md:h-8">
                   <polygon points="8,5 8,19 19,12" />
                 </svg>
               </div>
