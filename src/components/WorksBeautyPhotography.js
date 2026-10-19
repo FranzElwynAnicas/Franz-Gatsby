@@ -20,7 +20,7 @@ const staticImages = [
 ];
 
 const tiles = [
-  { id: 1,  label: "Hover ex. here", isHoverCycle: true },
+  { id: 1,  label: "Client 1", isHoverCycle: true },
   { id: 2,  label: "Client 2",  src: staticImages[0] },
   { id: 3,  label: "Client 3",  src: staticImages[1] },
   { id: 4,  label: "Client 4",  src: staticImages[2] },
@@ -59,13 +59,14 @@ const HoverCycleTile = ({ images, label, onOpen }) => {
   }, []);
 
   return (
-    <div className="w-[185px] shrink-0">
+    // Changed to w-full on mobile, fixed 185px on desktop
+    <div className="w-full md:w-[185px] shrink-0">
       <button
         type="button"
         onClick={() => onOpen({ src: images[index], label })}
         onMouseEnter={handleEnter}
         onMouseLeave={handleLeave}
-        className="block w-[185px] h-[191.94px] overflow-hidden bg-pocketLightGrey cursor-pointer"
+        className="block w-full md:w-[185px] aspect-[185/192] overflow-hidden bg-pocketLightGrey cursor-pointer"
       >
         <img
           src={images[index]}
@@ -75,8 +76,8 @@ const HoverCycleTile = ({ images, label, onOpen }) => {
         />
       </button>
       <p
-        className="mt-3 text-pocketGrey tracking-[-0.05em]"
-        style={{ fontSize: "20px", lineHeight: 1, fontWeight: 500 }}
+        className="mt-2 md:mt-3 text-pocketGrey tracking-[-0.05em] text-base md:text-[20px]"
+        style={{ lineHeight: 1.2, fontWeight: 500 }}
       >
         {label}
       </p>
@@ -85,11 +86,11 @@ const HoverCycleTile = ({ images, label, onOpen }) => {
 };
 
 const StaticTile = ({ src, label, onOpen }) => (
-  <div className="w-[185px] shrink-0">
+  <div className="w-full md:w-[185px] shrink-0">
     <button
       type="button"
       onClick={() => onOpen({ src, label })}
-      className="block w-[185px] h-[191.94px] overflow-hidden bg-pocketLightGrey cursor-pointer"
+      className="block w-full md:w-[185px] aspect-[185/192] overflow-hidden bg-pocketLightGrey cursor-pointer"
     >
       <img
         src={src}
@@ -99,8 +100,8 @@ const StaticTile = ({ src, label, onOpen }) => (
       />
     </button>
     <p
-      className="mt-3 text-pocketGrey tracking-[-0.05em]"
-      style={{ fontSize: "20px", lineHeight: 1, fontWeight: 500 }}
+      className="mt-2 md:mt-3 text-pocketGrey tracking-[-0.05em] text-base md:text-[20px]"
+      style={{ lineHeight: 1.2, fontWeight: 500 }}
     >
       {label}
     </p>
@@ -170,75 +171,86 @@ const WorksBeautyPhotography = () => {
   return (
     <section
       id="beauty-photography"
-      className="relative w-full bg-pocketWhite"
+      className="relative w-full bg-pocketWhite overflow-hidden"
       style={{ scrollMarginTop: "140px" }}
     >
-      <div className="pt-[220px] pb-16 md:pt-[260px] md:pb-24">
+      {/* Changed massive left padding to px-6 on mobile */}
+      <div className="px-6 md:pl-[14.4%] md:pr-[5%] pt-16 md:pt-[260px] pb-16 md:pb-24">
+        
         {/* Big "Photography ↓" heading */}
         <h2
-          className="font-extrabold tracking-[-0.05em] mb-16 md:mb-20"
+          className="font-extrabold tracking-[-0.05em] mb-10 md:mb-20 text-5xl md:text-[clamp(64px,6.25vw,120px)]"
           style={{
-            fontSize: "clamp(64px, 6.25vw, 120px)",
             color: "#FCBE17",
             lineHeight: 1,
-            paddingLeft: "14.4%",
           }}
         >
           Photography ↓
         </h2>
 
         {/* Sub-header row */}
-        <div
-          className="flex items-start justify-between mb-10"
-          style={{ paddingLeft: "14.4%", paddingRight: "5%" }}
-        >
+        <div className="flex flex-col md:flex-row md:items-start justify-between mb-6 md:mb-10 gap-3 md:gap-0">
           <h3
-            className="font-extrabold tracking-[-0.05em]"
-            style={{ fontSize: "40px", color: "#179CBD", lineHeight: 1 }}
+            className="font-extrabold tracking-[-0.05em] text-3xl md:text-[40px]"
+            style={{ color: "#179CBD", lineHeight: 1.1 }}
           >
             Beauty Photography
           </h3>
 
           <p
-            className="text-pocketGrey text-right ml-6 shrink-0 tracking-[-0.05em]"
-            style={{ fontSize: "20px", lineHeight: 1, fontWeight: 500 }}
+            className="text-pocketGrey text-left md:text-right md:ml-6 shrink-0 tracking-[-0.05em] text-sm md:text-[20px]"
+            style={{ lineHeight: 1.2, fontWeight: 500 }}
           >
-            *Click on thumbnail for large view
+            *Tap thumbnail for full view
           </p>
         </div>
 
-        {/* Tiles — pairs of 2 with wide gaps between pairs */}
-        <div style={{ paddingLeft: "14.4%", paddingRight: "5%" }}>
-          {/* Row 1 */}
-          <div className="flex" style={{ marginBottom: "40px" }}>
-            <TileRenderer tile={tiles[0]} onOpen={setActiveItem} />
-            <div style={{ width: "20px" }} />
-            <TileRenderer tile={tiles[1]} onOpen={setActiveItem} />
-            <div style={{ width: "98px" }} />
-            <TileRenderer tile={tiles[2]} onOpen={setActiveItem} />
-            <div style={{ width: "20px" }} />
-            <TileRenderer tile={tiles[3]} onOpen={setActiveItem} />
-            <div style={{ width: "98px" }} />
-            <TileRenderer tile={tiles[4]} onOpen={setActiveItem} />
-            <div style={{ width: "20px" }} />
-            <TileRenderer tile={tiles[5]} onOpen={setActiveItem} />
+        {/* Tiles — 
+            Mobile: CSS Grid (2 cols) 
+            Desktop: Flex layout (matching original pairs) 
+        */}
+        <div className="w-full">
+          {/* Mobile Grid Layout (Visible only on small screens) */}
+          <div className="grid grid-cols-2 gap-x-4 gap-y-8 md:hidden">
+            {tiles.map((tile) => (
+              <TileRenderer key={tile.id} tile={tile} onOpen={setActiveItem} />
+            ))}
           </div>
 
-          {/* Row 2 */}
-          <div className="flex">
-            <TileRenderer tile={tiles[6]}  onOpen={setActiveItem} />
-            <div style={{ width: "20px" }} />
-            <TileRenderer tile={tiles[7]}  onOpen={setActiveItem} />
-            <div style={{ width: "98px" }} />
-            <TileRenderer tile={tiles[8]}  onOpen={setActiveItem} />
-            <div style={{ width: "20px" }} />
-            <TileRenderer tile={tiles[9]}  onOpen={setActiveItem} />
-            <div style={{ width: "98px" }} />
-            <TileRenderer tile={tiles[10]} onOpen={setActiveItem} />
-            <div style={{ width: "20px" }} />
-            <TileRenderer tile={tiles[11]} onOpen={setActiveItem} />
+          {/* Desktop Flex Layout (Hidden on mobile, exact replica of original) */}
+          <div className="hidden md:block">
+            {/* Row 1 */}
+            <div className="flex" style={{ marginBottom: "40px" }}>
+              <TileRenderer tile={tiles[0]} onOpen={setActiveItem} />
+              <div style={{ width: "20px" }} />
+              <TileRenderer tile={tiles[1]} onOpen={setActiveItem} />
+              <div style={{ width: "98px" }} />
+              <TileRenderer tile={tiles[2]} onOpen={setActiveItem} />
+              <div style={{ width: "20px" }} />
+              <TileRenderer tile={tiles[3]} onOpen={setActiveItem} />
+              <div style={{ width: "98px" }} />
+              <TileRenderer tile={tiles[4]} onOpen={setActiveItem} />
+              <div style={{ width: "20px" }} />
+              <TileRenderer tile={tiles[5]} onOpen={setActiveItem} />
+            </div>
+
+            {/* Row 2 */}
+            <div className="flex">
+              <TileRenderer tile={tiles[6]}  onOpen={setActiveItem} />
+              <div style={{ width: "20px" }} />
+              <TileRenderer tile={tiles[7]}  onOpen={setActiveItem} />
+              <div style={{ width: "98px" }} />
+              <TileRenderer tile={tiles[8]}  onOpen={setActiveItem} />
+              <div style={{ width: "20px" }} />
+              <TileRenderer tile={tiles[9]}  onOpen={setActiveItem} />
+              <div style={{ width: "98px" }} />
+              <TileRenderer tile={tiles[10]} onOpen={setActiveItem} />
+              <div style={{ width: "20px" }} />
+              <TileRenderer tile={tiles[11]} onOpen={setActiveItem} />
+            </div>
           </div>
         </div>
+
       </div>
 
       <Lightbox item={activeItem} onClose={() => setActiveItem(null)} />

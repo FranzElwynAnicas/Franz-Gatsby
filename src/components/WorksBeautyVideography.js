@@ -38,13 +38,15 @@ const ThumbnailCard = ({ item, onOpen }) => {
   };
 
   return (
-    <div className="w-[320px]">
+    // Changed to w-full on mobile, fixed 320px on desktop
+    <div className="w-full md:w-[320px]">
       <button
         type="button"
         onClick={() => onOpen(item)}
         onMouseEnter={handleEnter}
         onMouseLeave={handleLeave}
-        className="block w-[320px] h-[157.33px] overflow-hidden bg-pocketBlack cursor-pointer"
+        // Changed to w-full on mobile, aspect ratio maintains the shape
+        className="block w-full md:w-[320px] aspect-video md:h-[157.33px] overflow-hidden bg-pocketBlack cursor-pointer relative"
       >
         <video
           ref={videoRef}
@@ -55,10 +57,19 @@ const ThumbnailCard = ({ item, onOpen }) => {
           playsInline
           preload="metadata"
         />
+        
+        {/* Added custom Play Button overlay to match Figma */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <div className="w-12 h-12 md:w-16 md:h-16 bg-pocketYellow md:bg-pocketTeal rounded-full flex items-center justify-center bg-opacity-90">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="white" className="ml-1 md:w-6 md:h-6">
+              <polygon points="8,5 8,19 19,12" />
+            </svg>
+          </div>
+        </div>
       </button>
       <p
-        className="mt-3 text-pocketGrey tracking-[-0.05em]"
-        style={{ fontSize: "16px", lineHeight: 2, fontWeight: 500 }}
+        className="mt-2 md:mt-3 text-pocketGrey tracking-[-0.05em] text-base md:text-[16px]"
+        style={{ lineHeight: 1.5, fontWeight: 500 }}
       >
         {item.label}
       </p>
@@ -118,44 +129,32 @@ const WorksBeautyVideography = () => {
   return (
     <section
       id="beauty-videography"
-      className="relative w-full bg-pocketWhite"
+      className="relative w-full bg-pocketWhite overflow-hidden"
       style={{ scrollMarginTop: "140px" }}
     >
-      {/* Left offset 277px at 1920 = 14.4% */}
-      <div className="pl-[14.4%] pr-10 pt-[220px] pb-16 md:pt-[260px] md:pb-24">
-        {/* Header row — matches grid width */}
-        <div
-          className="flex items-start justify-between mb-10"
-          style={{ width: "1360px", maxWidth: "100%" }}
-        >
+      {/* Changed hardcoded pl-[14.4%] to px-6 on mobile */}
+      <div className="px-6 md:pl-[14.4%] md:pr-10 pt-16 md:pt-[260px] pb-16 md:pb-24">
+        
+        {/* Header row */}
+        <div className="flex flex-col md:flex-row md:items-start justify-between mb-6 md:mb-10 w-full md:w-[1360px] md:max-w-full">
           <h2
-            className="font-extrabold tracking-[-0.05em]"
+            className="font-extrabold tracking-[-0.05em] text-3xl md:text-[40px]"
             style={{
-              fontSize: "40px",
               color: "#179CBD",
-              lineHeight: 1,
+              lineHeight: 1.1,
             }}
           >
             Beauty Videography
           </h2>
 
-          <p
-            className="text-pocketGrey text-right ml-6 shrink-0"
-            style={{ fontSize: "16px", lineHeight: 2, fontWeight: 500 }}
-          >
-            *Click on Video to play in large view
+          {/* Changed text to match screenshot */}
+          <p className="text-pocketGrey text-left md:text-right mt-3 md:mt-0 md:ml-6 shrink-0 text-sm md:text-[16px] font-medium">
+            *Tap Video to play
           </p>
         </div>
 
-        {/* Grid — 4 columns of 320px tiles, 40px gaps */}
-        <div
-          className="grid"
-          style={{
-            gridTemplateColumns: "repeat(4, 320px)",
-            gap: "40px",
-            width: "fit-content",
-          }}
-        >
+        {/* Grid — Grid column on desktop, single column on mobile */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-[40px] w-full md:w-fit">
           {tiles.map((item) => (
             <ThumbnailCard key={item.id} item={item} onOpen={setActiveItem} />
           ))}
