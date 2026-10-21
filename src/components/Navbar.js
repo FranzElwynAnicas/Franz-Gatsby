@@ -92,21 +92,25 @@ const Navbar = ({ activePage = "Home" }) => {
       {/* ================= MOBILE ================= */}
       {isMobile && (
         <>
-          {/* Mobile top bar */}
+          {/* Mobile top bar — FIXED so it floats above content */}
           <header
             style={{
-              position: "sticky",
+              position: "fixed",
               top: "16px",
+              left: 0,
+              right: 0,
               zIndex: 50,
               width: "100%",
               display: "flex",
               justifyContent: "center",
               paddingLeft: "16px",
               paddingRight: "16px",
+              pointerEvents: "none",
             }}
           >
             <nav
               style={{
+                pointerEvents: "auto",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "space-between",
@@ -132,8 +136,9 @@ const Navbar = ({ activePage = "Home" }) => {
                 style={{
                   display: "flex",
                   alignItems: "center",
-                  gap: "24px",
-                  flexShrink: 0,
+                  justifyContent: "space-between",
+                  flex: 1,
+                  marginLeft: "16px",
                 }}
               >
                 <a
@@ -148,6 +153,8 @@ const Navbar = ({ activePage = "Home" }) => {
                     width: "40px",
                     height: "40px",
                     color: "#5A6B7B",
+                    marginLeft: "auto",
+                    marginRight: "auto",
                   }}
                 >
                   <WhatsAppIcon size={40} />
@@ -169,6 +176,7 @@ const Navbar = ({ activePage = "Home" }) => {
                     border: "none",
                     cursor: "pointer",
                     padding: 0,
+                    flexShrink: 0,
                   }}
                 >
                   <span
@@ -405,8 +413,10 @@ const Navbar = ({ activePage = "Home" }) => {
       {!isMobile && (
         <header
           style={{
-            position: "sticky",
+            position: "fixed",
             top: "24px",
+            left: 0,
+            right: 0,
             zIndex: 50,
             width: "100%",
             display: "flex",
@@ -414,10 +424,12 @@ const Navbar = ({ activePage = "Home" }) => {
             alignItems: "center",
             paddingLeft: "16px",
             paddingRight: "16px",
+            pointerEvents: "none",
           }}
         >
           <nav
             style={{
+              pointerEvents: "auto",
               display: "flex",
               alignItems: "center",
               background: "#fff",

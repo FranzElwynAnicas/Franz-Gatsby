@@ -29,7 +29,7 @@ const HomeHeroIntro = () => {
 
   return (
     // Added overflow-hidden here to clip any accidental wide elements
-    <section className="w-full bg-pocketWhite pt-6 pb-16 overflow-hidden">
+    <section className="w-full bg-pocketWhite pt-24 md:pt-28 pb-16 overflow-hidden">
       <div className="pocket-container w-full">
         
         {/* Logo + photographers row */}

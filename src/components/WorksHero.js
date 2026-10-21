@@ -91,7 +91,7 @@ const WorksHero = ({ title = "BEAUTY" }) => {
   const [paused, setPaused] = useState(false);
 
   return (
-    <section className="w-full bg-pocketLightGrey overflow-hidden pt-10 pb-16">
+    <section className="w-full bg-pocketLightGrey overflow-hidden pt-24 md:pt-28 pb-16">
       {/* 1. Heading */}
       <h1
         className="text-center font-extrabold tracking-[-0.05em] leading-none mb-6 text-pocketBlack md:text-pocketTeal"
