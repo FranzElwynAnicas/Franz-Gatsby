@@ -1,7 +1,21 @@
 import React from "react";
+import { Link } from "gatsby"; // <-- Import Link from gatsby
 import logo from "../images/logo-pocket-wordmark.png";
 
 const Footer = () => {
+  // Add actual paths for your links here
+  const quickLinks = [
+    { label: "HOME", to: "/" },
+    { label: "ABOUT", to: "/about" },
+    { label: "WORKS", to: "/works" },
+    { label: "SERVICES", to: "/services" },
+    { label: "PRICING", to: "/pricing" },
+    { label: "CONTACT", to: "/contact" },
+    { label: "BLOGS", to: "/blog" }, // <-- Updated to your blog page
+    { label: "PHOTOGRAPHY TESTIMONIALS", to: "#photography-testimonials" },
+    { label: "VIDEOGRAPHY TESTIMONIALS", to: "#videography-testimonials" },
+  ];
+
   return (
     <footer className="w-full bg-pocketTeal text-white">
       {/* Top section */}
@@ -99,28 +113,20 @@ const Footer = () => {
               QuickLinks
             </h3>
             <div className="flex flex-wrap gap-x-5 gap-y-2 md:gap-x-7">
-              {[
-                "HOME",
-                "ABOUT",
-                "WORKS",
-                "SERVICES",
-                "PRICING",
-                "CONTACT",
-                "BLOGS",
-                "PHOTOGRAPHY TESTIMONIALS",
-                "VIDEOGRAPHY TESTIMONIALS",
-              ].map((link) => {
-                const isTestimonial = link.includes("TESTIMONIALS");
+              {quickLinks.map((link) => {
+                const isTestimonial = link.label.includes("TESTIMONIALS");
+                
+                // Using Link from gatsby for internal routing
                 return (
-                  <a
-                    key={link}
-                    href={`#${link.toLowerCase().replace(/\s/g, "-")}`}
+                  <Link
+                    key={link.label}
+                    to={link.to}
                     className={`text-white text-[16px] md:text-[20px] font-medium font-inter hover:text-pocketYellow transition-colors whitespace-nowrap ${
                       isTestimonial ? "hidden md:inline-block" : ""
                     }`}
                   >
-                    {link}
-                  </a>
+                    {link.label}
+                  </Link>
                 );
               })}
             </div>
