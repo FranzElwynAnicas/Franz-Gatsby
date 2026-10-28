@@ -3,9 +3,9 @@ import { Link } from "gatsby";
 import logo from "../images/logo-pocket-light.png";
 
 const navLinks = [
-  { label: "Home",     to: "/",         width: 83,  padding: "6px 16px" },
-  { label: "About",    to: "/about",    width: 85,  padding: "6px 16px" },
-  { label: "Works",    to: "/works",    width: 85,  padding: "7px 15px" },
+  { label: "Home",    to: "/",        width: 83,  padding: "6px 16px" },
+  { label: "About",   to: "/about",   width: 85,  padding: "6px 16px" },
+  { label: "Works",   to: "/works",   width: 85,  padding: "7px 15px" },
   { label: "Services", to: "/services", width: 107, padding: "6px 16px" },
   { label: "Pricing",  to: "/pricing",  width: 92,  padding: "8px 16px" },
 ];

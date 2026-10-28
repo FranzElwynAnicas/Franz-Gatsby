@@ -11,10 +11,15 @@ const HomePricing = () => {
             
             {/* Heading */}
             <h2 className="flex-1 text-[40px] md:text-6xl lg:text-[80px] font-extrabold leading-[1.1] tracking-[-0.03em] text-black">
-              We value<br className="md:hidden" />
-              <span className="text-[#179CBD]"> transparency,</span><br className="md:hidden" />
-              <span className="hidden md:inline"> </span>so let's talk about<br className="md:hidden" />
-              <span className="hidden md:inline"> </span>pricing.
+              <span className="md:text-[#FCBE17]">We value</span>
+              <br className="md:hidden" />
+              <span className="text-[#179CBD]"> transparency,</span>
+              <br className="md:hidden" />
+              <span className="hidden md:inline"> </span>
+              <span className="md:text-[#526E87]">so let's talk about</span>
+              <br className="md:hidden" />
+              <span className="hidden md:inline"> </span>
+              <span className="md:text-[#526E87]">pricing.</span>
             </h2>
 
             {/* View Pricing Button */}
