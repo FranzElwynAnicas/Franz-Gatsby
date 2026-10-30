@@ -7,13 +7,16 @@ const Footer = () => {
     { label: "HOME", to: "/" },
     { label: "ABOUT", to: "/about" },
     { label: "HOW WE WORK", to: "/how-we-work" }, 
+    { label: "PHOTOGRAPHY", to: "/photography" },
+    { label: "VIDEOGRAPHY", to: "/videography" },
+    { label: "COURSES", to: "/courses" }, // <-- Added Courses
     { label: "WORKS", to: "/works" },
     { label: "SERVICES", to: "/services" },
     { label: "PRICING", to: "/pricing" },
     { label: "CONTACT", to: "/contact" },
     { label: "BLOGS", to: "/blog" }, 
-    { label: "PHOTOGRAPHY TESTIMONIALS", to: "#photography-testimonials" },
-    { label: "VIDEOGRAPHY TESTIMONIALS", to: "#videography-testimonials" },
+    { label: "PHOTOGRAPHY TESTIMONIALS", to: "/photography-testimonials" }, // <-- Updated to route instead of hash if needed
+    { label: "VIDEOGRAPHY TESTIMONIALS", to: "/videography-testimonials" },
   ];
 
   return (
@@ -27,7 +30,7 @@ const Footer = () => {
           style={{
             fontFamily: "Inter, sans-serif",
             fontWeight: 600,
-            fontSize: "clamp(36px, 5vw, 64px)", // Scales down on mobile, exact 64px on desktop
+            fontSize: "clamp(36px, 5vw, 64px)",
             lineHeight: "100%",
             letterSpacing: "-0.05em",
           }}
