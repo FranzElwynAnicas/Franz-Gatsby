@@ -1,10 +1,14 @@
 import * as React from "react";
-import Navbar from "../components/Navbar";
-import HowWeWorkHero from "../components/HowWeWorkHero";
-import HowWeWorkAccordion from "../components/HowWeWorkAccordion";
-import HowWeWorkDetails from "../components/HowWeWorkDetails";
-import HowWeWorkFooter from "../components/HowWeWorkFooter"; 
-import Footer from "../components/Footer";
+
+// Layout
+import Navbar from "../components/layout/Navbar";
+import Footer from "../components/layout/Footer";
+
+// How We Work components
+import HowWeWorkHero from "../components/how-we-work/HowWeWorkHero";
+import HowWeWorkAccordion from "../components/how-we-work/HowWeWorkAccordion";
+import HowWeWorkDetails from "../components/how-we-work/HowWeWorkDetails";
+import HowWeWorkFooter from "../components/how-we-work/HowWeWorkFooter"; 
 
 export default function HowWeWorkPage() {
   return (

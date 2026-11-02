@@ -1,9 +1,13 @@
 import React from "react";
-import Navbar from "../components/Navbar";
-import PhotographyTestimonialsHero from "../components/PhotographyTestimonialsHero";
-import PhotographyTestimonialsMail from "../components/PhotographyTestimonialsMail";
-import PhotographyTestimonialsContent from "../components/PhotographyTestimonialsContent";
-import Footer from "../components/Footer";
+
+// Layout
+import Navbar from "../components/layout/Navbar";
+import Footer from "../components/layout/Footer";
+
+// Photography Testimonials components
+import PhotographyTestimonialsHero from "../components/photography-testimonials/PhotographyTestimonialsHero";
+import PhotographyTestimonialsMail from "../components/photography-testimonials/PhotographyTestimonialsMail";
+import PhotographyTestimonialsContent from "../components/photography-testimonials/PhotographyTestimonialsContent";
 
 export default function PhotographyTestimonialsPage() {
   return (
@@ -20,4 +24,3 @@ export default function PhotographyTestimonialsPage() {
 }
 
 export const Head = () => <title>Photography Testimonials | Pocket Creatives</title>;
-

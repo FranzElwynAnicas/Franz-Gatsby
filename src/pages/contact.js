@@ -1,9 +1,13 @@
 import React from "react";
-import Navbar from "../components/Navbar";
-import ContactHero from "../components/ContactHero";
-import ContactLocation from "../components/ContactLocation";
-import ContactPartners from "../components/ContactPartners"; // <-- Added
-import Footer from "../components/Footer";
+
+// Layout
+import Navbar from "../components/layout/Navbar";
+import Footer from "../components/layout/Footer";
+
+// Contact components
+import ContactHero from "../components/contact/ContactHero";
+import ContactLocation from "../components/contact/ContactLocation";
+import ContactPartners from "../components/contact/ContactPartners"; 
 
 export default function ContactPage() {
   return (
@@ -12,7 +16,7 @@ export default function ContactPage() {
       <main className="m-0 p-0 flex flex-col bg-white">
         <ContactHero />
         <ContactLocation />
-        <ContactPartners /> {/* <-- Added */}
+        <ContactPartners /> 
       </main>
       <Footer />
     </>

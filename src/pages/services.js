@@ -1,12 +1,16 @@
 import React from "react";
-import Navbar from "../components/Navbar";
-import ServicesCategoryBlock from "../components/ServicesCategoryBlock"; 
-import ServicesProcess from "../components/ServicesProcess"; 
-import ServicesCategoryBlock2 from "../components/ServicesCategoryBlock2"; 
-import ServicesProcess2 from "../components/ServicesProcess2"; 
-import ServicesCategoryBlock3 from "../components/ServicesCategoryBlock3"; 
-import WhatWeCanOffer from "../components/ServicesWhatWeCanOffer"; 
-import Footer from "../components/Footer"; 
+
+// Layout
+import Navbar from "../components/layout/Navbar";
+import Footer from "../components/layout/Footer";
+
+// Services components
+import ServicesCategoryBlock from "../components/services/ServicesCategoryBlock"; 
+import ServicesProcess from "../components/services/ServicesProcess"; 
+import ServicesCategoryBlock2 from "../components/services/ServicesCategoryBlock2"; 
+import ServicesProcess2 from "../components/services/ServicesProcess2"; 
+import ServicesCategoryBlock3 from "../components/services/ServicesCategoryBlock3"; 
+import WhatWeCanOffer from "../components/services/ServicesWhatWeCanOffer"; 
 
 export default function ServicesPage() {
   return (

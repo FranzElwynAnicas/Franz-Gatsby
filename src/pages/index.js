@@ -1,16 +1,20 @@
 import * as React from "react";
-import Navbar from "../components/Navbar";
-import HomeHeroIntro from "../components/HomeHeroIntro";
-import HomePartnersGrid from "../components/HomePartnersGrid";
-import HomeVideoWork from "../components/HomeVideoWork";
-import HomeVideoCategories from "../components/HomeVideoCategories";
-import HomeQuality from "../components/HomeQuality";
-import HomePhotography from "../components/HomePhotography";
-import HomeServicesCheck from "../components/HomeServicesCheck";
-import HomeMeetTheTeam from "../components/HomeMeetTheTeam";
-import HomeReviews from "../components/HomeReviews";
-import HomePricing from "../components/HomePricing";
-import Footer from "../components/Footer";
+
+// Layout
+import Navbar from "../components/layout/Navbar";
+import Footer from "../components/layout/Footer";
+
+// Home components
+import HomeHeroIntro from "../components/home/HomeHeroIntro";
+import HomePartnersGrid from "../components/home/HomePartnersGrid";
+import HomeVideoWork from "../components/home/HomeVideoWork";
+import HomeVideoCategories from "../components/home/HomeVideoCategories";
+import HomeQuality from "../components/home/HomeQuality";
+import HomePhotography from "../components/home/HomePhotography";
+import HomeServicesCheck from "../components/home/HomeServicesCheck";
+import HomeMeetTheTeam from "../components/home/HomeMeetTheTeam";
+import HomeReviews from "../components/home/HomeReviews";
+import HomePricing from "../components/home/HomePricing";
 
 const Home = () => (
   <main className="w-full min-h-screen bg-pocketWhite">

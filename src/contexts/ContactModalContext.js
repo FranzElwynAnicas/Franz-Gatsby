@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState } from "react";
-import ContactModal from "../components/ContactModal";
+import ContactModal from "../components/layout/ContactModal";
 
 const ContactModalContext = createContext();
 

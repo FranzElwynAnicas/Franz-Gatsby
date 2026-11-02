@@ -1,16 +1,20 @@
 import * as React from "react";
 import { useState } from "react";
-import Navbar from "../components/Navbar";
-import AboutHero from "../components/AboutHero";
-import AboutIntro from "../components/AboutIntro";
-import AboutServices from "../components/AboutServices";
-import AboutWorks from "../components/AboutWorks";
-import AboutWhyWorkWithUs from "../components/AboutWhyWorkWithUs";
-import AboutVideoSection from "../components/AboutVideoSection"; // 👈 added
-import AboutWhoWeWorkWith from "../components/AboutWhoWeWorkWith";
-import AboutOurStory from "../components/AboutOurStory";
-import Footer from "../components/Footer";
-import ContactModal from "../components/ContactModal";
+
+// Layout
+import Navbar from "../components/layout/Navbar";
+import Footer from "../components/layout/Footer";
+import ContactModal from "../components/layout/ContactModal";
+
+// About components
+import AboutHero from "../components/about/AboutHero";
+import AboutIntro from "../components/about/AboutIntro";
+import AboutServices from "../components/about/AboutServices";
+import AboutWorks from "../components/about/AboutWorks";
+import AboutWhyWorkWithUs from "../components/about/AboutWhyWorkWithUs";
+import AboutVideoSection from "../components/about/AboutVideoSection"; 
+import AboutWhoWeWorkWith from "../components/about/AboutWhoWeWorkWith";
+import AboutOurStory from "../components/about/AboutOurStory";
 
 const AboutPage = () => {
   const [isContactOpen, setIsContactOpen] = useState(false);

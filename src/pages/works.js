@@ -1,10 +1,14 @@
 import * as React from "react";
-import Navbar from "../components/Navbar";
-import WorksHero from "../components/WorksHero";
-import WorksCategoryBlock from "../components/WorksCategoryBlock";
-import Footer from "../components/Footer";
-import WorksBeautyVideography from "../components/WorksBeautyVideography";
-import WorksBeautyPhotography from "../components/WorksBeautyPhotography";
+
+// Layout
+import Navbar from "../components/layout/Navbar";
+import Footer from "../components/layout/Footer";
+
+// Works components
+import WorksHero from "../components/works/WorksHero";
+import WorksCategoryBlock from "../components/works/WorksCategoryBlock";
+import WorksBeautyVideography from "../components/works/WorksBeautyVideography";
+import WorksBeautyPhotography from "../components/works/WorksBeautyPhotography";
 
 const Works = () => (
   <main className="w-full bg-pocketLightGrey">

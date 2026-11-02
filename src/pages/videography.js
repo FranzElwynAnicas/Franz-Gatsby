@@ -1,10 +1,14 @@
 import React from "react";
-import Navbar from "../components/Navbar";
-import VideographyHero from "../components/VideographyHero";
-import VideographyHelp from "../components/VideographyHelp";
-import Footer from "../components/Footer";
-import VideographyPortfolio from "../components/VideographyPortfolio";
-import VideographyDetails from "../components/VideographyDetails";
+
+// Layout
+import Navbar from "../components/layout/Navbar";
+import Footer from "../components/layout/Footer";
+
+// Videography components
+import VideographyHero from "../components/videography/VideographyHero";
+import VideographyHelp from "../components/videography/VideographyHelp";
+import VideographyPortfolio from "../components/videography/VideographyPortfolio";
+import VideographyDetails from "../components/videography/VideographyDetails";
 
 export default function VideographyPage() {
   return (

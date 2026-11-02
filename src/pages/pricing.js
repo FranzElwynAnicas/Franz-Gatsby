@@ -1,11 +1,16 @@
 import React from "react";
-import Navbar from "../components/Navbar";
-import PricingHero from "../components/PricingHero";
-import PricingModular from "../components/PricingModular";
-import PricingExplanation from "../components/PricingExplanation";
-import PricingContact from "../components/PricingContact";
-import PricingProduction from "../components/PricingProduction";
-import Footer from "../components/Footer";
+
+// Layout
+import Navbar from "../components/layout/Navbar";
+import Footer from "../components/layout/Footer";
+
+// Pricing components
+import PricingHero from "../components/pricing/PricingHero";
+import PricingModular from "../components/pricing/PricingModular";
+import PricingExplanation from "../components/pricing/PricingExplanation";
+import PricingContact from "../components/pricing/PricingContact";
+import PricingProduction from "../components/pricing/PricingProduction";
+
 export default function PricingPage() {
   return (
     <>

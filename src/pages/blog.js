@@ -1,8 +1,12 @@
 import React from "react";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
-import BlogCarousel from "../components/BlogCarousel";
-import BlogCategory from "../components/BlogCategory";
+
+// Layout
+import Navbar from "../components/layout/Navbar";
+import Footer from "../components/layout/Footer";
+
+// Blog components
+import BlogCarousel from "../components/blog/BlogCarousel";
+import BlogCategory from "../components/blog/BlogCategory";
 
 export default function BlogPage() {
   return (

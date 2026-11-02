@@ -1,9 +1,13 @@
 import React from "react";
-import Navbar from "../components/Navbar";
-import VideoTestimonialsHero from "../components/VideoTestimonialsHero";
-import VideoTestimonialsMail from "../components/VideoTestimonialsMail";
-import VideoTestimonialsContent from "../components/VideoTestimonialsContent";
-import Footer from "../components/Footer";
+
+// Layout
+import Navbar from "../components/layout/Navbar";
+import Footer from "../components/layout/Footer";
+
+// Video Testimonials components
+import VideoTestimonialsHero from "../components/video-testimonials/VideoTestimonialsHero";
+import VideoTestimonialsMail from "../components/video-testimonials/VideoTestimonialsMail";
+import VideoTestimonialsContent from "../components/video-testimonials/VideoTestimonialsContent";
 
 export default function VideoTestimonialsPage() {
   return (

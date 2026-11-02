@@ -1,10 +1,14 @@
 import React from "react";
-import Navbar from "../components/Navbar";
-import PhotographyHero from "../components/PhotographyHero";
-import PhotographyAbout from "../components/PhotographyAbout";
-import PhotographyMail from "../components/PhotographyMail";
-import PhotographyDetails from "../components/PhotographyDetails";
-import Footer from "../components/Footer"; 
+
+// Layout
+import Navbar from "../components/layout/Navbar";
+import Footer from "../components/layout/Footer";
+
+// Photography components
+import PhotographyHero from "../components/photography/PhotographyHero";
+import PhotographyAbout from "../components/photography/PhotographyAbout";
+import PhotographyMail from "../components/photography/PhotographyMail";
+import PhotographyDetails from "../components/photography/PhotographyDetails";
 
 export default function PhotographyPage() {
   return (

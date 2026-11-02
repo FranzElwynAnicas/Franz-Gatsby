@@ -1,11 +1,15 @@
 import React from "react";
-import Navbar from "../components/Navbar";
-import CoursesHero from "../components/CoursesHero";
-import Footer from "../components/Footer";
-import CoursesHowItWorks from "../components/CoursesHowItWorks";
-import CoursesExamples from "../components/CoursesExamples";
-import CoursesBehindScenes from "../components/CoursesBehindScenes";
-import CoursesTestimonial from "../components/CoursesTestimonial";
+
+// Layout
+import Navbar from "../components/layout/Navbar";
+import Footer from "../components/layout/Footer";
+
+// Courses components
+import CoursesHero from "../components/courses/CoursesHero";
+import CoursesHowItWorks from "../components/courses/CoursesHowItWorks";
+import CoursesExamples from "../components/courses/CoursesExamples";
+import CoursesBehindScenes from "../components/courses/CoursesBehindScenes";
+import CoursesTestimonial from "../components/courses/CoursesTestimonial";
 
 export default function CoursesPage() {
   return (
@@ -13,7 +17,7 @@ export default function CoursesPage() {
       <Navbar activePage="Courses" />
       <main className="m-0 p-0 bg-[#F7F7F7]">
         <CoursesHero />
-        <CoursesHowItWorks/>
+        <CoursesHowItWorks />
         <CoursesExamples />
         <CoursesBehindScenes />
         <CoursesTestimonial />

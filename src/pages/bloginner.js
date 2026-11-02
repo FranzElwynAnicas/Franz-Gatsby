@@ -1,7 +1,11 @@
 import React from "react";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
-import BlogInner from "../components/BlogInner";
+
+// Layout
+import Navbar from "../components/layout/Navbar";
+import Footer from "../components/layout/Footer";
+
+// Blog components
+import BlogInner from "../components/blog/BlogInner";
 
 export default function BlogInnerPage() {
   return (
