@@ -79,9 +79,9 @@ const AboutWhoWeWorkWith = () => {
     <section className="w-full bg-pocketTeal">
 
       {/* ============================================================ */}
-      {/* MOBILE — heading, text, rotating name, View Testimonials btn  */}
+      {/* MOBILE & TABLET (default, md) — heading, text, name, button  */}
       {/* ============================================================ */}
-      <div className="lg:hidden px-6 pt-16 pb-20">
+      <div className="lg:hidden px-6 md:px-12 pt-16 pb-20">
         {/* Heading */}
         <h2
           className="text-white font-black leading-[1] tracking-[-0.05em] mb-8"
@@ -93,7 +93,7 @@ const AboutWhoWeWorkWith = () => {
         </h2>
 
         {/* Body copy */}
-        <div className="flex flex-col gap-6 text-white text-[16px] font-medium leading-[1.4] tracking-[-0.05em]">
+        <div className="flex flex-col gap-6 text-white text-[16px] md:text-[18px] font-medium leading-[1.4] tracking-[-0.05em]">
           <p>
             We have provided video and photography services to a huge variety of
             clients in our history, from crowdfunders and startups through to
@@ -159,39 +159,38 @@ const AboutWhoWeWorkWith = () => {
       </div>
 
       {/* ============================================================ */}
-      {/* DESKTOP — completely unchanged                                */}
+      {/* DESKTOP (lg, xl, 2xl) — fully responsive, no <br> tags       */}
       {/* ============================================================ */}
-      <div className="hidden lg:block min-h-screen items-start pt-56 pb-24">
+      <div className="hidden lg:block min-h-screen items-start pt-40 xl:pt-56 pb-24">
         <div className="pocket-container w-full">
 
           {/* Heading */}
           <h2
-            className="text-white font-black tracking-[-0.05em] leading-[1.2] mb-16 -ml-20"
+            className="text-white font-black tracking-[-0.05em] leading-[1.2] mb-12 xl:mb-16 -ml-4 xl:-ml-20"
             style={{ fontSize: "clamp(48px, 8vw, 120px)" }}
           >
             Who We Work With
           </h2>
 
-          <div className="grid grid-cols-2 gap-16 items-start">
+          <div className="grid grid-cols-2 gap-10 xl:gap-16 items-start">
 
             {/* Left: body copy */}
-            <div className="flex flex-col gap-8 text-white text-[20px] font-medium leading-[1.2] tracking-[-0.05em]">
-              <p className="text-justify">
-                We have provided video and photography services to a huge variety of<br />
-                clients in our history, from crowdfunders and startups through to more<br />
-                established names and global businesses. We love that mix, and being<br />
+            <div className="flex flex-col gap-6 xl:gap-8 text-white text-[18px] xl:text-[20px] font-medium leading-[1.3] xl:leading-[1.2] tracking-[-0.05em]">
+              <p>
+                We have provided video and photography services to a huge variety of
+                clients in our history, from crowdfunders and startups through to more
+                established names and global businesses. We love that mix, and being
                 entrusted with the visuals for clients of any size is extremely satisfying.
               </p>
 
-              <p className="text-left">
-                We work with most clients directly, and we're also able to provide our<br />
-                services to agencies and other creative companies who don't have<br />
+              <p>
+                We work with most clients directly, and we're also able to provide our
+                services to agencies and other creative companies who don't have
                 access to video and photography services in house.
               </p>
 
-              <p className="text-left">
-                We're very proud to have worked with known clients<br />
-                such as{" "}
+              <p>
+                We're very proud to have worked with known clients such as{" "}
                 <span
                   className="inline-flex items-center justify-center align-middle mx-1 bg-pocketYellow text-black"
                   style={{
@@ -201,9 +200,9 @@ const AboutWhoWeWorkWith = () => {
                   }}
                 >
                   <span
-                    className="font-bold"
+                    className="font-bold whitespace-nowrap"
                     style={{
-                      fontSize: "20px",
+                      fontSize: "18px",
                       letterSpacing: "-0.05em",
                       lineHeight: "1.2",
                       opacity: enterFade ? 0 : 1,
@@ -215,8 +214,7 @@ const AboutWhoWeWorkWith = () => {
                     {NAME_CAROUSEL[nameIndex]}
                   </span>
                 </span>{" "}
-                and many more emerging names that<br />
-                you'll come to know very soon.
+                and many more emerging names that you'll come to know very soon.
               </p>
             </div>
 
@@ -235,7 +233,7 @@ const AboutWhoWeWorkWith = () => {
                       {logos.map((logo, idx) => (
                         <div
                           key={idx}
-                          className="w-full aspect-[2/1] bg-white rounded-2xl shadow-[0_4px_6px_rgba(0,0,0,0.18)] flex items-center justify-center px-6 py-4"
+                          className="w-full aspect-[2/1] bg-white rounded-2xl shadow-[0_4px_6px_rgba(0,0,0,0.18)] flex items-center justify-center px-4 xl:px-6 py-3 xl:py-4"
                         >
                           <img
                             src={logo.src}
@@ -256,9 +254,10 @@ const AboutWhoWeWorkWith = () => {
                   href="https://www.pocketcreatives.co.uk/testimonials/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full aspect-[2/1] bg-pocketYellow rounded-2xl flex items-center justify-end text-right text-black font-bold hover:opacity-90 transition-opacity px-4 py-4"
+                  className="w-full aspect-[2/1] bg-pocketYellow rounded-2xl flex items-center justify-end text-right text-black font-bold hover:opacity-90 transition-opacity px-3 xl:px-4 py-3 xl:py-4"
                   style={{
-                    fontSize: "16px",
+                    fontSize: "14px",
+                    xl: { fontSize: "16px" },
                     letterSpacing: "-0.05em",
                     lineHeight: "1.2",
                   }}

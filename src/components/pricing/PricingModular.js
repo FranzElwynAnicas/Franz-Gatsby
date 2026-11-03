@@ -114,10 +114,10 @@ const PricingModular = () => {
           </ul>
         </div>
 
-        {/* Middle Video Container - Strict 1353x761 on Desktop */}
+        {/* Middle Video Container */}
         <div className="hidden md:block w-full max-w-[1353px] mb-12 md:mb-16">
           <div 
-            className="w-full h-[300px] md:h-[761px] bg-black relative rounded-[2px] overflow-hidden shadow-lg group cursor-pointer"
+            className="w-full h-[300px] md:h-[400px] lg:h-[500px] xl:h-[761px] bg-black relative rounded-[2px] overflow-hidden shadow-lg group cursor-pointer transition-all duration-300"
             onClick={togglePlay}
           >
             <video
@@ -138,20 +138,20 @@ const PricingModular = () => {
           </div>
         </div>
 
-        {/* Bottom Two Blue Modular Boxes Container - Strict 620x547 on Desktop */}
-        <div className="w-full max-w-[1353px] flex flex-col md:flex-row md:grid md:grid-cols-2 gap-8 lg:gap-[113px] relative pt-6">
+        {/* Bottom Two Blue Modular Boxes Container */}
+        <div className="w-full max-w-[1353px] flex flex-col md:grid md:grid-cols-2 gap-8 md:gap-6 lg:gap-12 xl:gap-16 2xl:gap-[113px] relative pt-6">
           
           {/* Card 1 */}
-          <div className="relative bg-[#1EA4B9] text-white p-6 md:p-10 lg:p-14 w-full md:w-[620px] min-h-[450px] md:h-[547px] flex flex-col justify-center items-center text-center mt-6 md:mt-0">
+          <div className="relative bg-[#1EA4B9] text-white p-6 md:p-8 lg:p-10 xl:p-14 w-full 2xl:max-w-[620px] min-h-[400px] xl:min-h-[547px] flex flex-col justify-center items-center text-center mt-6 md:mt-0">
             <div className="absolute -top-10 -left-4 md:-top-10 md:-left-8 z-10">
               <PriceTagBadge />
             </div>
 
-            <h3 className="font-bold text-white text-xl md:text-[36px] lg:text-[40px] leading-[123%] tracking-[-0.05em] max-w-[546px] mb-6 md:mb-8 mt-4 md:mt-0">
+            <h3 className="font-bold text-white text-xl md:text-[28px] lg:text-[34px] xl:text-[40px] leading-[123%] tracking-[-0.05em] max-w-[546px] mb-6 md:mb-8 mt-4 md:mt-0">
               Everything you need and no hidden costs.
             </h3>
 
-            <p className="font-medium text-white text-base md:text-[18px] lg:text-[20px] leading-[123%] tracking-[-0.05em] max-w-[496px]">
+            <p className="font-medium text-white text-base md:text-[16px] lg:text-[18px] xl:text-[20px] leading-[123%] tracking-[-0.05em] max-w-[496px]">
               There are lots of factors that affect the overall price of video
               production and photography shoots, such as props, backgrounds,
               models and locations. This is why there’s no one-size-fits all
@@ -161,12 +161,12 @@ const PricingModular = () => {
           </div>
 
           {/* Card 2 */}
-          <div className="relative bg-[#1EA4B9] text-white p-6 md:p-10 lg:p-14 w-full md:w-[620px] min-h-[450px] md:h-[547px] flex flex-col justify-center items-center text-center mt-6 md:mt-0">
-            <h3 className="font-bold text-white text-xl md:text-[36px] lg:text-[40px] leading-[123%] tracking-[-0.05em] max-w-[546px] mb-6 md:mb-8">
+          <div className="relative bg-[#1EA4B9] text-white p-6 md:p-8 lg:p-10 xl:p-14 w-full 2xl:max-w-[620px] min-h-[400px] xl:min-h-[547px] flex flex-col justify-center items-center text-center mt-6 md:mt-0">
+            <h3 className="font-bold text-white text-xl md:text-[28px] lg:text-[34px] xl:text-[40px] leading-[123%] tracking-[-0.05em] max-w-[546px] mb-6 md:mb-8">
               We’ll get you from brief to quote in a flash!
             </h3>
 
-            <p className="font-medium text-white text-base md:text-[18px] lg:text-[20px] leading-[123%] tracking-[-0.05em] max-w-[496px]">
+            <p className="font-medium text-white text-base md:text-[16px] lg:text-[18px] xl:text-[20px] leading-[123%] tracking-[-0.05em] max-w-[496px]">
               We will work with you to understand your brief and the full
               photography and video production requirements of your project,
               before delivering a budget breakdown to you at the beginning of the

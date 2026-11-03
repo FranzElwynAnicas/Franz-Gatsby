@@ -11,54 +11,12 @@ const balls = [
 ];
 
 const nodes = [
-  {
-    id: "b2",
-    ballX: 440,
-    ballSize: 54,
-    position: "below",
-    content:
-      "Steven's professional history started in broadcasting, supporting mainstream television programmes such as BBC's Watchdog, Crimewatch and Horizon and leading a 10-person team running 24/7 to make this happen.",
-  },
-  {
-    id: "b3",
-    ballX: 780,
-    ballSize: 54,
-    position: "above",
-    content:
-      "But photography and video production was always the passion, and he burnt all the hours in the day running a small, innovative corporate video production company alongside called Screensaver which could boast clients such as Tower Bridge, the Museum of London and the National Portrait Gallery. This paved the way to progress full time into the production world and merged into Tailwind Media into 2010.",
-  },
-  {
-    id: "b4",
-    ballX: 1120,
-    ballSize: 54,
-    position: "below",
-    content:
-      "For 6 years, Steven oversaw the production team, making impressive in-roads into the UK corporate video market, working with some of the country's biggest names. Highlights would include a huge change campaign for Arcadia; helping to update the internal communications video magazine for electronics giant Philips, working with pop star Olly Murs for the Pringles 25th birthday adverts, and overseeing a multitude of projects for Tesco, Currys PC World and Groupon to name just a few.",
-  },
-  {
-    id: "b5",
-    ballX: 1460,
-    ballSize: 54,
-    position: "above",
-    content:
-      "2015 saw the creation of SMC, after Steven wanted to take a different direction, by offering both video and photography. Haider Romero Perez and Lauren Hodge were invited to join, bringing a wealth of skill, enthusiasm, and drive and within 2 years have become co-owners of the newly incorporated Pocket Creatives.",
-  },
-  {
-    id: "b6",
-    ballX: 1800,
-    ballSize: 54,
-    position: "below",
-    content:
-      "\"SMC provided a wonderful opportunity to meet new business owners and establish ourselves in new markets, offering new video and photography services and building a friendly and creative business where we're building long-term working relationships with our clients. Pocket Creatives couldn't have been launched without the faith and trust shown in us by our clients, and we look forward to growing alongside them over the years to come.\"",
-  },
-  {
-    id: "b7",
-    ballX: 2140,
-    ballSize: 130,
-    position: "above",
-    content:
-      "Now, embarking on our 6th year in business together, we've reached one milestone after the next. We boast an enviable client list, with impressive client retention numbers and have built a genuinely wonderful team around us.",
-  },
+  { id: "b2", ballX: 440, ballSize: 54, position: "below", content: "Steven's professional history started in broadcasting, supporting mainstream television programmes such as BBC's Watchdog, Crimewatch and Horizon and leading a 10-person team running 24/7 to make this happen." },
+  { id: "b3", ballX: 780, ballSize: 54, position: "above", content: "But photography and video production was always the passion, and he burnt all the hours in the day running a small, innovative corporate video production company alongside called Screensaver which could boast clients such as Tower Bridge, the Museum of London and the National Portrait Gallery. This paved the way to progress full time into the production world and merged into Tailwind Media into 2010." },
+  { id: "b4", ballX: 1120, ballSize: 54, position: "below", content: "For 6 years, Steven oversaw the production team, making impressive in-roads into the UK corporate video market, working with some of the country's biggest names. Highlights would include a huge change campaign for Arcadia; helping to update the internal communications video magazine for electronics giant Philips, working with pop star Olly Murs for the Pringles 25th birthday adverts, and overseeing a multitude of projects for Tesco, Currys PC World and Groupon to name just a few." },
+  { id: "b5", ballX: 1460, ballSize: 54, position: "above", content: "2015 saw the creation of SMC, after Steven wanted to take a different direction, by offering both video and photography. Haider Romero Perez and Lauren Hodge were invited to join, bringing a wealth of skill, enthusiasm, and drive and within 2 years have become co-owners of the newly incorporated Pocket Creatives." },
+  { id: "b6", ballX: 1800, ballSize: 54, position: "below", content: "\"SMC provided a wonderful opportunity to meet new business owners and establish ourselves in new markets, offering new video and photography services and building a friendly and creative business where we're building long-term working relationships with our clients. Pocket Creatives couldn't have been launched without the faith and trust shown in us by our clients, and we look forward to growing alongside them over the years to come.\"" },
+  { id: "b7", ballX: 2140, ballSize: 130, position: "above", content: "Now, embarking on our 6th year in business together, we've reached one milestone after the next. We boast an enviable client list, with impressive client retention numbers and have built a genuinely wonderful team around us." },
 ];
 
 const desktopBalls = [
@@ -95,9 +53,11 @@ const AboutOurStory = () => {
   }, []);
 
   const activeBall = desktopBalls[stops[activeIndex].ballIndex];
+  
   const centerOffset = -260;
-  const translateX =
-    viewportWidth / 2 - activeBall.x - activeBall.size / 2 + centerOffset;
+  const lgOffset = viewportWidth < 1536 ? 150 : 0;
+  
+  const translateX = viewportWidth / 2 - (activeBall.x + activeBall.size / 2) + centerOffset + lgOffset;
 
   const handleNext = () =>
     activeIndex < stops.length - 1 && setActiveIndex(activeIndex + 1);
@@ -112,7 +72,7 @@ const AboutOurStory = () => {
   return (
     <section className="w-full font-sans select-none">
       {/* ============================================================ */}
-      {/* MOBILE — Matches exact visual design + updated title typography */}
+      {/* MOBILE & TABLET (default, sm, md) — Swipeable timeline       */}
       {/* ============================================================ */}
       <div className="lg:hidden bg-[#FCBE17] overflow-hidden">
         <div
@@ -123,11 +83,7 @@ const AboutOurStory = () => {
             className="relative"
             style={{ width: "2600px", height: `${CONTAINER_HEIGHT}px` }}
           >
-            {/* ─── "Our Story" heading + text ─── */}
-            <div
-              className="absolute left-[24px] top-[28px]"
-              style={{ width: "300px" }}
-            >
+            <div className="absolute left-[24px] top-[28px]" style={{ width: "300px" }}>
               <h2
                 className="text-white mb-3"
                 style={{
@@ -145,18 +101,22 @@ const AboutOurStory = () => {
               </p>
             </div>
 
-            {/* Timeline line */}
+            {/* Line spans exactly from center of left diamond to center of right diamond */}
             <div
               className="absolute h-[2px] bg-black"
-              style={{ top: `${LINE_TOP}px`, left: `${LEFT_PADDING}px`, width: "2300px" }}
+              style={{ top: `${LINE_TOP}px`, left: `${LEFT_PADDING}px`, width: "2296px" }}
             />
-            {/* Left diamond pin */}
+            {/* Left pin */}
             <div
               className="absolute w-3.5 h-3.5 bg-black rotate-45"
               style={{ top: `${LINE_TOP - 6}px`, left: `${LEFT_PADDING}px` }}
             />
+            {/* Right pin */}
+            <div
+              className="absolute w-3.5 h-3.5 bg-black rotate-45"
+              style={{ top: `${LINE_TOP - 6}px`, left: "2320px" }}
+            />
 
-            {/* Balls along timeline */}
             {balls.map((ball) => {
               const isBig = ball.size === 130;
               const sizePx = isBig ? 130 : 54;
@@ -186,7 +146,6 @@ const AboutOurStory = () => {
               );
             })}
 
-            {/* Text cards above/below timeline */}
             {nodes.map((node) => {
               const isAbove = node.position === "above";
               const isBig = node.ballSize === 130;
@@ -217,12 +176,14 @@ const AboutOurStory = () => {
       </div>
 
       {/* ============================================================ */}
-      {/* DESKTOP — completely unchanged                               */}
+      {/* DESKTOP (lg, xl, 2xl) — Exact same layout, responsive text   */}
       {/* ============================================================ */}
       <div className="hidden lg:block relative w-full h-[1232px] bg-white overflow-hidden font-inter">
         <div
-          className="absolute top-0 left-0 h-full w-[5000px] transition-transform duration-[800ms] ease-in-out"
-          style={{ transform: `translateX(${translateX}px)` }}
+          className="absolute top-0 left-0 h-full w-[5500px] transition-transform duration-[800ms] ease-in-out lg:-mt-8 xl:-mt-16"
+          style={{ 
+            transform: `translateX(${translateX}px)`,
+          }}
         >
           <div className="absolute top-[794px] left-[312px] w-[3837px] h-[6px] bg-[#526E87]" />
           <div className="absolute top-[782px] left-[300px] w-6 h-6 bg-[#526E87] rotate-45" />
@@ -255,21 +216,12 @@ const AboutOurStory = () => {
           >
             Our Story
           </h2>
+          
           <p
-            className="absolute text-[40px] font-medium text-[#526E87] leading-[1.2] tracking-[-5%] whitespace-nowrap"
-            style={{ left: 367, top: 320, width: 620 }}
+            className="absolute text-[40px] font-medium text-[#526E87] leading-[1.2] tracking-[-5%] w-[clamp(500px,50vw,620px)]"
+            style={{ left: 367, top: 320 }}
           >
-            Pocket Creatives launched in the winter
-            <br />
-            of 2017, formed as a limited company
-            <br />
-            following the team working under the
-            <br />
-            name of Steven Mayatt Creative since
-            <br />
-            2015. Pocket is the next step in our
-            <br />
-            evolution.
+            Pocket Creatives launched in the winter of 2017, formed as a limited company following the team working under the name of Steven Mayatt Creative since 2015. Pocket is the next step in our evolution.
           </p>
 
           <p className="absolute text-[20px] font-bold text-[#526E87] leading-[1.2] tracking-[-5%]" style={{ left: 1119, top: 867, width: 500 }}>
@@ -289,24 +241,14 @@ const AboutOurStory = () => {
           </p>
 
           <p
-            className="absolute text-[40px] font-medium text-black leading-[1.2] tracking-[-5%]"
-            style={{ left: 4064, top: 345, width: 721 }}
+            className="absolute text-[40px] font-medium text-black leading-[1.2] tracking-[-5%] lg:w-[650px] xl:w-[clamp(500px,50vw,721px)] lg:top-[260px] xl:top-[345px]"
+            style={{ left: 4064 }}
           >
-            Now, embarking on our 6th year in
-            <br />
-            business together, we've reached one
-            <br />
-            milestone after the next. We boast an
-            <br />
-            enviable client list, with impressive client
-            <br />
-            retention numbers and have built a
-            <br />
-            genuinely wonderful team around us.
+            Now, embarking on our 6th year in business together, we've reached one milestone after the next. We boast an enviable client list, with impressive client retention numbers and have built a genuinely wonderful team around us.
           </p>
         </div>
 
-        {/* Arrows */}
+        {/* Arrows — Exactly the same for lg, xl, and 2xl */}
         <div className="absolute bottom-[70px] left-[381px] flex items-center gap-4 z-30">
           <button
             onClick={handlePrev}

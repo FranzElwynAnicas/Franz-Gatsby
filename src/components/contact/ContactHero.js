@@ -9,23 +9,19 @@ const ContactHero = () => {
     <section className="relative w-full bg-[#179CBD] min-h-screen flex items-center pt-32 pb-16 lg:py-0 overflow-hidden">
       <div className="w-full max-w-[1440px] mx-auto px-6 md:px-12 lg:px-16 relative z-10">
         
-        {/* Adjusted grid layout to give equal room or proper proportion */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-12 items-center">
+        {/* Responsive grid layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-12 xl:gap-16 items-center">
           
           {/* LEFT SIDE: Text & Mobile Button */}
           <div className="flex flex-col justify-center">
             <h1 
-              className="text-white mb-8 md:mb-10 font-extrabold tracking-[-0.05em] leading-[0.95]"
+              className="text-white mb-8 md:mb-10 font-extrabold tracking-[-0.05em] leading-[1.05] lg:leading-[0.95]"
               style={{ 
                 fontFamily: "Inter, sans-serif",
                 fontSize: "clamp(48px, 5.2vw, 84px)" 
               }}
             >
-              <span className="whitespace-nowrap">Grab a latte</span>
-              <br />
-              <span className="whitespace-nowrap">and let's</span>
-              <br />
-              <span className="whitespace-nowrap">have a chat</span>
+              Grab a latte and let's have a chat
             </h1>
 
             <div 
@@ -44,14 +40,14 @@ const ContactHero = () => {
             </div>
 
             {/* Mobile Only Button */}
-            <div className="lg:hidden w-full flex justify-center">
+            <div className="lg:hidden w-full flex justify-start md:justify-center">
               <button 
                 onClick={() => window.location.href = "mailto:hello@example.com"}
-                className="inline-flex items-center gap-3 bg-[#FCBE17] text-black px-8 py-4 rounded-full hover:bg-yellow-500 transition-colors"
+                className="inline-flex items-center gap-3 bg-[#FCBE17] text-black px-6 md:px-8 py-3 md:py-4 rounded-full hover:bg-yellow-500 transition-colors"
                 style={{
                   fontFamily: "Inter, sans-serif",
                   fontWeight: 500,
-                  fontSize: "20px",
+                  fontSize: "18px",
                   lineHeight: "200%",
                   letterSpacing: "-0.05em"
                 }}
@@ -69,8 +65,8 @@ const ContactHero = () => {
           <div className="hidden lg:block w-full">
             <form onSubmit={handleSubmit} className="w-full flex flex-col">
               
-              {/* Top Row: 3 Inputs */}
-              <div className="grid grid-cols-3 gap-4 mb-5 w-full">
+              {/* Top Row: 3 Inputs - Stacks on lg, becomes 3 cols on xl */}
+              <div className="grid grid-cols-1 xl:grid-cols-3 gap-4 lg:gap-5 mb-5 w-full">
                 
                 {/* Name Box */}
                 <div>
@@ -140,9 +136,9 @@ const ContactHero = () => {
               <div className="flex justify-end w-full">
                 <button 
                   type="submit"
-                  className="bg-[#FCBE17] text-black font-extrabold hover:bg-yellow-500 transition-colors flex items-center justify-center rounded-2xl"
+                  className="bg-[#FCBE17] text-black font-extrabold hover:bg-yellow-500 transition-colors flex items-center justify-center rounded-2xl w-full sm:w-auto"
                   style={{
-                    width: "188px",
+                    minWidth: "188px",
                     height: "54px"
                   }}
                 >

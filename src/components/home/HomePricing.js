@@ -4,43 +4,42 @@ const HomePricing = () => {
   return (
     <section className="w-full bg-[#F4F4F4] flex items-center">
       <div className="w-full py-16 md:py-24">
-        <div className="px-6 md:pl-[12.5%] md:pr-8 lg:pr-16">
+        {/* Reduced padding on md, full offset on lg+ */}
+        <div className="px-6 md:px-10 lg:pl-[12.5%] lg:pr-8 xl:pr-16">
           
           {/* Top row: heading + View Pricing button */}
-          <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-8 lg:gap-10 mb-12 lg:mb-20 lg:pr-[12.5%]">
+          <div className="flex flex-col md:flex-row md:items-start justify-between gap-8 md:gap-10 mb-12 md:mb-20 lg:pr-[12.5%]">
             
             {/* Heading */}
-            <h2 className="flex-1 text-[40px] md:text-6xl lg:text-[80px] font-extrabold leading-[1.1] tracking-[-0.03em] text-black">
+            <h2 className="flex-1 text-[40px] md:text-5xl lg:text-6xl xl:text-[80px] font-extrabold leading-[1.1] tracking-[-0.03em] text-black">
               <span className="md:text-[#FCBE17]">We value</span>
-              <br className="md:hidden" />
-              <span className="text-[#179CBD]"> transparency,</span>
-              <br className="md:hidden" />
-              <span className="hidden md:inline"> </span>
+              {" "}
+              <span className="text-[#179CBD]">transparency,</span>
+              {" "}
               <span className="md:text-[#526E87]">so let's talk about</span>
-              <br className="md:hidden" />
-              <span className="hidden md:inline"> </span>
+              {" "}
               <span className="md:text-[#526E87]">pricing.</span>
             </h2>
 
             {/* View Pricing Button */}
             <button 
-              className="bg-pocketYellow text-pocketBlack text-sm md:text-2xl font-bold px-6 py-2 md:px-8 md:py-4 rounded-full md:rounded-xl hover:opacity-90 transition-opacity shrink-0 mx-auto lg:mx-0 mt-2 lg:mt-0"
+              className="bg-pocketYellow text-pocketBlack text-sm md:text-lg lg:text-2xl font-bold px-6 py-2 md:px-6 md:py-3 lg:px-8 lg:py-4 rounded-full md:rounded-xl hover:opacity-90 transition-opacity shrink-0 mx-auto md:mx-0 mt-2 md:mt-0"
               style={{ boxShadow: "3px 3px 6px 0px #526E87" }}
             >
               View Pricing
             </button>
           </div>
 
-          {/* Sub heading - CHANGED mb-20 to mb-8 on mobile */}
-          <p className="text-black md:text-pocketGrey text-xl md:text-3xl lg:text-[40px] font-medium leading-[1.4] tracking-[-0.02em] max-w-[700px] mb-8 lg:mb-40">
+          {/* Sub heading */}
+          <p className="text-black md:text-pocketGrey text-xl md:text-2xl lg:text-3xl xl:text-[40px] font-medium leading-[1.4] tracking-[-0.02em] max-w-[700px] mb-8 md:mb-20 lg:mb-40">
             Lorem ipsum dolor sit amet consectetur. Placerat quisque feugiat
             porta quam ornare.
           </p>
 
           {/* Bottom row */}
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-12 lg:gap-16 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr] gap-12 md:gap-8 lg:gap-16 items-center">
             
-            <p className="text-black md:text-pocketGrey text-base md:text-lg font-medium leading-[1.9] max-w-[700px]">
+            <p className="text-black md:text-pocketGrey text-base md:text-sm lg:text-lg font-medium leading-[1.9] max-w-[700px]">
               Lorem ipsum dolor sit amet consectetur. Placerat quisque feugiat
               porta quam ornare. In nec lacinia consectetur placerat vestibulum
               sem odio. In feugiat elit fames eget lobortis turpis scelerisque
@@ -48,11 +47,11 @@ const HomePricing = () => {
             </p>
 
             {/* Request a quote (Mobile uses the Value Price box) */}
-            <div className="flex flex-col w-full lg:w-fit mx-auto lg:mx-0">
+            <div className="flex flex-col w-full md:w-fit mx-auto md:mx-0">
               
-              {/* Mobile "Pocket Promise" header - Shifted Right */}
+              {/* Mobile "Pocket Promise" header - Hidden on md+ */}
               <h3 
-                className="text-black mb-4 text-center lg:hidden pl-6"
+                className="text-black mb-4 text-center md:hidden pl-6"
                 style={{ 
                   fontFamily: "Inter, sans-serif",
                   fontWeight: 500,
@@ -66,11 +65,11 @@ const HomePricing = () => {
               
               {/* The Button */}
               <button 
-                className="bg-pocketYellow rounded-xl w-full lg:w-auto px-6 py-6 flex items-center justify-center lg:gap-4 hover:opacity-90 transition-opacity"
+                className="bg-pocketYellow rounded-xl w-full md:w-auto px-6 py-6 flex items-center justify-center md:gap-4 hover:opacity-90 transition-opacity"
                 style={{ boxShadow: "3px 3px 6px 0px #526E87" }}
               >
                 {/* Mobile Text Layout */}
-                <span className="lg:hidden flex items-center justify-center gap-4 pl-4">
+                <span className="md:hidden flex items-center justify-center gap-4 pl-4">
                   <span className="text-white font-black text-4xl leading-none tracking-[-0.03em]">
                     Value
                   </span>
@@ -82,12 +81,12 @@ const HomePricing = () => {
                   </svg>
                 </span>
 
-                {/* Desktop Text Layout */}
-                <span className="hidden lg:flex items-center gap-4">
-                  <span className="text-white font-black text-5xl md:text-6xl lg:text-[80px] leading-none tracking-[-0.03em]">
+                {/* Desktop/Tablet Text Layout */}
+                <span className="hidden md:flex items-center gap-4">
+                  <span className="text-white font-black text-4xl lg:text-5xl xl:text-[80px] leading-none tracking-[-0.03em]">
                     Request
                   </span>
-                  <span className="text-pocketBlack font-medium text-2xl md:text-3xl lg:text-[32px] leading-[1.1] text-left">
+                  <span className="text-pocketBlack font-medium text-xl lg:text-2xl xl:text-[32px] leading-[1.1] text-left">
                     a<br />
                     quote
                   </span>

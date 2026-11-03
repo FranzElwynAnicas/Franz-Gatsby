@@ -13,19 +13,19 @@ const ContactPartners = () => {
         {/* =========================================
             SECTION 1: Vacancies
         ========================================= */}
-        <div className="flex flex-col lg:flex-row items-center lg:items-start gap-8 lg:gap-16 text-center lg:text-left">
+        <div className="flex flex-col lg:flex-row items-center lg:items-start gap-8 lg:gap-16 text-center lg:text-left w-full">
           
           {/* Vacancy Image */}
-          <div className="w-full lg:w-[731px] shrink-0">
+          <div className="w-full lg:w-1/2 shrink-0">
             <img
               src={vacancyImg}
               alt="Creative agency team working on a video and photography production"
-              className="w-full lg:w-[731px] h-auto lg:h-[415px] object-cover"
+              className="w-full h-auto lg:h-[415px] object-cover"
             />
           </div>
 
           {/* Text & Email Button */}
-          <div className="flex flex-col items-center lg:items-start pt-2 max-w-[460px]">
+          <div className="flex flex-col items-center lg:items-start pt-2 max-w-[460px] w-full lg:w-1/2">
             <h2 
               className="font-extrabold text-black mb-4 lg:mb-6 tracking-[-0.04em]"
               style={{
@@ -50,7 +50,7 @@ const ContactPartners = () => {
 
             <a
               href="mailto:jobs@pocketcreatives.co.uk"
-              className="inline-block bg-[#1EA4B9] text-white font-medium text-[16px] md:text-[20px] tracking-[-0.02em] px-6 py-2.5 hover:bg-[#179CBD] transition-colors"
+              className="inline-block bg-[#1EA4B9] text-white font-medium text-[16px] md:text-[20px] tracking-[-0.02em] px-4 md:px-6 py-2.5 hover:bg-[#179CBD] transition-colors break-all w-full md:w-auto text-center"
             >
               jobs@pocketcreatives.co.uk
             </a>
@@ -61,20 +61,20 @@ const ContactPartners = () => {
         {/* =========================================
             SECTION 2: Partners
         ========================================= */}
-        <div className="flex flex-col lg:flex-row items-center lg:items-start gap-8 lg:gap-16 text-center lg:text-left">
+        <div className="flex flex-col lg:flex-row items-center lg:items-start gap-8 lg:gap-16 text-center lg:text-left w-full">
           
           {/* Logos Image & Floating Badge */}
-          <div className="relative w-full lg:w-[804.59px] shrink-0 order-1 lg:order-2">
+          <div className="relative w-full lg:w-1/2 shrink-0 order-1 lg:order-2">
             <img
               src={partnersImg}
               alt="Partner Logos"
-              className="w-full lg:w-[804.59px] h-auto lg:h-[415px] object-contain"
+              className="w-full h-auto lg:h-[415px] object-contain"
             />
             
             {/* Floating "See Our Works" Bubble wrapped in Gatsby Link */}
             <Link 
               to="/works"
-              className="hidden md:flex group absolute -top-12 -right-10 lg:-top-16 lg:-right-14 w-[110px] h-[110px] lg:w-[125px] lg:h-[125px] bg-[#1EA4B9] hover:bg-white rounded-full items-center justify-center rotate-[9.59deg] shadow-lg z-10 transition-colors duration-300 cursor-pointer"
+              className="hidden md:flex group absolute -top-12 -right-4 lg:-top-16 lg:-right-14 w-[110px] h-[110px] lg:w-[125px] lg:h-[125px] bg-[#1EA4B9] hover:bg-white rounded-full items-center justify-center rotate-[9.59deg] shadow-lg z-10 transition-colors duration-300 cursor-pointer"
             >
               <span 
                 className="font-extrabold text-white group-hover:text-[#1EA4B9] text-[18px] lg:text-[22px] text-center tracking-[-0.05em] leading-[1.1] transition-colors duration-300"
@@ -86,7 +86,7 @@ const ContactPartners = () => {
           </div>
 
           {/* Text & Email Button */}
-          <div className="flex flex-col items-center lg:items-start pt-2 max-w-[440px] order-2 lg:order-1 lg:ml-12">
+          <div className="flex flex-col items-center lg:items-start pt-2 max-w-[440px] w-full lg:w-1/2 order-2 lg:order-1 lg:ml-0">
             <h2 
               className="font-extrabold text-black mb-4 lg:mb-6 tracking-[-0.04em]"
               style={{
@@ -111,7 +111,7 @@ const ContactPartners = () => {
 
             <a
               href="mailto:partners@pocketcreatives.co.uk"
-              className="inline-block bg-[#1EA4B9] text-white font-medium text-[18px] md:text-[20px] tracking-[-0.02em] px-6 py-2.5 hover:bg-[#179CBD] transition-colors"
+              className="inline-block bg-[#1EA4B9] text-white font-medium text-[16px] md:text-[20px] tracking-[-0.02em] px-4 md:px-6 py-2.5 hover:bg-[#179CBD] transition-colors break-all w-full md:w-auto text-center"
             >
               partners@pocketcreatives.co.uk
             </a>

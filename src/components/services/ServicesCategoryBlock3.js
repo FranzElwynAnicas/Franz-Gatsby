@@ -17,10 +17,10 @@ const ServicesCategoryBlock3 = ({
   return (
     <section
       id="the-rest"
-      className={`relative w-full ${bgColor} min-h-screen flex flex-col justify-center pt-32 pb-16 md:py-0`}
+      className={`relative w-full ${bgColor} min-h-screen flex flex-col justify-center pt-32 pb-16 lg:py-0`}
       style={{ scrollMarginTop: "0px" }}
     >
-      <div className="w-full max-w-[1280px] mx-auto px-5 md:px-12">
+      <div className="w-full max-w-[1280px] mx-auto px-5 md:px-10 lg:px-12">
         
         {/* Heading */}
         <h2
@@ -33,10 +33,10 @@ const ServicesCategoryBlock3 = ({
         </h2>
 
         {/* Content layout */}
-        <div className="grid grid-cols-1 md:grid-cols-[600px_1fr] gap-10 md:gap-40 items-start">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1fr_1fr] xl:grid-cols-[600px_1fr] gap-10 md:gap-12 lg:gap-16 xl:gap-20 items-start">
           
           {/* Paragraph */}
-          <p className="text-black font-medium tracking-[-0.05em] text-[18px] md:text-[20px] leading-[1.5] md:leading-[1.6]">
+          <p className="text-black font-medium tracking-[-0.05em] text-[18px] md:text-[18px] lg:text-[20px] xl:text-[22px] leading-[1.5] lg:leading-[1.6]">
             Lorem ipsum dolor sit amet consectetur. Nulla purus rhoncus at
             mattis. Et ac vitae ornare volutpat. Mollis sem scelerisque dictum
             nunc iaculis vivamus donec. Molestie sed mattis aenean sit arcu
@@ -45,21 +45,21 @@ const ServicesCategoryBlock3 = ({
             fames. Rhoncus.
           </p>
 
-          {/* Links section */}
-          <div className="md:pl-4">
-            <p className="text-black font-extrabold tracking-[-0.05em] mb-4 text-[18px] md:text-[20px] leading-[1.25]">
+          {/* Links section — pushed further to the right */}
+          <div className="md:pl-6 lg:pl-12 xl:pl-24">
+            <p className="text-black font-extrabold tracking-[-0.05em] mb-4 text-[18px] md:text-[18px] lg:text-[20px] xl:text-[22px] leading-[1.25]">
               Go to...
             </p>
 
-            <ul className="flex flex-col gap-4 md:gap-3">
+            <ul className="flex flex-col gap-4 md:gap-4 lg:gap-5">
               {links.map((link) => (
                 <li key={link.label}>
                   <a
                     href={link.to}
                     onClick={(e) => handleClick(e, link.to)}
-                    className="arrow-link inline-flex items-center gap-3 md:gap-2 text-white font-extrabold tracking-[-0.05em] hover:opacity-90 transition-opacity text-[18px] md:text-[20px] leading-[1.25]"
+                    className="arrow-link inline-flex items-center gap-3 md:gap-2 lg:gap-3 text-white font-extrabold tracking-[-0.05em] hover:opacity-90 transition-opacity text-[18px] md:text-[18px] lg:text-[20px] xl:text-[22px] leading-[1.25]"
                   >
-                    <span className="arrow-wrap" aria-hidden="true">
+                    <span className="arrow-wrap shrink-0" aria-hidden="true">
                       <svg
                         width="60"
                         height="14"
