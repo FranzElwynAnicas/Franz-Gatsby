@@ -23,9 +23,11 @@
     "gatsby-plugin-sharp": "^5.16.0",
     "gatsby-plugin-sitemap": "^6.16.0",
     "gatsby-source-filesystem": "^5.16.0",
+    "gatsby-source-wordpress": "^7.17.0",
     "gatsby-transformer-sharp": "^5.16.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "rimraf": "^6.1.4"
   },
   "devDependencies": {
     "autoprefixer": "^10.6.1",
