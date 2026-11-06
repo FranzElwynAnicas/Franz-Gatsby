@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { Link } from "gatsby";
 import BlogRelated from "./BlogRelated";
 
-const BlogInner = ({ post }) => {
+const BlogInner = ({ post, relatedPosts }) => {
   // Get the featured image from WordPress
   const featuredImage = post.featuredImage ? post.featuredImage.node.sourceUrl : null;
   
@@ -206,7 +206,7 @@ const BlogInner = ({ post }) => {
           </article>
         </div>
 
-        <BlogRelated /> 
+        <BlogRelated relatedPosts={relatedPosts} /> 
       </div>
     </section>
   );
