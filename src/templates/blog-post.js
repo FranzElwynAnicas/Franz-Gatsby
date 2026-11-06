@@ -1,16 +1,15 @@
 import React from "react";
 import { graphql } from "gatsby";
 
-// Layout
+// Layout (Notice the extra ../)
 import Navbar from "../components/layout/Navbar";
 import Footer from "../components/layout/Footer";
-
-// Blog components
 import BlogInner from "../components/blog/BlogInner";
 
 export default function BlogInnerPage({ data }) {
+  // Safety check
   if (!data || !data.wpPost) {
-    return <div className="min-h-screen flex items-center justify-center">Post not found or loading...</div>;
+    return <div className="min-h-screen flex items-center justify-center">Post not found</div>;
   }
 
   return (
@@ -24,6 +23,7 @@ export default function BlogInnerPage({ data }) {
   );
 }
 
+// Keep the query the same, with the required "!"
 export const query = graphql`
   query($id: String!) {
     wpPost(id: { eq: $id }) {

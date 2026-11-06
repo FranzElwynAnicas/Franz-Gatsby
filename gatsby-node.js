@@ -19,7 +19,7 @@ exports.createPages = async ({ graphql, actions }) => {
   }
 
   // Use the file where it currently lives
-  const postTemplate = path.resolve("./src/pages/bloginner.js")
+  const postTemplate = path.resolve("./src/templates/blog-post.js")
 
   result.data.allWpPost.nodes.forEach(post => {
     createPage({
