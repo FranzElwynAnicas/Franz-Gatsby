@@ -74,8 +74,8 @@ const HomeHeroIntro = () => {
           </span>
 
           <span className="block md:inline">
-            <span className="text-pocketBlack font-normal">company with</span>{" "}
-            <span className="text-pocketBlack font-bold">bags of</span>
+            <span className="text-pocketBlack font-normal"> company with</span>{" "}
+            <span className="text-pocketBlack font-bold">bags of </span>
           </span>
 
           <span className="block md:inline">

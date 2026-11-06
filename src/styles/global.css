@@ -51,3 +51,48 @@
     user-select: none;
   }
 }
+
+/* WordPress Dynamic Content Styling */
+.wordpress-content p {
+  margin-bottom: 1.5rem;
+}
+
+.wordpress-content h2 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  letter-spacing: -0.05em;
+}
+
+.wordpress-content h3 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  letter-spacing: -0.05em;
+}
+
+.wordpress-content ul {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.wordpress-content li {
+  margin-bottom: 0.5rem;
+}
+
+.wordpress-content a {
+  color: #179CBD;
+  text-decoration: underline;
+}
+
+/* Ensure images inside the WordPress post don't overflow */
+.wordpress-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+}
