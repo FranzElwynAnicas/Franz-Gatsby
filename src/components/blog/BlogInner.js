@@ -3,24 +3,63 @@ import { Link } from "gatsby";
 import BlogRelated from "./BlogRelated";
 
 const BlogInner = ({ post }) => {
-  
-  // Get the featured image from WordPress (raw URL to avoid GraphQL errors)
+  // Get the featured image from WordPress
   const featuredImage = post.featuredImage ? post.featuredImage.node.sourceUrl : null;
+  
+  // State for the dynamic Table of Contents
+  const [toc, setToc] = useState([]);
 
-  // --- YOUR ORIGINAL STICKY TOC LOGIC ---
-  const [tocStyles, setTocStyles] = useState({ position: "relative", top: "auto", left: "auto", width: "300px" });
+  // --- STICKY / CLAMPING LOGIC ---
+  const [tocStyles, setTocStyles] = useState({ 
+    position: "relative", 
+    top: "auto", 
+    left: "auto", 
+    width: "300px" 
+  });
   const [placeholderHeight, setPlaceholderHeight] = useState(0);
+
   const tocRef = useRef(null);
   const articleRef = useRef(null);
 
+  // 1. AUTOMATICALLY GENERATE TOC FROM WORDPRESS H2 TAGS
+  useEffect(() => {
+    // Wait a moment for the WordPress HTML to render into the DOM
+    const timer = setTimeout(() => {
+      if (!articleRef.current) return;
+      
+      // Find all H2 tags inside the article
+      const headings = articleRef.current.querySelectorAll("h2");
+      const tocItems = [];
+
+      headings.forEach((heading, index) => {
+        // Create a unique ID for the heading if it doesn't have one
+        const id = heading.id || `heading-${index}`;
+        heading.id = id; // Assign the ID so we can scroll to it
+        
+        tocItems.push({
+          id: id,
+          text: heading.innerText,
+        });
+      });
+
+      setToc(tocItems);
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, [post.content]);
+
+  // 2. SCROLL LOGIC FOR THE STICKY SIDEBAR
   useEffect(() => {
     const handleScroll = () => {
       if (!tocRef.current || !articleRef.current) return;
+
       const tocHeight = tocRef.current.offsetHeight;
       setPlaceholderHeight(tocHeight);
+
       const articleRect = articleRef.current.getBoundingClientRect();
       const topOffset = 0; 
       const bottomGap = 40; 
+
       const isPastTop = articleRect.top <= topOffset;
       const remainingSpace = articleRect.bottom - topOffset;
       const isPastBottom = remainingSpace <= tocHeight + bottomGap;
@@ -28,17 +67,36 @@ const BlogInner = ({ post }) => {
       if (isPastBottom) {
         const articleHeight = articleRef.current.offsetHeight;
         const clampTop = articleHeight - tocHeight - bottomGap;
-        setTocStyles({ position: "absolute", top: `${Math.max(0, clampTop)}px`, left: "0px", width: "300px" });
+        
+        setTocStyles({
+          position: "absolute",
+          top: `${Math.max(0, clampTop)}px`,
+          left: "0px",
+          width: "300px",
+        });
       } else if (isPastTop) {
         const asideRect = tocRef.current.parentElement.getBoundingClientRect();
-        setTocStyles({ position: "fixed", top: `${topOffset}px`, width: "300px", left: `${asideRect.left}px` });
+        setTocStyles({
+          position: "fixed",
+          top: `${topOffset}px`,
+          width: "300px",
+          left: `${asideRect.left}px`, 
+        });
       } else {
-        setTocStyles({ position: "relative", top: "auto", left: "auto", width: "300px" });
+        setTocStyles({
+          position: "relative",
+          top: "auto",
+          left: "auto",
+          width: "300px",
+        });
       }
     };
+
     window.addEventListener("scroll", handleScroll, { passive: true });
     window.addEventListener("resize", handleScroll);
+
     const timeout = setTimeout(handleScroll, 50);
+
     return () => {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", handleScroll);
@@ -46,6 +104,27 @@ const BlogInner = ({ post }) => {
     };
   }, []);
   // -------------------------------
+
+  // 3. RENDER THE DYNAMIC TOC LIST
+  const tocList = (
+    <ul className="flex flex-col gap-4">
+      {toc.length > 0 ? (
+        toc.map((item) => (
+          <li key={item.id}>
+            <a 
+              href={`#${item.id}`} 
+              className="text-black font-medium hover:text-[#179CBD] transition-colors"
+              style={{ fontFamily: "Inter, sans-serif", fontSize: "16px", lineHeight: "1.4", letterSpacing: "-0.05em" }}
+            >
+              {item.text}
+            </a>
+          </li>
+        ))
+      ) : (
+        <p className="text-sm font-medium text-black">Scroll to read the article...</p>
+      )}
+    </ul>
+  );
 
   return (
     <section className="w-full bg-white py-12 px-4 md:px-8 lg:px-16 font-inter">
@@ -66,9 +145,17 @@ const BlogInner = ({ post }) => {
 
         {/* DYNAMIC META DATA */}
         <div className="flex flex-wrap items-center gap-4 md:gap-8 mb-10">
-          <span className="text-[#179CBD] text-lg md:text-xl font-medium tracking-[-0.05em]">{post.author.node.name}</span>
+          <span className="text-[#179CBD] text-lg md:text-xl font-medium tracking-[-0.05em]">
+            {post.author?.node?.name || "Pocket Creatives"}
+          </span>
           <span className="text-[#179CBD] text-lg md:text-xl font-medium tracking-[-0.05em]">{post.date}</span>
-          <span className="bg-[#FCBE17] text-black text-lg font-medium px-8 py-2 rounded-[10px]">Blog</span>
+          
+          {/* Render Categories dynamically if they exist */}
+          {post.categories?.nodes?.map((cat, i) => (
+            <span key={i} className="bg-[#FCBE17] text-black text-lg font-medium px-6 py-2 rounded-[10px]">
+              {cat.name}
+            </span>
+          ))}
         </div>
 
         {/* DYNAMIC FEATURED IMAGE */}
@@ -91,8 +178,7 @@ const BlogInner = ({ post }) => {
                 <h3 style={{ fontFamily: "Inter, sans-serif", fontWeight: 700, fontSize: "20px", lineHeight: "100%", letterSpacing: "-0.05em", color: "#000000" }}>
                   Table of Contents
                 </h3>
-                {/* Placeholder for TOC - we can make this dynamic later */}
-                <p className="text-sm font-medium">Scroll to read the article...</p>
+                {tocList}
               </div>
             </div>
           </aside>
@@ -100,13 +186,13 @@ const BlogInner = ({ post }) => {
           {/* Main Text Content */}
           <article ref={articleRef} className="flex flex-col gap-6">
             
-            {/* Mobile Table of Contents */}
+            {/* Mobile/Tablet Table of Contents */}
             <div className="block lg:hidden w-full mb-4">
               <div className="bg-[#FCBE17] p-6 rounded-sm flex flex-col gap-4">
                 <h3 style={{ fontFamily: "Inter, sans-serif", fontWeight: 700, fontSize: "20px", lineHeight: "100%", letterSpacing: "-0.05em", color: "#000000" }}>
                   Table of Contents
                 </h3>
-                <p className="text-sm font-medium">Scroll to read the article...</p>
+                {tocList}
               </div>
             </div>
 

@@ -5,6 +5,7 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 100px;
     overflow-x: hidden;   /* Prevents horizontal scroll on mobile */
     margin: 0;
     padding: 0;
