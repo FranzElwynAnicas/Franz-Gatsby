@@ -25,6 +25,9 @@ module.exports = {
       resolve: `gatsby-source-wordpress`,
       options: {
         url: `https://franz-wordpress.vercel.app/graphql`,
+        production: {
+          allow404Images: true, 
+        },
       },
     },
   ]
