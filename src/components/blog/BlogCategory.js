@@ -2,12 +2,15 @@ import React, { useState } from "react";
 import { Link } from "gatsby";
 
 const BlogCategory = ({ posts }) => {
+  // 1. MOVE THIS TO THE TOP (before the early return)
+  const [activeCategory, setActiveCategory] = useState("All");
+
+  // 2. THEN do the safety check
   if (!posts || posts.length === 0) return null;
 
   // Extract unique categories from the posts
   const allCategories = ["All", ...new Set(posts.flatMap(post => post.categories.nodes.map(cat => cat.name)))];
-  const [activeCategory, setActiveCategory] = useState("All");
-
+  
   // Filter posts based on selected category
   const filteredPosts = activeCategory === "All" 
     ? posts 

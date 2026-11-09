@@ -89,11 +89,27 @@
   text-decoration: underline;
 }
 
-/* Ensure images inside the WordPress post don't overflow */
 .wordpress-content img {
   max-width: 100%;
   height: auto;
   border-radius: 8px;
   margin-top: 1rem;
   margin-bottom: 1.5rem;
+}
+
+h1 p, h2 p, h3 p, h1 div, h2 div, h3 div {
+  margin: 0;
+  padding: 0;
+  display: inline;
+}
+
+.video-work-paragraph p {
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+}
+
+@media (min-width: 768px) {
+  .video-work-paragraph p {
+    line-height: 1.6;
+  }
 }

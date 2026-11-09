@@ -1,29 +1,35 @@
 import React, { useState } from "react";
 import photoBeauty from "../../images/product-pink.png";
 
-const categories = [
-  { label: "Beauty" },
-  { label: "Food & Drink" },
-  { label: "Product" },
-  { label: "Events" },
-  { label: "Crowdfunding" },
-  { label: "Fashion" },
-  { label: "People" },
-  { label: "Jewellery" },
-];
-
-const HomePhotography = () => {
+const HomePhotography = ({ photographyHeading, photographyCategories }) => {
   const [activeIndex, setActiveIndex] = useState(0);
+
+  // If WP has categories, split them by newline. Otherwise, use the fallback.
+  const categories = photographyCategories 
+    ? photographyCategories.split('\n').filter(c => c.trim() !== '').map(label => ({ label: label.trim() }))
+    : [
+        { label: "Beauty" },
+        { label: "Food & Drink" },
+        { label: "Product" },
+        { label: "Events" },
+        { label: "Crowdfunding" },
+        { label: "Fashion" },
+        { label: "People" },
+        { label: "Jewellery" },
+      ];
+
+  // Ensure activeIndex doesn't crash if the list shrinks
+  const safeIndex = activeIndex >= categories.length ? 0 : activeIndex;
 
   return (
     <section className="w-full min-h-screen bg-pocketLightGrey flex items-center overflow-hidden">
       <div className="w-full py-16 md:py-20">
-        {/* Symmetrical padding on mobile, offset on desktop */}
         <div className="px-6 md:pl-[12.5%] md:pr-16">
           
-          {/* Top row: icon + Photography label (+ Let's Talk on desktop only) */}
+          {/* Top row: icon + Photography label */}
           <div className="flex items-center justify-between mb-8 md:mb-16">
             <div className="flex items-center gap-3 md:gap-4">
+              {/* FULL SVG RESTORED */}
               <svg
                 width="60"
                 height="60"
@@ -38,11 +44,10 @@ const HomePhotography = () => {
                 />
               </svg>
               <span className="text-pocketGrey font-inter text-2xl md:text-[32px] lg:text-[40px] font-extrabold tracking-[-0.02em]">
-                Photography
+                {photographyHeading || "Photography"}
               </span>
             </div>
             
-            {/* Hidden on mobile, visible on desktop */}
             <button className="hidden md:flex bg-pocketTeal text-white font-bold text-base md:text-lg rounded-full w-20 h-20 md:w-28 md:h-28 items-center justify-center hover:opacity-90 transition-opacity shrink-0">
               Let's Talk
             </button>
@@ -54,20 +59,13 @@ const HomePhotography = () => {
             {/* The list */}
             <ul className="flex flex-col w-full order-2 lg:order-1">
               {categories.map((cat, idx) => (
-                <li
-                  key={cat.label}
-                  onMouseEnter={() => setActiveIndex(idx)}
-                  onClick={() => setActiveIndex(idx)}
-                  className="border-b border-pocketTeal/40 md:border-pocketGrey/60"
-                >
+                <li key={cat.label} onMouseEnter={() => setActiveIndex(idx)} onClick={() => setActiveIndex(idx)} className="border-b border-pocketTeal/40 md:border-pocketGrey/60">
                   <button
                     className={`text-left w-full py-4 md:py-5 text-xl md:text-3xl lg:text-[40px] font-extrabold tracking-[-0.02em] transition-colors leading-none ${
-                      activeIndex === idx
-                        ? "text-pocketTeal md:text-pocketYellow"
-                        : "text-pocketGrey hover:text-pocketYellow"
+                      safeIndex === idx ? "text-pocketTeal md:text-pocketYellow" : "text-pocketGrey hover:text-pocketYellow"
                     }`}
                   >
-                    {activeIndex === idx ? `View ${cat.label}` : cat.label}
+                    {safeIndex === idx ? `View ${cat.label}` : cat.label}
                   </button>
                 </li>
               ))}
@@ -77,12 +75,11 @@ const HomePhotography = () => {
             <div className="w-full aspect-[4/3] md:aspect-[3/2] overflow-hidden order-1 lg:order-2">
               <img
                 src={photoBeauty}
-                alt={categories[activeIndex].label}
+                alt={categories[safeIndex]?.label || "Photography"}
                 className="w-full h-full object-cover transition-opacity duration-300"
               />
             </div>
           </div>
-
         </div>
       </div>
     </section>

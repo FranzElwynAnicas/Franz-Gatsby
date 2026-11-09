@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 
+// Keeping the columns hardcoded for now
 const columns = [
   {
     title: "Proactive",
@@ -92,7 +93,7 @@ const columns = [
 
 const ITEMS_PER_PAGE = 3;
 
-const HomeServicesCheck = () => {
+const HomeServicesCheck = ({ sectionHeading }) => {
   const [page, setPage] = useState(0);
 
   const totalPages = Math.ceil(columns.length / ITEMS_PER_PAGE);
@@ -107,21 +108,35 @@ const HomeServicesCheck = () => {
     if (!isFirst) setPage((p) => p - 1);
   };
 
+  // Helper to color the word "Check" teal and add the checkmark
+  const renderHeading = (text) => {
+    if (!text) return (
+      <>
+        <span className="text-white">Services - </span><span className="text-pocketTeal">Check ✓</span><br />
+        <span className="text-white">Quality - </span><span className="text-pocketTeal">Check ✓</span><br />
+        <span className="text-white">People - </span><span className="text-pocketTeal">Check ✓</span>
+      </>
+    );
+
+    // Split by "Check" and add the checkmark/color
+    const parts = text.split(/(Check)/gi);
+    return parts.map((part, index) => {
+      if (part.toLowerCase() === "check") {
+        return <span key={index} className="text-pocketTeal">{part} ✓</span>;
+      }
+      // Any text before "Check" should be white
+      return <span key={index} className="text-white">{part}</span>;
+    });
+  };
+
   return (
     <section className="w-full min-h-screen bg-pocketYellow flex items-center">
       <div className="w-full py-20">
         <div className="px-8 md:pl-[12.5%] md:pr-16">
-          {/* Top row: heading + Say Hello button (desktop only) */}
+          {/* Top row: heading + Say Hello button */}
           <div className="flex items-start justify-between gap-10 mb-20">
             <h2 className="text-5xl md:text-7xl lg:text-[80px] font-black leading-[0.95] tracking-[-0.03em]">
-              <span className="text-white">Services - </span>
-              <span className="text-pocketTeal">Check ✓</span>
-              <br />
-              <span className="text-white">Quality - </span>
-              <span className="text-pocketTeal">Check ✓</span>
-              <br />
-              <span className="text-white">People - </span>
-              <span className="text-pocketTeal">Check ✓</span>
+              {renderHeading(sectionHeading)}
             </h2>
 
             <button className="hidden md:flex bg-white text-pocketTeal font-extrabold text-lg md:text-2xl rounded-full w-24 h-24 md:w-32 md:h-32 items-center justify-center hover:scale-105 transition-transform shrink-0 leading-tight shadow-[3px_3px_6px_0px_#526E87]">
@@ -129,20 +144,14 @@ const HomeServicesCheck = () => {
             </button>
           </div>
 
-          {/* MOBILE: single vertical stacked list, no arrows, no sliding */}
+          {/* MOBILE LAYOUT */}
           <div className="md:hidden flex flex-col gap-10">
             {columns.map((col) => (
               <div key={col.title}>
-                <h3 className="text-2xl text-pocketBlack font-medium mb-6">
-                  {col.title}
-                </h3>
-                <p className="text-pocketBlack text-base font-medium leading-[1.4]">
-                  {col.body}
-                </p>
+                <h3 className="text-2xl text-pocketBlack font-medium mb-6">{col.title}</h3>
+                <p className="text-pocketBlack text-base font-medium leading-[1.4]">{col.body}</p>
               </div>
             ))}
-
-            {/* Say Hello ball - mobile only, centered below everything */}
             <div className="flex justify-center mt-6">
               <button className="bg-white text-pocketTeal font-extrabold text-lg rounded-full w-24 h-24 flex items-center justify-center hover:scale-105 transition-transform leading-tight shadow-[3px_3px_6px_0px_#526E87]">
                 Say<br />Hello
@@ -150,7 +159,7 @@ const HomeServicesCheck = () => {
             </div>
           </div>
 
-          {/* DESKTOP: sliding track + arrows */}
+          {/* DESKTOP LAYOUT */}
           <div className="hidden md:block">
             <div className="overflow-hidden">
               <div
@@ -159,12 +168,8 @@ const HomeServicesCheck = () => {
               >
                 {columns.map((col) => (
                   <div key={col.title} className="w-1/3 shrink-0 pr-8 lg:pr-12">
-                    <h3 className="text-2xl md:text-3xl text-pocketBlack font-medium mb-8">
-                      {col.title}
-                    </h3>
-                    <p className="text-pocketBlack text-base md:text-[20px] font-medium leading-[1.4]">
-                      {col.body}
-                    </p>
+                    <h3 className="text-2xl md:text-3xl text-pocketBlack font-medium mb-8">{col.title}</h3>
+                    <p className="text-pocketBlack text-base md:text-[20px] font-medium leading-[1.4]">{col.body}</p>
                   </div>
                 ))}
               </div>
@@ -175,22 +180,9 @@ const HomeServicesCheck = () => {
               <button
                 onClick={handlePrev}
                 aria-label="Previous"
-                className={`w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-[3px_3px_6px_0px_#526E87] hover:scale-105 transition-transform ${
-                  isFirst ? "invisible" : "visible"
-                }`}
+                className={`w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-[3px_3px_6px_0px_#526E87] hover:scale-105 transition-transform ${isFirst ? "invisible" : "visible"}`}
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="3"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="text-pocketBlack"
-                >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="text-pocketBlack">
                   <path d="M19 12H5" />
                   <path d="M12 19l-7-7 7-7" />
                 </svg>
@@ -199,22 +191,9 @@ const HomeServicesCheck = () => {
               <button
                 onClick={handleNext}
                 aria-label="Next"
-                className={`w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-[3px_3px_6px_0px_#526E87] hover:scale-105 transition-transform ${
-                  isLast ? "invisible" : "visible"
-                }`}
+                className={`w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-[3px_3px_6px_0px_#526E87] hover:scale-105 transition-transform ${isLast ? "invisible" : "visible"}`}
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="3"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="text-pocketBlack"
-                >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="text-pocketBlack">
                   <path d="M5 12h14" />
                   <path d="M12 5l7 7-7 7" />
                 </svg>
