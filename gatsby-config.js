@@ -27,7 +27,7 @@ module.exports = {
         url: `https://dev-franz-wordpress-cms.pantheonsite.io/graphql`,
         production: {
           allow404Images: true, 
-          allow401Images: true, 
+          allow401Images: true,
         },
       },
     },
