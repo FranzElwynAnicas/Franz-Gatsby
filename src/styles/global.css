@@ -113,3 +113,30 @@ h1 p, h2 p, h3 p, h1 div, h2 div, h3 div {
     line-height: 1.6;
   }
 }
+
+  /* WYSIWYG overrides for the About Intro teal section */
+  .wordpress-content--on-teal p {
+    margin: 0 0 1.5rem 0;
+    font-size: 16px;
+    line-height: 1.6;
+    letter-spacing: -0.05em;
+    color: #000000;
+  }
+  .wordpress-content--on-teal p:last-child {
+    margin-bottom: 0;
+  }
+  .wordpress-content--on-teal strong {
+    color: #ffffff; /* Makes bolded names white */
+    font-weight: 700;
+  }
+
+  /* Heading override to flatten <p> tags inside WYSIWYG */
+  .wordpress-content--heading,
+  .wordpress-content--heading p {
+    color: #ffffff;
+    font-size: inherit;
+    line-height: inherit;
+    letter-spacing: inherit;
+    margin: 0;
+    display: inline;
+  }

@@ -1,11 +1,28 @@
 import React, { useState, useRef } from "react";
-import aboutLogo from "../../images/aboutlogo.png";
+import v1Logo from "../../images/v1.png";
 import { useContactModal } from "../../contexts/ContactModalContext";
 
-const AboutHero = () => {
+const AboutHero = ({
+  heroHeadingText,
+  heroColorWord1,
+  heroColorWord2,
+  heroVideoUrl,
+  heroBodyCopy,
+  heroCtaLabel,
+}) => {
   const [playing, setPlaying] = useState(false);
   const videoRef = useRef(null);
   const { open } = useContactModal();
+
+  // ACF values with hardcoded fallbacks
+  const heading = heroHeadingText || "About us at";
+  const word1 = heroColorWord1 || "Pocket";
+  const word2 = heroColorWord2 || "Creatives";
+  const videoSrc = heroVideoUrl || "/videos/lighting.mp4";
+  const bodyCopy =
+    heroBodyCopy ||
+    "Find out more about our production team, what we stand for and why you would choose us for your next video production or photography shoot.";
+  const ctaLabel = heroCtaLabel || "I'D LIKE TO CHAT";
 
   const togglePlay = () => {
     if (!videoRef.current) return;
@@ -40,7 +57,7 @@ const AboutHero = () => {
               color: "#000000",
             }}
           >
-            About us at
+            {heading}
           </h1>
           <h1
             className="m-0"
@@ -54,13 +71,13 @@ const AboutHero = () => {
               color: "#55C8E4",
             }}
           >
-            Pocket
+            {word1}
           </h1>
           <h1
             className="m-0"
             style={{
               fontFamily: "Inter, sans-serif",
-              fontWeight: 800,
+              fontWeight: 300, /* Thinner wordmark on mobile */
               fontStyle: "normal",
               fontSize: "60px",
               lineHeight: "100%",
@@ -68,11 +85,11 @@ const AboutHero = () => {
               color: "#FCBE17E5",
             }}
           >
-            Creatives
+            {word2}
           </h1>
         </div>
 
-        {/* ─── DESKTOP ONLY: original heading + logo image ─── */}
+        {/* ─── DESKTOP ONLY: heading + logo icon + split wordmark text ─── */}
         <div className="hidden md:block">
           <h1
             className="font-normal leading-none m-0"
@@ -82,20 +99,43 @@ const AboutHero = () => {
               color: "#526E87",
             }}
           >
-            About us at
+            {heading}
           </h1>
 
-          <img
-            src={aboutLogo}
-            alt="Pocket Creatives"
-            className="w-full"
-            style={{
-              maxWidth: "1049px",
-              height: "auto",
-              display: "block",
-              marginTop: "-10px",
-            }}
-          />
+          <div className="flex items-center gap-4 md:gap-6 mt-2">
+            <img
+              src={v1Logo}
+              alt="Pocket Creatives logo mark"
+              style={{
+                width: "clamp(60px, 8vw, 120px)",
+                height: "auto",
+                display: "block",
+                flexShrink: 0,
+              }}
+            />
+            <h1
+              className="m-0 leading-none text-[#55C8E4] xl:text-[#526E87]"
+              style={{
+                fontFamily: "Inter, sans-serif",
+                fontSize: "clamp(56px, 6.25vw, 120px)",
+                letterSpacing: "-0.05em",
+                fontWeight: 800,
+              }}
+            >
+              {word1}
+            </h1>
+            <h1
+              className="m-0 leading-none text-[#FCBE17E5] xl:text-[#526E87]"
+              style={{
+                fontFamily: "Inter, sans-serif",
+                fontSize: "clamp(56px, 6.25vw, 120px)",
+                letterSpacing: "-0.05em",
+                fontWeight: 300, /* Thinner wordmark on desktop */
+              }}
+            >
+              {word2}
+            </h1>
+          </div>
         </div>
 
         {/* Two-column grid — stacks on mobile */}
@@ -114,7 +154,7 @@ const AboutHero = () => {
               <video
                 ref={videoRef}
                 className="h-[220px] md:h-[280px] lg:h-[352px] w-full object-cover cursor-pointer"
-                src="/videos/lighting.mp4"
+                src={videoSrc}
                 loop
                 playsInline
                 preload="metadata"
@@ -134,9 +174,7 @@ const AboutHero = () => {
               className="text-left lg:text-right text-base md:text-xl font-medium leading-[1.8] md:leading-[2]"
               style={{ color: "#526E87", maxWidth: "517px" }}
             >
-              Find out more about our production team, what we stand for and why
-              you would choose us for your next video production or photography
-              shoot.
+              {bodyCopy}
             </p>
 
             <button
@@ -161,7 +199,9 @@ const AboutHero = () => {
                 <rect x="2" y="4" width="20" height="16" rx="1" />
                 <path d="m22 6-10 7L2 6" />
               </svg>
-              <span className="text-base md:text-xl font-medium">I'D LIKE TO CHAT</span>
+              <span className="text-base md:text-xl font-medium">
+                {ctaLabel}
+              </span>
             </button>
           </div>
         </div>

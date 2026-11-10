@@ -3,7 +3,14 @@ import { useState, useRef } from "react";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { graphql, useStaticQuery } from "gatsby";
 
-const AboutServices = () => {
+const AboutServices = ({
+  videoHeading,
+  videoBody,
+  videoImage,
+  photoHeading,
+  photoBody,
+  photoImage,
+}) => {
   const data = useStaticQuery(graphql`
     query AboutServicesQuery {
       videoImg: file(relativePath: { eq: "burgerads.png" }) {
@@ -27,8 +34,8 @@ const AboutServices = () => {
     }
   `);
 
-  const videoImage = getImage(data.videoImg);
-  const photoImage = getImage(data.photoImg);
+  const fallbackVideoImage = getImage(data.videoImg);
+  const fallbackPhotoImage = getImage(data.photoImg);
 
   const [slideIndex, setSlideIndex] = useState(0);
   const dragStartX = useRef(null);
@@ -94,19 +101,29 @@ const AboutServices = () => {
             {/* ─── Slide 1 ─── */}
             <div className="shrink-0 pl-6 pr-0 py-8 md:py-16" style={{ width: `${SLIDE_WIDTH}%` }}>
               <h2 className="font-inter text-left text-[40px] font-extrabold leading-[100%] tracking-[-0.05em] text-black mb-6">
-                We're a <span className="text-[#55C8E4]">video production</span> company
+                {videoHeading ? (
+                  <div dangerouslySetInnerHTML={{ __html: videoHeading }} />
+                ) : (
+                  <>We're a <span className="text-[#55C8E4]">video production</span> company</>
+                )}
               </h2>
               <div className="font-inter font-medium text-[20px] leading-[120%] tracking-[-0.05em] text-black space-y-5 text-justify">
-                <p>As a video production company, we deliver high quality and engaging content for commercial, corporate, and promotional use. We create TV adverts, brand films, promotional videos, crowdfunding campaign videos, and video content for social media. Our professional video team knows how to craft the right elements together to convey your messages and tell your story.</p>
-                <p>What are you looking for in a video production company? If it's a creative team who are trustworthy, knowledgeable, enjoyable to work with and well-priced, then we might just be the right fit for you.</p>
+                {videoBody ? (
+                  <div className="wordpress-content" dangerouslySetInnerHTML={{ __html: videoBody }} />
+                ) : (
+                  <>
+                    <p>As a video production company, we deliver high quality and engaging content for commercial, corporate, and promotional use. We create TV adverts, brand films, promotional videos, crowdfunding campaign videos, and video content for social media. Our professional video team knows how to craft the right elements together to convey your messages and tell your story.</p>
+                    <p>What are you looking for in a video production company? If it's a creative team who are trustworthy, knowledgeable, enjoyable to work with and well-priced, then we might just be the right fit for you.</p>
+                  </>
+                )}
               </div>
               <div className="mt-8 flex justify-center">
-                {videoImage && (
-                  <GatsbyImage
-                    image={videoImage}
-                    alt="Video production studio setup"
-                    className="w-[85%] md:w-[75%] h-auto object-cover"
-                  />
+                {videoImage ? (
+                  <img src={videoImage} alt="Video production" className="w-[85%] md:w-[75%] h-auto object-cover" />
+                ) : (
+                  fallbackVideoImage && (
+                    <GatsbyImage image={fallbackVideoImage} alt="Video production studio setup" className="w-[85%] md:w-[75%] h-auto object-cover" />
+                  )
                 )}
               </div>
             </div>
@@ -114,20 +131,30 @@ const AboutServices = () => {
             {/* ─── Slide 2 ─── */}
             <div className="shrink-0 px-0 py-8 md:py-16 flex flex-col justify-start items-start text-left" style={{ width: `${SLIDE_WIDTH}%` }}>
               <div className="mb-8 flex justify-start w-full">
-                {photoImage && (
-                  <GatsbyImage
-                    image={photoImage}
-                    alt="Photographer capturing food on a table"
-                    className="w-[85%] md:w-[75%] h-auto object-cover"
-                  />
+                {photoImage ? (
+                  <img src={photoImage} alt="Photography" className="w-[85%] md:w-[75%] h-auto object-cover" />
+                ) : (
+                  fallbackPhotoImage && (
+                    <GatsbyImage image={fallbackPhotoImage} alt="Photographer capturing food on a table" className="w-[85%] md:w-[75%] h-auto object-cover" />
+                  )
                 )}
               </div>
               <h2 className="font-inter text-left text-[40px] font-extrabold leading-[100%] tracking-[-0.05em] text-black mb-6">
-                and a <span className="text-[#FCBE17]">photography company</span> too…
+                {photoHeading ? (
+                  <div dangerouslySetInnerHTML={{ __html: photoHeading }} />
+                ) : (
+                  <>and a <span className="text-[#FCBE17]">photography company</span> too…</>
+                )}
               </h2>
               <div className="font-inter font-medium text-[20px] leading-[120%] tracking-[-0.05em] text-black space-y-5 text-justify">
-                <p>As a photography company, we're able to squeeze every pixel to deliver images that perform. A photographer must know how to communicate, and view a project from different perspectives, knowing how to create images that jump out and catch attention. We strive to do just that. We offer product photography, people photography and lifestyle photography across a wide range of sectors.</p>
-                <p>As a content creation company, we know how to give you the best of both worlds: through the use of video production to tell a story across multiple shots, or where a single photograph has to say it all.</p>
+                {photoBody ? (
+                  <div className="wordpress-content" dangerouslySetInnerHTML={{ __html: photoBody }} />
+                ) : (
+                  <>
+                    <p>As a photography company, we're able to squeeze every pixel to deliver images that perform. A photographer must know how to communicate, and view a project from different perspectives, knowing how to create images that jump out and catch attention. We strive to do just that. We offer product photography, people photography and lifestyle photography across a wide range of sectors.</p>
+                    <p>As a content creation company, we know how to give you the best of both worlds: through the use of video production to tell a story across multiple shots, or where a single photograph has to say it all.</p>
+                  </>
+                )}
               </div>
             </div>
           </div>
@@ -146,23 +173,37 @@ const AboutServices = () => {
           <div className="flex justify-end py-4 pl-6 2xl:pl-12">
             <div className="w-full max-w-[clamp(450px,42vw,740px)] flex flex-col gap-6">
               <h2 className="font-inter text-left text-[clamp(24px,2.5vw,40px)] font-extrabold xl:font-normal leading-[100%] tracking-[-0.05em] text-black xl:text-[#526E87]">
-                We're a <span className="text-[#55C8E4] xl:text-[#179CBD] xl:font-extrabold">video production</span> company
+                {videoHeading ? (
+                  <div dangerouslySetInnerHTML={{ __html: videoHeading }} />
+                ) : (
+                  <>We're a <span className="text-[#55C8E4] xl:text-[#179CBD] xl:font-extrabold">video production</span> company</>
+                )}
               </h2>
               <div className="font-inter font-medium text-[clamp(13px,1.2vw,20px)] leading-[1.25] tracking-[-0.05em] text-black xl:text-[#526E87] text-left xl:text-justify space-y-4">
-                <p>As a video production company, we deliver high quality and engaging content for commercial, corporate, and promotional use. We create TV adverts, brand films, promotional videos, crowdfunding campaign videos, and video content for social media. Our professional video team knows how to craft the right elements together to convey your messages and tell your story.</p>
-                <p>What are you looking for in a video production company? If it's a creative team who are trustworthy, knowledgeable, enjoyable to work with and well-priced, then we might just be the right fit for you.</p>
+                {videoBody ? (
+                  <div className="wordpress-content" dangerouslySetInnerHTML={{ __html: videoBody }} />
+                ) : (
+                  <>
+                    <p>As a video production company, we deliver high quality and engaging content for commercial, corporate, and promotional use. We create TV adverts, brand films, promotional videos, crowdfunding campaign videos, and video content for social media. Our professional video team knows how to craft the right elements together to convey your messages and tell your story.</p>
+                    <p>What are you looking for in a video production company? If it's a creative team who are trustworthy, knowledgeable, enjoyable to work with and well-priced, then we might just be the right fit for you.</p>
+                  </>
+                )}
               </div>
             </div>
           </div>
           
           {/* Top Photo Image */}
           <div className="flex justify-end w-full">
-            {photoImage && (
-              <GatsbyImage 
-                image={photoImage} 
-                alt="Photographer capturing food on a table" 
-                className="w-[clamp(300px,40vw,755px)] h-auto object-cover"
-              />
+            {photoImage ? (
+              <img src={photoImage} alt="Photography" className="w-[clamp(300px,40vw,755px)] h-auto object-cover" />
+            ) : (
+              fallbackPhotoImage && (
+                <GatsbyImage 
+                  image={fallbackPhotoImage} 
+                  alt="Photographer capturing food on a table" 
+                  className="w-[clamp(300px,40vw,755px)] h-auto object-cover"
+                />
+              )
             )}
           </div>
         </div>
@@ -172,12 +213,16 @@ const AboutServices = () => {
           
           {/* Bottom Video Image */}
           <div className="flex justify-start w-full">
-            {videoImage && (
-              <GatsbyImage 
-                image={videoImage} 
-                alt="Video production studio setup" 
-                className="w-[clamp(300px,40vw,755px)] h-auto object-cover"
-              />
+            {videoImage ? (
+              <img src={videoImage} alt="Video production" className="w-[clamp(300px,40vw,755px)] h-auto object-cover" />
+            ) : (
+              fallbackVideoImage && (
+                <GatsbyImage 
+                  image={fallbackVideoImage} 
+                  alt="Video production studio setup" 
+                  className="w-[clamp(300px,40vw,755px)] h-auto object-cover"
+                />
+              )
             )}
           </div>
           
@@ -185,11 +230,21 @@ const AboutServices = () => {
           <div className="flex justify-start py-4 pr-6 2xl:pr-12 mt-4 xl:mt-16 2xl:mt-24">
             <div className="w-full max-w-[clamp(480px,45vw,816px)] flex flex-col gap-6">
               <h2 className="font-inter text-left text-[clamp(24px,2.5vw,40px)] font-extrabold xl:font-normal leading-[100%] tracking-[-0.05em] text-black xl:text-[#526E87]">
-                and a <span className="text-[#FCBE17] xl:text-[#179CBD] xl:font-extrabold">photography company</span> too…
+                {photoHeading ? (
+                  <div dangerouslySetInnerHTML={{ __html: photoHeading }} />
+                ) : (
+                  <>and a <span className="text-[#FCBE17] xl:text-[#179CBD] xl:font-extrabold">photography company</span> too…</>
+                )}
               </h2>
               <div className="w-full font-inter font-medium text-[clamp(13px,1.2vw,20px)] leading-[1.25] tracking-[-0.05em] text-black xl:text-[#526E87] text-left xl:text-justify space-y-4">
-                <p>As a photography company, we're able to squeeze every pixel to deliver images that perform. A photographer must know how to communicate, and view a project from different perspectives, knowing how to create images that jump out and catch attention. We strive to do just that. We offer product photography, people photography and lifestyle photography across a wide range of sectors.</p>
-                <p>As a content creation company, we know how to give you the best of both worlds: through the use of video production to tell a story across multiple shots, or where a single photograph has to say it all.</p>
+                {photoBody ? (
+                  <div className="wordpress-content" dangerouslySetInnerHTML={{ __html: photoBody }} />
+                ) : (
+                  <>
+                    <p>As a photography company, we're able to squeeze every pixel to deliver images that perform. A photographer must know how to communicate, and view a project from different perspectives, knowing how to create images that jump out and catch attention. We strive to do just that. We offer product photography, people photography and lifestyle photography across a wide range of sectors.</p>
+                    <p>As a content creation company, we know how to give you the best of both worlds: through the use of video production to tell a story across multiple shots, or where a single photograph has to say it all.</p>
+                  </>
+                )}
               </div>
             </div>
           </div>

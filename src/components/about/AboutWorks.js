@@ -98,13 +98,12 @@ const CARD_W = 349;
 const CARD_H = 706;
 const CENTER_W = 430;
 const CENTER_H = 819;
-
 const GAP = 48;
 
 const SWIPE_THRESHOLD = 60;
 const CLICK_THRESHOLD = 6; // px of movement still considered a "click"
 
-const AboutWorks = () => {
+const AboutWorks = ({ worksHeading }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [muted, setMuted] = useState(true); // global mute state
   const total = slides.length;
@@ -178,7 +177,7 @@ const AboutWorks = () => {
             letterSpacing: "-0.05em",
           }}
         >
-          Our Works
+          {worksHeading || "Our Works"}
         </h2>
 
         <div

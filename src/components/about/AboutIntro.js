@@ -2,8 +2,16 @@ import React, { useState } from "react";
 import aboutTeam from "../../images/aboutteam.png";
 import ContactModal from "../layout/ContactModal";
 
-const AboutIntro = () => {
+const AboutIntro = ({
+  introHeading,
+  introParagraph,
+  introImage,
+  introBadgeText,
+}) => {
   const [isContactOpen, setIsContactOpen] = useState(false);
+
+  const imageSrc = introImage || aboutTeam;
+  const badge = introBadgeText || "This is us...";
 
   return (
     <>
@@ -17,13 +25,21 @@ const AboutIntro = () => {
               letterSpacing: "-0.05em",
             }}
           >
-            Video production and photography at{" "}
-            <span className="md:inline">Pocket Creatives</span>
+            {introHeading ? (
+              <div
+                className="wordpress-content wordpress-content--heading"
+                dangerouslySetInnerHTML={{ __html: introHeading }}
+              />
+            ) : (
+              <>
+                Video production and photography at{" "}
+                <span className="md:inline">Pocket Creatives</span>
+              </>
+            )}
           </h2>
 
           {/* Two-column on desktop, stacked on mobile */}
-          <div className="flex flex-col lg:grid lg:items-start lg:gap-12 lg:grid-cols-[1.2fr_1fr] xl:grid-cols-[1.1fr_1fr] 2xl:grid-cols-[610px_1fr]">
-
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
             {/* IMAGE */}
             <div className="relative lg:order-2 mb-8 lg:mb-0 lg:pl-6 xl:pl-12">
               {/* Badge — desktop only */}
@@ -35,17 +51,15 @@ const AboutIntro = () => {
                   fontSize: "20px",
                   top: "-60px",
                   left: "20px",
-                  boxShadow: "0 2px 1px rgba(0,0,0,0.1)",
+                  boxShadow: "0 2px 1px rgb(0,0,0,0.1)",
                 }}
               >
-                This is
-                <br />
-                us...
+                {badge}
               </div>
 
-              {/* Team image — made fluid so it never looks too small */}
+              {/* Team image — ACF URL or local fallback */}
               <img
-                src={aboutTeam}
+                src={imageSrc}
                 alt="Steven, Haider and Lauren"
                 className="w-full h-auto block rounded-lg"
               />
@@ -53,33 +67,31 @@ const AboutIntro = () => {
 
             {/* Paragraph + email button */}
             <div className="lg:order-1">
-              <p
-                className="font-medium"
-                style={{
-                  fontSize: "16px",
-                  lineHeight: 1.6,
-                  letterSpacing: "-0.05em",
-                  color: "#000000",
-                }}
-              >
-                Pocket Creatives is a video production and photography team
-                built on over 16 years of experience in the visual and
-                creative industries. Run by co-owners{" "}
-                <span className="font-bold text-white">Steven</span>,{" "}
-                <span className="font-bold text-white">Haider</span> and{" "}
-                <span className="font-bold text-white">Lauren</span>, our team
-                loves producing great video and photography, and we like to
-                think that it shows in the work we deliver.
-                <br />
-                <br />
-                We've worked hard to assemble a talented team who can deliver
-                high quality video production services, as well as video and
-                photography content creation.
-                <br />
-                <br />
-                Drop us a mail, we're a friendly bunch and are more than happy
-                to chat about what we could offer on your next project!
-              </p>
+              <div className="wordpress-content wordpress-content--on-teal font-medium">
+                {introParagraph ? (
+                  <div dangerouslySetInnerHTML={{ __html: introParagraph }} />
+                ) : (
+                  <p>
+                    Pocket Creatives is a video production and photography team
+                    built on over 16 years of experience in the visual and
+                    creative industries. Run by co-owners{" "}
+                    <strong>Steven</strong>, <strong>Haider</strong> and{" "}
+                    <strong>Lauren</strong>, our team loves producing great
+                    video and photography, and we like to think that it shows in
+                    the work we deliver.
+                    <br />
+                    <br />
+                    We've worked hard to assemble a talented team who can deliver
+                    high quality video production services, as well as video and
+                    photography.
+                    <br />
+                    <br />
+                    Drop us a mail, we're a friendly bunch and are more than
+                    happy to chat about what we could offer on your next
+                    project!
+                  </p>
+                )}
+              </div>
 
               {/* Email circle button — desktop only */}
               <button
