@@ -165,7 +165,7 @@ const Lightbox = ({ item, onClose }) => {
   );
 };
 
-const WorksBeautyPhotography = () => {
+const WorksBeautyPhotography = ({ photoGridHeading }) => {
   const [activeItem, setActiveItem] = useState(null);
 
   return (
@@ -194,7 +194,7 @@ const WorksBeautyPhotography = () => {
             className="font-extrabold tracking-[-0.05em] text-3xl md:text-[40px]"
             style={{ color: "#179CBD", lineHeight: 1.1 }}
           >
-            Beauty Photography
+            {photoGridHeading || "Beauty Photography"}
           </h3>
 
           <p

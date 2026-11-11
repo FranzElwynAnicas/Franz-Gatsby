@@ -2,6 +2,7 @@ import React from "react";
 
 const WorksCategoryBlock = ({
   title = "Beauty",
+  paragraph,
   links = [
     { label: "More Beauty Videography", to: "#beauty-videography" },
     { label: "More Beauty Photography", to: "#beauty-photography" },
@@ -40,16 +41,21 @@ const WorksCategoryBlock = ({
           <div className="grid grid-cols-1 md:grid-cols-[600px_1fr] gap-10 md:gap-40 items-start">
             
             {/* Paragraph */}
-            <p
+            <div
               className="text-black font-medium tracking-[-0.05em] text-base md:text-[20px] leading-[1.6] md:leading-[2]"
-              // Removed whiteSpace: "nowrap" and forced <br /> tags so it wraps naturally on mobile
             >
-              Lorem ipsum dolor sit amet consectetur. Nulla purus rhoncus at mattis.
-              Et ac vitae ornare volutpat. Mollis sem scelerisque dictum nunc iaculis
-              vivamus donec. Molestie sed mattis aenean sit arcu ipsum amet
-              vulputate tellus. Blandit pellentesque magna egestas eget rhoncus
-              tincidunt. In ultrices velit et velit morbi vitae dolor fames. Rhoncus.
-            </p>
+              {paragraph ? (
+                <div className="wordpress-content" dangerouslySetInnerHTML={{ __html: paragraph }} />
+              ) : (
+                <p>
+                  Lorem ipsum dolor sit amet consectetur. Nulla purus rhoncus at mattis.
+                  Et ac vitae ornare volutpat. Mollis sem scelerisque dictum nunc iaculis
+                  vivamus donec. Molestie sed mattis aenean sit arcu ipsum amet
+                  vulputate tellus. Blandit pellentesque magna egestas eget rhoncus
+                  tincidunt. In ultrices velit et velit morbi vitae dolor fames. Rhoncus.
+                </p>
+              )}
+            </div>
 
             {/* Links section */}
             <div className="md:pl-4">

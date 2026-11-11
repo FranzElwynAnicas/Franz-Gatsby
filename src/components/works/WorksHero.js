@@ -1,22 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import nursem from "../../images/Nursem.png";
 
-/* ─── Category pills data ─── */
-const categories = [
-  { label: "Beauty", active: true },
-  { label: "Product" },
-  { label: "Events" },
-  { label: "Crowdfunding" },
-  { label: "Fashion" },
-  { label: "People" },
-  { label: "Jewellery" },
-  { label: "TV Ads" },
-  { label: "HR" },
-  { label: "Education" },
-  { label: "Explainers" },
-  { label: "Social First" },
-];
-
 /* ─── Marquee items ─── */
 const items = [
   {
@@ -51,7 +35,6 @@ const MarqueeCard = ({ item }) => {
 
   return (
     <div className="shrink-0 flex-none">
-      {/* Image / video — responsive height, natural width */}
       <div className="overflow-hidden h-[250px] md:h-[420px]">
         {item.type === "video" ? (
           <video
@@ -74,7 +57,6 @@ const MarqueeCard = ({ item }) => {
         )}
       </div>
 
-      {/* Label row */}
       <div className="flex justify-between items-center mt-4 md:mt-6 px-1 gap-4 md:gap-6">
         <span className="text-pocketGrey text-sm font-medium whitespace-nowrap">
           {item.label}
@@ -87,8 +69,33 @@ const MarqueeCard = ({ item }) => {
   );
 };
 
-const WorksHero = ({ title = "BEAUTY" }) => {
+const WorksHero = ({ title = "BEAUTY", categories }) => {
   const [paused, setPaused] = useState(false);
+
+  // Fallback if ACF is empty
+  const defaultCategories = [
+    { label: "Beauty" },
+    { label: "Product" },
+    { label: "Events" },
+    { label: "Crowdfunding" },
+    { label: "Fashion" },
+    { label: "People" },
+    { label: "Jewellery" },
+    { label: "TV Ads" },
+    { label: "HR" },
+    { label: "Education" },
+    { label: "Explainers" },
+    { label: "Social First" },
+  ];
+
+  // Use ACF data if it exists, otherwise use fallbacks
+  const rawCategories = categories && categories.length > 0 ? categories : defaultCategories;
+  
+  // Map to add the "active" state to the first item
+  const displayCategories = rawCategories.map((cat, idx) => ({
+    label: cat.label,
+    active: idx === 0,
+  }));
 
   return (
     <section className="w-full bg-pocketLightGrey overflow-hidden pt-24 md:pt-28 pb-16">
@@ -102,7 +109,7 @@ const WorksHero = ({ title = "BEAUTY" }) => {
 
       {/* 2. Category pills */}
       <div className="flex flex-wrap justify-center gap-x-4 gap-y-3 md:gap-x-8 md:gap-y-3 px-6 max-w-[1300px] mx-auto mb-10 md:mb-14">
-        {categories.map((cat) => (
+        {displayCategories.map((cat) => (
           <button
             key={cat.label}
             className={`font-medium tracking-[-0.05em] leading-none transition-colors text-[18px] md:text-[20px] ${
@@ -122,7 +129,6 @@ const WorksHero = ({ title = "BEAUTY" }) => {
           className={`marquee-wrap ${paused ? "paused" : ""}`}
           style={{ overflow: "hidden" }}
         >
-          {/* Gap reduced on mobile */}
           <div className="marquee-track flex items-start gap-6 md:gap-16 w-max">
             {[...items, ...items].map((item, idx) => (
               <MarqueeCard key={`a-${idx}`} item={item} />
@@ -144,7 +150,6 @@ const WorksHero = ({ title = "BEAUTY" }) => {
         </h2>
 
         <div className="flex items-center justify-between w-full md:w-auto">
-          {/* Mobile-only helper text */}
           <p className="block md:hidden text-pocketGrey text-sm font-medium">
             Tap on a Video/Photo for larger view
           </p>

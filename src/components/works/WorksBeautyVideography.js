@@ -123,7 +123,7 @@ const FullscreenLightbox = ({ item, onClose }) => {
   );
 };
 
-const WorksBeautyVideography = () => {
+const WorksBeautyVideography = ({ videoGridHeading }) => {
   const [activeItem, setActiveItem] = useState(null);
 
   return (
@@ -144,7 +144,7 @@ const WorksBeautyVideography = () => {
               lineHeight: 1.1,
             }}
           >
-            Beauty Videography
+            {videoGridHeading || "Beauty Videography"}
           </h2>
 
           {/* Changed text to match screenshot */}
