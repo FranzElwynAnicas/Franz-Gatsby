@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 
-const PricingHero = () => {
+const PricingHero = ({ topText, title, p1, p2 }) => {
   const videoRef = useRef(null);
   const [isMuted, setIsMuted] = useState(true);
 
@@ -55,11 +55,12 @@ const PricingHero = () => {
               letterSpacing: "-0.05em"
             }}
           >
-            Avoiding the taboo:
+            {topText || "Avoiding the taboo:"}
           </p>
           
+          {/* DYNAMIC TITLE: Using whiteSpace pre-line so WordPress Enter keys become <br /> */}
           <h1 
-            className="text-black mb-8"
+            className="text-black mb-8 whitespace-pre-line"
             style={{ 
               fontFamily: "Inter, sans-serif",
               fontWeight: 700,
@@ -68,11 +69,7 @@ const PricingHero = () => {
               letterSpacing: "-0.05em"
             }}
           >
-            <span className="whitespace-nowrap">Pricing for</span>
-            <br />
-            <span className="whitespace-nowrap">video production</span>
-            <br />
-            <span className="whitespace-nowrap">and photography</span>
+            {title || "Pricing for\nvideo production\nand photography"}
           </h1>
           
           <div 
@@ -86,10 +83,10 @@ const PricingHero = () => {
             }}
           >
             <p>
-              Price is important to everybody, and we know this is a major factor in deciding who you'll want to work with. We like to think that clients work with us for a range of reasons, from our quality of output to our project management, but getting the budget in the right place is something that we spend a lot of time on.
+              {p1 || "Price is important to everybody, and we know this is a major factor in deciding who you'll want to work with. We like to think that clients work with us for a range of reasons, from our quality of output to our project management, but getting the budget in the right place is something that we spend a lot of time on."}
             </p>
             <p>
-              We can either quote from scratch once we understand your brief, or work to your target spend. This flexibility makes us a great fit for both small and large clients alike. You can read a bit more below about how we structure our rates for both video production and photography below, and we're always here for any queries.
+              {p2 || "We can either quote from scratch once we understand your brief, or work to your target spend. This flexibility makes us a great fit for both small and large clients alike. You can read a bit more below about how we structure our rates for both video production and photography below, and we're always here for any queries."}
             </p>
           </div>
 

@@ -2,6 +2,7 @@ import React from "react";
 
 const ServicesCategoryBlock2 = ({
   title = "Pixel perfection: Photography",
+  paragraph, 
   links = [
     { label: "Video Production", to: "#category-video-production" },
     { label: "The Rest", to: "#the-rest" },
@@ -35,17 +36,12 @@ const ServicesCategoryBlock2 = ({
         {/* Content layout */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1fr_1fr] xl:grid-cols-[600px_1fr] gap-10 md:gap-12 lg:gap-16 xl:gap-20 items-start">
           
-          {/* Paragraph */}
+          {/* Dynamic Paragraph from WordPress */}
           <p className="text-black font-medium tracking-[-0.05em] text-[18px] md:text-[18px] lg:text-[20px] xl:text-[22px] leading-[1.5] lg:leading-[1.6]">
-            Lorem ipsum dolor sit amet consectetur. Nulla purus rhoncus at
-            mattis. Et ac vitae ornare volutpat. Mollis sem scelerisque dictum
-            nunc iaculis vivamus donec. Molestie sed mattis aenean sit arcu
-            ipsum amet vulputate tellus. Blandit pellentesque magna egestas eget
-            rhoncus tincidunt. In ultrices velit et velit morbi vitae dolor
-            fames. Rhoncus.
+            {paragraph || "Lorem ipsum dolor sit amet consectetur. Nulla purus rhoncus at mattis. Et ac vitae ornare volutpat. Mollis sem scelerisque dictum nunc iaculis vivamus donec. Molestie sed mattis aenean sit arcu ipsum amet vulputate tellus. Blandit pellentesque magna egestas eget rhoncus tincidunt. In ultrices velit et velit morbi vitae dolor fames. Rhoncus."}
           </p>
 
-          {/* Links section — pushed further to the right */}
+          {/* Links section */}
           <div className="md:pl-6 lg:pl-12 xl:pl-24">
             <p className="text-black font-extrabold tracking-[-0.05em] mb-4 text-[18px] md:text-[18px] lg:text-[20px] xl:text-[22px] leading-[1.25]">
               Go to...

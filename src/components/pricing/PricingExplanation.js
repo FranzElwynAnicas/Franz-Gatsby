@@ -1,6 +1,9 @@
 import React from "react";
 
-const PricingExplanation = () => {
+const PricingExplanation = ({ 
+  e1Title, e1Text1, e1Text2, 
+  e2Title, e2Text1, e2Text2, e2Text3, e2Text4 
+}) => {
   return (
     <section className="w-full bg-[#179cbd] py-16 md:py-32 overflow-hidden">
       {/* Container limits max width and adds padding so it never touches the edges */}
@@ -16,12 +19,12 @@ const PricingExplanation = () => {
             <h2 
               className="font-bold text-black w-full lg:w-[750px] text-center lg:text-left"
               style={{ 
-                fontSize: "clamp(28px, 5vw, 80px)", /* Reduced from 6vw to 5vw */
+                fontSize: "clamp(28px, 5vw, 80px)",
                 lineHeight: "123%", 
                 letterSpacing: "-0.05em" 
               }}
             >
-              Cheap or Expensive?
+              {e1Title || "Cheap or Expensive?"}
             </h2>
           </div>
           
@@ -34,10 +37,10 @@ const PricingExplanation = () => {
             }}
           >
             <p className="mb-6">
-              To give you some context, we aim to be in the middle band in terms of our pricing structure, which means that our typical daily rates for photography and video production will sit in between those agencies who work at the very upper end of our industry, with individual freelancers at the lower end of the pricing range.
+              {e1Text1 || "To give you some context, we aim to be in the middle band in terms of our pricing structure, which means that our typical daily rates for photography and video production will sit in between those agencies who work at the very upper end of our industry, with individual freelancers at the lower end of the pricing range."}
             </p>
             <p>
-              It's important to note that we're not talking about quality here, just price. We're often chosen ahead of the largest of our competitors as we can deliver great quality photography and video production services for a lower price. This is because we run an efficient setup, with less overheads and no bloat.
+              {e1Text2 || "It's important to note that we're not talking about quality here, just price. We're often chosen ahead of the largest of our competitors as we can deliver great quality photography and video production services for a lower price. This is because we run an efficient setup, with less overheads and no bloat."}
             </p>
           </div>
         </div>
@@ -57,7 +60,7 @@ const PricingExplanation = () => {
                 letterSpacing: "-0.05em" 
               }}
             >
-              So how does it work?
+              {e2Title || "So how does it work?"}
             </h2>
           </div>
           
@@ -70,16 +73,16 @@ const PricingExplanation = () => {
             }}
           >
             <p className="mb-6">
-              Our setup also makes us attractive to start-ups, those who are crowdfunding, and businesses who still need great photography and video production, but are working within tighter budgets.
+              {e2Text1 || "Our setup also makes us attractive to start-ups, those who are crowdfunding, and businesses who still need great photography and video production, but are working within tighter budgets."}
             </p>
             <p className="mb-6">
-              We do this by using modular pricing – knowing that each photography and video production project is different, you pay for just what you need.
+              {e2Text2 || "We do this by using modular pricing – knowing that each photography and video production project is different, you pay for just what you need."}
             </p>
             <p className="mb-6">
-              While some clients may need just an hour of photography to capture some simple pack shots for a new addition to their range, others may need a multiple camera setup for a TV advert to showcase their brand to the world. We have the ability to quote easily for both ends of that spectrum.
+              {e2Text3 || "While some clients may need just an hour of photography to capture some simple pack shots for a new addition to their range, others may need a multiple camera setup for a TV advert to showcase their brand to the world. We have the ability to quote easily for both ends of that spectrum."}
             </p>
             <p>
-              If you already have a total budget available, share that with us and we can work out how to deliver as much as possible for what you have to spend.
+              {e2Text4 || "If you already have a total budget available, share that with us and we can work out how to deliver as much as possible for what you have to spend."}
             </p>
           </div>
         </div>

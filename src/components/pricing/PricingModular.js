@@ -60,7 +60,10 @@ const FlowerTagSvg = () => (
   </svg>
 );
 
-const PricingModular = () => {
+const PricingModular = ({ 
+  modularHeading, b1, b2, b3, 
+  c1Title, c1Text, c2Title, c2Text 
+}) => {
   const [playing, setPlaying] = useState(false);
   const videoRef = useRef(null);
 
@@ -79,10 +82,11 @@ const PricingModular = () => {
     }
   };
 
+  // Dynamic benefits array
   const benefits = [
-    "Pay only for what you need",
-    "No matter how large or small your project",
-    "Oh, and no budget overruns!",
+    b1 || "Pay only for what you need",
+    b2 || "No matter how large or small your project",
+    b3 || "Oh, and no budget overruns!",
   ];
 
   return (
@@ -95,13 +99,13 @@ const PricingModular = () => {
             className="font-bold text-[#5c7285] tracking-[-0.05em] leading-[100%] mb-6 md:mb-8"
             style={{ fontSize: "clamp(36px, 5.5vw, 80px)" }}
           >
-            We use a modular pricing model:
+            {modularHeading || "We use a modular pricing model:"}
           </h2>
 
           <ul className="list-none p-0 flex flex-col gap-3 md:gap-4">
-            {benefits.map((benefit) => (
+            {benefits.map((benefit, index) => (
               <li
-                key={benefit}
+                key={index}
                 className="flex items-start text-[#5c7285] font-medium tracking-[-0.05em] leading-[100%]"
                 style={{ fontSize: "clamp(20px, 2.8vw, 40px)" }}
               >
@@ -148,32 +152,22 @@ const PricingModular = () => {
             </div>
 
             <h3 className="font-bold text-white text-xl md:text-[28px] lg:text-[34px] xl:text-[40px] leading-[123%] tracking-[-0.05em] max-w-[546px] mb-6 md:mb-8 mt-4 md:mt-0">
-              Everything you need and no hidden costs.
+              {c1Title || "Everything you need and no hidden costs."}
             </h3>
 
             <p className="font-medium text-white text-base md:text-[16px] lg:text-[18px] xl:text-[20px] leading-[123%] tracking-[-0.05em] max-w-[496px]">
-              There are lots of factors that affect the overall price of video
-              production and photography shoots, such as props, backgrounds,
-              models and locations. This is why there’s no one-size-fits all
-              price, and most creative agencies won’t put any prices on their
-              websites – as they can be misleading without a lot of description.
+              {c1Text || "There are lots of factors that affect the overall price..."}
             </p>
           </div>
 
           {/* Card 2 */}
           <div className="relative bg-[#1EA4B9] text-white p-6 md:p-8 lg:p-10 xl:p-14 w-full 2xl:max-w-[620px] min-h-[400px] xl:min-h-[547px] flex flex-col justify-center items-center text-center mt-6 md:mt-0">
             <h3 className="font-bold text-white text-xl md:text-[28px] lg:text-[34px] xl:text-[40px] leading-[123%] tracking-[-0.05em] max-w-[546px] mb-6 md:mb-8">
-              We’ll get you from brief to quote in a flash!
+              {c2Title || "We'll get you from brief to quote in a flash!"}
             </h3>
 
             <p className="font-medium text-white text-base md:text-[16px] lg:text-[18px] xl:text-[20px] leading-[123%] tracking-[-0.05em] max-w-[496px]">
-              We will work with you to understand your brief and the full
-              photography and video production requirements of your project,
-              before delivering a budget breakdown to you at the beginning of the
-              process. This gives you a fully honest and transparent view of the
-              resources that make up your project. There’s always room for
-              conversation and tweaks, and we’re also happy to start with your
-              ideal spend and work backwards.
+              {c2Text || "We will work with you to understand your brief..."}
             </p>
 
             <div className="absolute -bottom-6 -right-4 md:-bottom-8 md:-right-6 z-10">

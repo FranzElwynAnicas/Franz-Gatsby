@@ -3,7 +3,11 @@ import { useState, useRef } from "react";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { graphql, useStaticQuery } from "gatsby";
 
-const ServicesProcess2 = () => {
+const ServicesProcess2 = ({ 
+  p1Title, p1Subtitle, p1Text,
+  p2Title, p2Subtitle, p2Text,
+  p3Title, p3Subtitle, p3Text 
+}) => {
   const data = useStaticQuery(graphql`
     query ServicesProcess2ImagesQuery {
       preProdImg: file(relativePath: { eq: "girls-meeting.png" }) {
@@ -90,25 +94,26 @@ const ServicesProcess2 = () => {
     </p>
   );
 
+  // Dynamic steps array using the props from WordPress
   const steps = [
     {
-      title: "Pre-production",
-      subtitle: "Meeting & Planning",
-      text: "Lorem ipsum dolor sit amet consectetur. Morbi mi elit vulputate aliquet amet. Consectetur imperdiet ac tortor urna. Amet convallis cras amet tortor massa odio consectetur. Nunc egestas euismod odio ullamcorper. Risus pharetra massa quam tincidunt odio senectus nunc pulvinar nisl. Commodo mattis quis mauris libero aliquet nunc quis aliquam. Ultricies.",
+      title: p1Title || "Pre-production",
+      subtitle: p1Subtitle || "Meeting & Planning",
+      text: p1Text || "Lorem ipsum dolor sit amet consectetur. Morbi mi elit vulputate aliquet amet. Consectetur imperdiet ac tortor urna. Amet convallis cras amet tortor massa odio consectetur. Nunc egestas euismod odio ullamcorper. Risus pharetra massa quam tincidunt odio senectus nunc pulvinar nisl. Commodo mattis quis mauris libero aliquet nunc quis aliquam. Ultricies.",
       image: preProdImage,
       alt: "Pre-production planning and meeting",
     },
     {
-      title: "Production",
-      subtitle: "Lights, Camera, Action",
-      text: "Lorem ipsum dolor sit amet consectetur. Morbi mi elit vulputate aliquet amet. Consectetur imperdiet ac tortor urna. Amet convallis cras amet tortor massa odio consectetur. Nunc egestas euismod odio ullamcorper. Risus pharetra massa quam tincidunt odio senectus nunc pulvinar nisl. Commodo mattis quis mauris libero aliquet nunc quis aliquam. Ultricies.",
+      title: p2Title || "Production",
+      subtitle: p2Subtitle || "Lights, Camera, Action",
+      text: p2Text || "Lorem ipsum dolor sit amet consectetur. Morbi mi elit vulputate aliquet amet. Consectetur imperdiet ac tortor urna. Amet convallis cras amet tortor massa odio consectetur. Nunc egestas euismod odio ullamcorper. Risus pharetra massa quam tincidunt odio senectus nunc pulvinar nisl. Commodo mattis quis mauris libero aliquet nunc quis aliquam. Ultricies.",
       image: prodImage,
       alt: "Production makeup application",
     },
     {
-      title: "Post-production",
-      subtitle: "Review & Edit",
-      text: "Lorem ipsum dolor sit amet consectetur. Morbi mi elit vulputate aliquet amet. Consectetur imperdiet ac tortor urna. Amet convallis cras amet tortor massa odio consectetur. Nunc egestas euismod odio ullamcorper. Risus pharetra massa quam tincidunt odio senectus nunc pulvinar nisl. Commodo mattis quis mauris libero aliquet nunc quis aliquam. Ultricies.",
+      title: p3Title || "Post-production",
+      subtitle: p3Subtitle || "Review & Edit",
+      text: p3Text || "Lorem ipsum dolor sit amet consectetur. Morbi mi elit vulputate aliquet amet. Consectetur imperdiet ac tortor urna. Amet convallis cras amet tortor massa odio consectetur. Nunc egestas euismod odio ullamcorper. Risus pharetra massa quam tincidunt odio senectus nunc pulvinar nisl. Commodo mattis quis mauris libero aliquet nunc quis aliquam. Ultricies.",
       image: postProdImage,
       alt: "Post-production video editing",
     }
@@ -204,7 +209,7 @@ const ServicesProcess2 = () => {
       {/* ============================================================ */}
       <div className="hidden lg:block w-full">
         
-        {/* Row 1: Pre-production Text & Pre-production Image (Right) */}
+        {/* Row 1 */}
         <div className="flex items-center mb-24 w-full">
           <div className="w-[40%] flex justify-end pr-12 xl:pr-24 pl-6">
             <div className="max-w-[450px] w-full">
@@ -224,7 +229,7 @@ const ServicesProcess2 = () => {
           </div>
         </div>
 
-        {/* Row 2: Camera Image (Left) & Production Text */}
+        {/* Row 2 */}
         <div className="flex items-center mb-24 w-full">
           <div className="w-[60%] flex justify-end mr-auto">
             {steps[1].image && (
@@ -244,7 +249,7 @@ const ServicesProcess2 = () => {
           </div>
         </div>
 
-        {/* Row 3: Post-production Text & Post-production Image (Right) */}
+        {/* Row 3 */}
         <div className="flex items-center w-full">
           <div className="w-[40%] flex justify-end pr-12 xl:pr-24 pl-6">
             <div className="max-w-[450px] w-full">

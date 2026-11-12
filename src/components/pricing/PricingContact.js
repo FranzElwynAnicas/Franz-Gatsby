@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const PricingContact = () => {
+const PricingContact = ({ title, subtitle }) => {
   const [formData, setFormData] = useState({
     name: "John Doe",
     contactNumber: "",
@@ -27,17 +27,18 @@ const PricingContact = () => {
         
         {/* Left Side: Text */}
         <div className="w-full lg:w-[45%] flex flex-col justify-center">
-          {/* Title: 50px bold centered on mobile / 80px bold left-aligned on desktop */}
+          {/* DYNAMIC TITLE */}
           <h2
             className="text-black lg:text-[#1EA4B9] font-bold mb-4 lg:mb-6 text-center lg:text-left tracking-[-0.05em] leading-[100%] text-[50px] lg:text-[80px]"
           >
-            Get In Touch
+            {title || "Get In Touch"}
           </h2>
 
+          {/* DYNAMIC SUBTITLE */}
           <p
             className="text-black lg:text-[#526E87] font-medium text-center lg:text-left tracking-[-0.05em] leading-[110%] lg:leading-[100%] text-[24px] md:text-[32px] lg:text-[40px] max-w-[509.65px] mx-auto lg:mx-0"
           >
-            Drop us a mail, let us know your budget, and we’ll share what we can offer
+            {subtitle || "Drop us a mail, let us know your budget, and we'll share what we can offer"}
           </p>
         </div>
 
