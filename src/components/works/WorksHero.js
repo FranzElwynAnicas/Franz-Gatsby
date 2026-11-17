@@ -88,12 +88,27 @@ const WorksHero = ({ title = "BEAUTY", categories }) => {
     { label: "Social First" },
   ];
 
-  // Use ACF data if it exists, otherwise use fallbacks
-  const rawCategories = categories && categories.length > 0 ? categories : defaultCategories;
-  
-  // Map to add the "active" state to the first item
+  /*
+   * Accept BOTH shapes:
+   *  - Array (old repeater)        → categories.map(c => c.label)
+   *  - Single object (new group)   → categories.label (or categories.title)
+   *  - Empty/null                  → defaultCategories
+   */
+  let rawCategories;
+  if (Array.isArray(categories) && categories.length > 0) {
+    rawCategories = categories;
+  } else if (categories && typeof categories === "object") {
+    rawCategories = [categories];
+  } else {
+    rawCategories = defaultCategories;
+  }
+
   const displayCategories = rawCategories.map((cat, idx) => ({
-    label: cat.label,
+    // Prefer `label` (repeater), fall back to `title` (group), then string
+    label:
+      (cat && (cat.label ?? cat.title)) ||
+      (typeof cat === "string" ? cat : "") ||
+      "",
     active: idx === 0,
   }));
 
@@ -109,9 +124,9 @@ const WorksHero = ({ title = "BEAUTY", categories }) => {
 
       {/* 2. Category pills */}
       <div className="flex flex-wrap justify-center gap-x-4 gap-y-3 md:gap-x-8 md:gap-y-3 px-6 max-w-[1300px] mx-auto mb-10 md:mb-14">
-        {displayCategories.map((cat) => (
+        {displayCategories.map((cat, idx) => (
           <button
-            key={cat.label}
+            key={`${cat.label}-${idx}`}
             className={`font-medium tracking-[-0.05em] leading-none transition-colors text-[18px] md:text-[20px] ${
               cat.active
                 ? "text-pocketYellow"
@@ -170,7 +185,13 @@ const WorksHero = ({ title = "BEAUTY", categories }) => {
                 <polygon points="0,0 12,7 0,14" />
               </svg>
             ) : (
-              <svg width="12" height="12" viewBox="0 0 14 14" fill="white" className="md:w-[14px] md:h-[14px]">
+              <svg
+                width="12"
+                height="12"
+                viewBox="0 0 14 14"
+                fill="white"
+                className="md:w-[14px] md:h-[14px]"
+              >
                 <rect x="2" y="1" width="3.5" height="12" rx="0.5" />
                 <rect x="8.5" y="1" width="3.5" height="12" rx="0.5" />
               </svg>

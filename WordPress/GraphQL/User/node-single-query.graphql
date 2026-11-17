@@ -1,0 +1,252 @@
+query SINGLE_CONTENT_QUERY($id: ID!) {
+  user(id: $id) {
+    aboutPageContent {
+      fieldGroupName
+      heroBodyCopy
+      heroCtaLabel
+      heroHeading
+
+      heroVideo {
+        node {
+          __typename
+          id
+        }
+      }
+
+      heroWord1
+      heroWord2
+      introBadgeText
+      introHeading
+
+      introImage {
+        node {
+          __typename
+          id
+        }
+      }
+
+      introParagraph
+
+      photoService {
+        fieldGroupName
+        servicesPhotoBody
+        servicesPhotoHeading
+
+        servicesPhotoImage {
+          node {
+            __typename
+            id
+          }
+        }
+      }
+
+      storyHeading
+      storyIntro
+      videoSectionHeading
+
+      videoSectionVideo {
+        node {
+          __typename
+          id
+        }
+      }
+
+      videoservice {
+        fieldGroupName
+        servicesVideoBody
+        servicesVideoHeading
+
+        servicesVideoImage {
+          node {
+            __typename
+            id
+          }
+        }
+      }
+
+      whoHeading
+      whoRotatingNames
+      whoTestimonialsCta
+      whoTestimonialsUrl
+
+      whoparagraphs {
+        fieldGroupName
+        whoParagraph1
+        whoParagraph2
+        whoParagraph3Prefix
+        whoParagraph3Suffix
+      }
+
+      whyHeading
+      whyIntroParagraph
+
+      whyItems {
+        fieldGroupName
+        item1Desc
+        item1Title
+        item2Desc
+        item2Title
+        item3Desc
+        item3Title
+        item4Desc
+        item4Title
+        item5Desc
+        item5Title
+      }
+
+      worksHeading
+
+      worksSlides {
+        fieldGroupName
+        slide1Description
+
+        slide1Media {
+          node {
+            __typename
+            id
+          }
+        }
+
+        slide1Subtitle
+        slide1Tag
+        slide2Description
+
+        slide2Media {
+          node {
+            __typename
+            id
+          }
+        }
+
+        slide2Subtitle
+        slide2Tag
+        slide3Description
+
+        slide3Media {
+          node {
+            __typename
+            id
+          }
+        }
+
+        slide3Subtitle
+        slide3Tag
+        slide4Description
+
+        slide4Media {
+          node {
+            __typename
+            id
+          }
+        }
+
+        slide4Subtitle
+        slide4Tag
+      }
+    }
+
+    adminColor
+
+    avatar {
+      default
+      extraAttr
+      forceDefault
+      foundAvatar
+      height
+      rating
+      scheme
+      size
+      url
+      width
+    }
+
+    capKey
+    capabilities
+
+    comments(first: 100) {
+      nodes {
+        __typename
+        id
+      }
+
+      pageInfo {
+        endCursor
+        hasNextPage
+        hasPreviousPage
+        startCursor
+      }
+    }
+
+    databaseId
+    description
+    email
+    extraCapabilities
+    firstName
+    hasCommentShortcutsEnabled
+    hasRichEditingEnabled
+    hasSyntaxHighlightingEnabled
+    id
+    isComment
+    isContentNode
+    isFrontPage
+    isPostsPage
+    isTermNode
+    lastName
+    locale
+    name
+    nicename
+    nickname
+
+    pages(first: 100) {
+      nodes {
+        __typename
+        id
+      }
+
+      pageInfo {
+        endCursor
+        hasNextPage
+        hasPreviousPage
+        startCursor
+      }
+    }
+
+    posts(first: 100) {
+      nodes {
+        __typename
+        id
+      }
+
+      pageInfo {
+        endCursor
+        hasNextPage
+        hasPreviousPage
+        startCursor
+      }
+    }
+
+    registeredDate
+
+    roles(first: 100) {
+      nodes {
+        __typename
+        id
+      }
+
+      pageInfo {
+        endCursor
+        hasNextPage
+        hasPreviousPage
+        startCursor
+      }
+    }
+
+    shouldShowAdminToolbar
+    slug
+    uri
+    url
+    userId
+    username
+    __typename
+  }
+}

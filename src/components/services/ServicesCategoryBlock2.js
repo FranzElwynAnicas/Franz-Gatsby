@@ -1,7 +1,7 @@
 import React from "react";
 
 const ServicesCategoryBlock2 = ({
-  title = "Pixel perfection: Photography",
+  title,
   paragraph, 
   links = [
     { label: "Video Production", to: "#category-video-production" },
@@ -30,7 +30,7 @@ const ServicesCategoryBlock2 = ({
             fontSize: "clamp(48px, 7.5vw, 120px)",
           }}
         >
-          {title}
+          {title || "Pixel perfection: Photography"}
         </h2>
 
         {/* Content layout */}

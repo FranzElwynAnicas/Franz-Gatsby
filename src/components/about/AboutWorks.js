@@ -1,99 +1,5 @@
 import React, { useState, useRef } from "react";
 
-import shampoo from "../../images/shampoo.png";
-import man from "../../images/man.png";
-
-const slides = [
-  {
-    id: "soap",
-    type: "image",
-    src: shampoo,
-    alt: "Soap & Glory product photography",
-    tag: "Soap And Glory",
-    subtitle: "People & Portrait Photography",
-    description: (
-      <>
-        Expertly delivered product photography and
-        <br />
-        product videos. From simple pack shots to
-        <br />
-        creative product photography and engaging
-        <br />
-        product video, high quality imagery is
-        <br />
-        designed to entice the viewer and convert
-        <br />
-        to a customer.
-      </>
-    ),
-  },
-  {
-    id: "hairo",
-    type: "video",
-    src: "/videos/hairo-brand-advert.mp4",
-    alt: "HairO Brand Advert",
-    tag: "HairO Brand Advert",
-    subtitle: "Beauty Video Production",
-    description: (
-      <>
-        Expertly crafted cosmetics, personal
-        <br />
-        care and beauty video and beauty
-        <br />
-        photography. Creating both usage
-        <br />
-        and creative product content, high
-        <br />
-        quality photography shows your
-        <br />
-        beauty brand in its best light.
-      </>
-    ),
-  },
-  {
-    id: "motionpromo",
-    type: "image",
-    src: shampoo,
-    alt: "Motion Promo",
-    tag: "Motion Promo",
-    subtitle: "Motion Graphics & Promo",
-    description: (
-      <>
-        Dynamic motion graphics and promotional
-        <br />
-        content designed to grab attention.
-        <br />
-        From animated brand intros to full
-        <br />
-        promo campaigns, we craft visuals that
-        <br />
-        tell your story and drive engagement.
-      </>
-    ),
-  },
-  {
-    id: "smiles",
-    type: "video",
-    src: "/videos/motionpromo.mp4",
-    alt: "Smiles Alliance",
-    tag: "Smiles Alliance",
-    subtitle: "People & Portrait Videography",
-    description: (
-      <>
-        Lorem ipsum dolor sit amet,
-        <br />
-        consectetur adipiscing elit. Cras
-        <br />
-        gravida metus eget orci iaculis, eu
-        <br />
-        ornare augue auctor. Donec at
-        <br />
-        sagittis magna.
-      </>
-    ),
-  },
-];
-
 const CARD_W = 349;
 const CARD_H = 706;
 const CENTER_W = 430;
@@ -103,10 +9,25 @@ const GAP = 48;
 const SWIPE_THRESHOLD = 60;
 const CLICK_THRESHOLD = 6; // px of movement still considered a "click"
 
-const AboutWorks = ({ worksHeading }) => {
+const AboutWorks = ({ worksHeading, slides = [] }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [muted, setMuted] = useState(true); // global mute state
-  const total = slides.length;
+
+  // Build the slide array from ACF (infer image vs video from file extension)
+  const displaySlides = slides.map((s) => {
+    const isVideo = /\.(mp4|webm|mov|ogv)$/i.test(s.mediaUrl || "");
+    return {
+      id: s.tag,
+      type: isVideo ? "video" : "image",
+      src: s.mediaUrl,
+      alt: s.tag,
+      tag: s.tag,
+      subtitle: s.subtitle,
+      description: s.description,
+    };
+  });
+
+  const total = displaySlides.length;
 
   const dragStartX = useRef(null);
   const [dragOffset, setDragOffset] = useState(0);
@@ -161,11 +82,30 @@ const AboutWorks = ({ worksHeading }) => {
     const rawIdx = currentIndex + offset;
     const slideIdx = ((rawIdx % total) + total) % total;
     return {
-      slide: slides[slideIdx],
+      slide: displaySlides[slideIdx],
       position: offset,
       uniqueKey: `${slideIdx}-${rawIdx}`,
     };
   });
+
+  // Guard: if no slides exist (nothing set in WP yet), render just the heading
+  if (total === 0) {
+    return (
+      <section className="w-full bg-pocketWhite py-12 md:py-24 overflow-hidden">
+        <div className="mx-auto max-w-[1920px] px-6 md:px-[12%]">
+          <h2
+            className="text-center font-bold leading-none text-black md:text-pocketTeal mb-14"
+            style={{
+              fontSize: "clamp(56px, 6.25vw, 120px)",
+              letterSpacing: "-0.05em",
+            }}
+          >
+            {worksHeading || "Our Works"}
+          </h2>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="w-full bg-pocketWhite py-12 md:py-24 overflow-hidden">
@@ -323,6 +263,7 @@ const AboutWorks = ({ worksHeading }) => {
                         lineHeight: 1.4,
                         letterSpacing: "-0.05em",
                         color: "#000000",
+                        whiteSpace: "pre-line",
                       }}
                     >
                       {slide.description}
@@ -336,7 +277,8 @@ const AboutWorks = ({ worksHeading }) => {
                       inset: 0,
                       background: "white",
                       opacity: isCenter ? 0 : 0.55,
-                      transition: "opacity 1100ms cubic-bezier(0.22, 1, 0.36, 1)",
+                      transition:
+                        "opacity 1100ms cubic-bezier(0.22, 1, 0.36, 1)",
                       zIndex: 3,
                       pointerEvents: "none",
                     }}

@@ -1,10 +1,10 @@
 import React from "react";
 
-const HowWeWorkFooter = () => {
+const HowWeWorkFooter = ({ footerHeading, footerText1, footerText2, formHeading }) => {
   return (
     <section className="relative w-full bg-[#FCBE17] py-16 md:py-28 overflow-hidden flex justify-center">
       
-      {/* Background SVG "3" positioned on the left behind the text */}
+      {/* Background SVG "3" (Keep as is) */}
       <div className="absolute top-1/2 -translate-y-1/2 left-[-80px] md:left-[2%] lg:left-[5%] xl:left-[8%] w-[450px] h-[580px] md:w-[650px] md:h-[850px] pointer-events-none z-0 opacity-80 select-none">
         <svg width="100%" height="100%" viewBox="0 0 672 882" fill="none" xmlns="http://www.w3.org/2000/svg">
           <mask id="stroke0_2491_1740" maskUnits="userSpaceOnUse" x="-0.524414" y="-0.0625" width="673" height="882" fill="black">
@@ -17,53 +17,26 @@ const HowWeWorkFooter = () => {
 
       <div className="w-full max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 relative z-10 flex flex-col lg:grid lg:grid-cols-[1fr_1.2fr] gap-16 lg:gap-24 items-center">
         
-        {/* LEFT SIDE: Text */}
+        {/* LEFT SIDE: Dynamic Text */}
         <div className="flex flex-col items-center lg:items-start text-center lg:text-left lg:pl-4">
-          <h2 
-            className="text-white mb-8 md:mb-10"
-            style={{
-              fontFamily: "Inter, sans-serif",
-              fontWeight: 800,
-              fontSize: "clamp(48px, 8vw, 100px)",
-              lineHeight: "1",
-              letterSpacing: "-0.05em"
-            }}
-          >
-            See you<br />next time
+          <h2 className="text-white mb-8 md:mb-10" style={{ fontFamily: "Inter, sans-serif", fontWeight: 800, fontSize: "clamp(48px, 8vw, 100px)", lineHeight: "1", letterSpacing: "-0.05em" }}>
+            {footerHeading || "See you next time"}
           </h2>
           
-          <div 
-            className="space-y-4 max-w-[450px]"
-            style={{
-              fontFamily: "Inter, sans-serif",
-              fontWeight: 500,
-              fontSize: "18px",
-              lineHeight: "130%",
-              letterSpacing: "-0.05em",
-            }}
-          >
+          <div className="space-y-4 max-w-[450px]" style={{ fontFamily: "Inter, sans-serif", fontWeight: 500, fontSize: "18px", lineHeight: "130%", letterSpacing: "-0.05em" }}>
             <p className="text-black">
-              The truth of the matter, is that we love all this. We’re here because we choose to be (and because we failed the GCHQ entry quiz). We’ve built a team who genuinely care about delivering you the best service that we’re able to.
+              {footerText1 || "The truth of the matter, is that we love all this. We're here because we choose to be (and because we failed the GCHQ entry quiz). We've built a team who genuinely care about delivering you the best service that we're able to."}
             </p>
             <p className="text-black">
-              The next step in the process is seeing how we can get it even better for you next time.
+              {footerText2 || "The next step in the process is seeing how we can get it even better for you next time."}
             </p>
           </div>
         </div>
 
-        {/* RIGHT SIDE: Form */}
+        {/* RIGHT SIDE: Form (Keep as is) */}
         <div className="w-full flex flex-col justify-center mt-8 lg:mt-0">
-          <h3 
-            className="mb-6 text-left text-black"
-            style={{
-              fontFamily: "Inter, sans-serif",
-              fontWeight: 800,
-              fontSize: "clamp(28px, 3vw, 32px)",
-              lineHeight: "1.1",
-              letterSpacing: "-0.02em",
-            }}
-          >
-            Ready to see what we could do with<br />your next project?
+          <h3 className="mb-6 text-left text-black" style={{ fontFamily: "Inter, sans-serif", fontWeight: 800, fontSize: "clamp(28px, 3vw, 32px)", lineHeight: "1.1", letterSpacing: "-0.02em" }}>
+            {formHeading || "Ready to see what we could do with your next project?"}
           </h3>
 
           <form className="w-full flex flex-col text-left">
@@ -75,12 +48,10 @@ const HowWeWorkFooter = () => {
                 <label className="block text-black font-medium text-[16px] mb-2">Full Name*</label>
                 <input type="text" placeholder="Full Name" className="w-full bg-white h-[55px] px-4 text-[16px] text-black border border-gray-300 outline-none focus:ring-2 focus:ring-[#1EA4B9]" />
               </div>
-
               <div className="lg:hidden">
                 <label className="block text-black font-medium text-[16px] mb-2">Contact Number*</label>
                 <input type="tel" placeholder="Contact Number" className="w-full bg-white h-[55px] px-4 text-[16px] text-black border border-gray-300 outline-none focus:ring-2 focus:ring-[#1EA4B9]" />
               </div>
-
               <div className="lg:hidden">
                 <label className="block text-black font-medium text-[16px] mb-2">Email Address*</label>
                 <input type="email" placeholder="Email Address" className="w-full bg-white h-[55px] px-4 text-[16px] text-black border border-gray-300 outline-none focus:ring-2 focus:ring-[#1EA4B9]" />
@@ -116,10 +87,7 @@ const HowWeWorkFooter = () => {
 
             {/* Submit Button */}
             <div className="flex justify-center lg:justify-end">
-              <button 
-                type="submit"
-                className="w-full lg:w-auto bg-[#1EA4B9] text-white font-extrabold text-[16px] px-12 py-4 lg:py-3 rounded-lg lg:rounded-xl hover:bg-[#179CBD] transition-colors"
-              >
+              <button type="submit" className="w-full lg:w-auto bg-[#1EA4B9] text-white font-extrabold text-[16px] px-12 py-4 lg:py-3 rounded-lg lg:rounded-xl hover:bg-[#179CBD] transition-colors">
                 Send
               </button>
             </div>

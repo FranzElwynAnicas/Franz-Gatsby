@@ -1,0 +1,82 @@
+query NON_NODE_QUERY {
+  allSettings {
+    discussionSettingsDefaultCommentStatus
+    discussionSettingsDefaultPingStatus
+    generalSettingsDateFormat
+    generalSettingsDescription
+    generalSettingsEmail
+    generalSettingsHomeUrl
+    generalSettingsLanguage
+    generalSettingsStartOfWeek
+    generalSettingsTimeFormat
+    generalSettingsTimezone
+    generalSettingsTitle
+    generalSettingsUrl
+    permalinkSettingsCategoryBase
+    permalinkSettingsStructure
+    permalinkSettingsTagBase
+    readingSettingsPageForPosts
+    readingSettingsPageOnFront
+    readingSettingsPostsPerPage
+    readingSettingsShowOnFront
+    writingSettingsDefaultCategory
+    writingSettingsDefaultPostFormat
+    writingSettingsUseSmilies
+  }
+
+  discussionSettings {
+    defaultCommentStatus
+    defaultPingStatus
+    id
+  }
+
+  generalSettings {
+    dateFormat
+    description
+    email
+    homeUrl
+    id
+    language
+
+    siteIcon {
+      node {
+        __typename
+        id
+      }
+    }
+
+    siteIconUrl
+    startOfWeek
+    timeFormat
+    timezone
+    title
+    url
+  }
+
+  permalinkSettings {
+    categoryBase
+    id
+    structure
+    tagBase
+  }
+
+  readingSettings {
+    id
+    pageForPosts
+    pageOnFront
+    postsPerPage
+    showOnFront
+  }
+
+  wpGatsby {
+    arePrettyPermalinksEnabled
+    isPreviewFrontendOnline
+  }
+
+  writingSettings {
+    defaultCategory
+    defaultPostFormat
+    id
+    useSmilies
+  }
+}

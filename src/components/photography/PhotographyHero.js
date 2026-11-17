@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { Link } from "gatsby";
 
-const PhotographyHero = () => {
+const PhotographyHero = ({ heading, text1, text2, videoUrl }) => {
   const videoRef = useRef(null);
   const [playing, setPlaying] = useState(false);
 
@@ -36,12 +36,12 @@ const PhotographyHero = () => {
             style={{
               fontFamily: "Inter, sans-serif",
               fontWeight: 800,
-              fontSize: "clamp(42px, 8vw, 80px)", // Adjusted for mobile
+              fontSize: "clamp(42px, 8vw, 80px)",
               lineHeight: "1.05",
               letterSpacing: "-0.05em"
             }}
           >
-            Photography<br className="block md:hidden" /> Services
+            {heading || "Photography Services"}
           </h1>
           <p 
             className="text-white text-[15px] md:text-[20px] lg:text-[28px]"
@@ -55,12 +55,12 @@ const PhotographyHero = () => {
           </p>
         </div>
 
-        {/* Video Banner - Removed fixed heights on mobile so it respects the natural 384x231 ratio */}
+        {/* Video Banner */}
         <div className="relative w-full h-auto md:aspect-video md:h-[500px] overflow-hidden mb-2 md:mb-3 bg-black/10">
           <video
             ref={videoRef}
             className="w-full h-auto md:h-full object-cover cursor-pointer"
-            src="/videos/pv1.mp4" 
+            src={videoUrl || "/videos/pv1.mp4"}
             loop
             playsInline
             onClick={togglePlay}
@@ -103,10 +103,7 @@ const PhotographyHero = () => {
                 letterSpacing: "-0.02em"
               }}
             >
-              If you're looking for expert photography services, you've come to{" "}
-              <span className="bg-[#FCBE17] text-black px-1.5 py-0.5 inline-block">
-                the right place.
-              </span>
+              {text1 || "If you're looking for expert photography services, you've come to the right place."}
             </h2>
           </div>
           
@@ -121,8 +118,7 @@ const PhotographyHero = () => {
                 letterSpacing: "-0.02em"
               }}
             >
-              We put quality and creativity at the heart of what we do, and can work with you to edit, model, make-up artists and more to complete the picture. <br /><br />
-              It really is the full package.
+              {text2 || "We put quality and creativity at the heart of what we do, and can work with you to edit, model, make-up artists and more to complete the picture. It really is the full package."}
             </p>
             
             <Link 

@@ -27,34 +27,36 @@ const QuoteIcon = ({ className = "" }) => (
   </svg>
 );
 
-const PhotographyTestimonialsHero = () => {
+const PhotographyTestimonialsHero = ({
+  heroTitle = "Photography Testimonials",
+  heroDescription1 = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum luctus velit sem, vitae mollis dolor ultricies nec. Praesent odio mi, commodo accumsan libero vitae, finibus rhoncus mauris. Praesent non libero mattis, vulputate diam sed, convallis nunc. Fusce augue tortor, aliquam vel molestie volutpat, tincidunt at justo. Pellentesque lectus nunc, varius id posuere sit amet, finibus vitae est. Morbi venenatis ac nunc vulputate dignissim. Aliquam et volutpat sem. Sed ullamcorper suscipit viverra. Mauris auctor augue fringilla turpis aliquet commodo. Curabitur nunc augue, faucibus non bibendum sit amet, sagittis ut neque. Vivamus ac felis vel eros accumsan congue.",
+  heroDescription2 = "Nunc eu maximus purus. Nunc posuere aliquet aliquam. Aenean mauris nunc, mollis ut ornare vitae, venenatis fermentum purus. Nullam leo tortor, vestibulum vitae felis nec, aliquam feugiat nibh. Donec turpis arcu, pretium in blandit vel, mattis a enim. Aenean vestibulum urna eget efficitur luctus. Etiam sodales fringilla nisl non posuere. Duis posuere venenatis turpis, a pharetra purus vehicula a. Quisque eu vestibulum lorem, id interdum eros. In tempor vestibulum consequat. Aliquam sodales eu sapien nec consectetur. Etiam pulvinar scelerisque ullamcorper.",
+  testimonials = {},
+}) => {
   const [items, setItems] = useState([
     {
       id: 1,
-      name: "Client Name 1",
-      text: "Fun, innovative and unflappable. Pocket Creatives are great to work with – whether it's finding the perfect lighting for a trifle to capturing GoPro footage on a whisk, they always approach every situation with a steady yet game-changing attitude.",
+      name: testimonials?.card1Name || "Client Name 1",
+      text: testimonials?.card1Text || "Fun, innovative and unflappable. Pocket Creatives are great to work with – whether it's finding the perfect lighting for a trifle to capturing GoPro footage on a whisk, they always approach every situation with a steady yet game-changing attitude.",
+      logo: testimonials?.card1Logo || null,
     },
     {
       id: 2,
-      name: "Client Name 2",
-      text: "Fun, innovative and unflappable. Pocket Creatives are great to work with – whether it's finding the perfect lighting for a trifle to capturing GoPro footage on a whisk, they always approach every situation with a steady yet game-changing attitude. I see the whole team as trusted creative partners to make great content together.",
+      name: testimonials?.card2Name || "Client Name 2",
+      text: testimonials?.card2Text || "Fun, innovative and unflappable. Pocket Creatives are great to work with – whether it's finding the perfect lighting for a trifle to capturing GoPro footage on a whisk, they always approach every situation with a steady yet game-changing attitude. I see the whole team as trusted creative partners to make great content together.",
+      logo: testimonials?.card2Logo || null,
     },
     {
       id: 3,
-      name: "Client Name 3",
-      text: "Fun, innovative and unflappable. Pocket Creatives are great to work with – whether it's finding the perfect lighting for a trifle to capturing GoPro footage on a whisk, they always approach every situation with a steady yet game-changing attitude.",
+      name: testimonials?.card3Name || "Client Name 3",
+      text: testimonials?.card3Text || "Fun, innovative and unflappable. Pocket Creatives are great to work with – whether it's finding the perfect lighting for a trifle to capturing GoPro footage on a whisk, they always approach every situation with a steady yet game-changing attitude.",
+      logo: testimonials?.card3Logo || null,
     },
   ]);
 
   const [descItems] = useState([
-    {
-      id: 1,
-      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum luctus velit sem, vitae mollis dolor ultricies nec. Praesent odio mi, commodo accumsan libero vitae, finibus rhoncus mauris. Praesent non libero mattis, vulputate diam sed, convallis nunc. Fusce augue tortor, aliquam vel molestie volutpat, tincidunt at justo. Pellentesque lectus nunc, varius id posuere sit amet, finibus vitae est. Morbi venenatis ac nunc vulputate dignissim. Aliquam et volutpat sem. Sed ullamcorper suscipit viverra. Mauris auctor augue fringilla turpis aliquet commodo. Curabitur nunc augue, faucibus non bibendum sit amet, sagittis ut neque. Vivamus ac felis vel eros accumsan congue.",
-    },
-    {
-      id: 2,
-      text: "Nunc eu maximus purus. Nunc posuere aliquet aliquam. Aenean mauris nunc, mollis ut ornare vitae, venenatis fermentum purus. Nullam leo tortor, vestibulum vitae felis nec, aliquam feugiat nibh. Donec turpis arcu, pretium in blandit vel, mattis a enim. Aenean vestibulum urna eget efficitur luctus. Etiam sodales fringilla nisl non posuere. Duis posuere venenatis turpis, a pharetra purus vehicula a. Quisque eu vestibulum lorem, id interdum eros. In tempor vestibulum consequat. Aliquam sodales eu sapien nec consectetur. Etiam pulvinar scelerisque ullamcorper.",
-    },
+    { id: 1, text: heroDescription1 },
+    { id: 2, text: heroDescription2 },
   ]);
 
   const [activeMobileIndex, setActiveMobileIndex] = useState(0);
@@ -149,7 +151,7 @@ const PhotographyTestimonialsHero = () => {
   };
 
   return (
-    <section 
+    <section
       className="relative w-full bg-[#EAEAEA] min-h-screen pb-36 overflow-hidden flex flex-col items-center select-none"
       style={{ paddingTop: "150px" }}
     >
@@ -165,7 +167,7 @@ const PhotographyTestimonialsHero = () => {
             letterSpacing: "-0.05em",
           }}
         >
-          Photography Testimonials
+          {heroTitle}
         </h1>
 
         {/* ============================================================ */}
@@ -216,7 +218,7 @@ const PhotographyTestimonialsHero = () => {
         {/* TESTIMONIAL CAROUSEL                                          */}
         {/* ============================================================ */}
 
-        {/* MOBILE CAROUSEL — Layout matched to VideoTestimonialsHero */}
+        {/* MOBILE CAROUSEL */}
         <div
           className="flex lg:hidden w-full overflow-x-auto snap-x snap-mandatory scrollbar-hide relative h-[460px] pt-4 pb-20 mb-12 px-6 gap-4 -mx-6"
           style={{ width: "calc(100% + 48px)" }}
@@ -264,12 +266,20 @@ const PhotographyTestimonialsHero = () => {
                   </div>
                 </div>
 
-                {/* Dynamically displays logo/photo on whichever card is currently active/centered */}
+                {/* Mobile logo badge — shows on active/centered card */}
                 {isCenterMobile && (
-                  <div className="absolute -bottom-[50px] left-1/2 -translate-x-1/2 w-[100px] h-[100px] bg-[#D9D9D9] rounded-full flex items-center justify-center shadow-md border-4 border-[#EAEAEA] z-30">
-                    <span className="text-black text-[10px] font-medium text-center px-1">
-                      [company logo/photo]
-                    </span>
+                  <div className="absolute -bottom-[50px] left-1/2 -translate-x-1/2 w-[100px] h-[100px] bg-[#D9D9D9] rounded-full flex items-center justify-center shadow-md border-4 border-[#EAEAEA] z-30 overflow-hidden">
+                    {item.logo ? (
+                      <img
+                        src={item.logo}
+                        alt={item.name}
+                        className="w-full h-full object-contain p-2"
+                      />
+                    ) : (
+                      <span className="text-black text-[10px] font-medium text-center px-1">
+                        [company logo/photo]
+                      </span>
+                    )}
                   </div>
                 )}
               </div>
@@ -353,11 +363,20 @@ const PhotographyTestimonialsHero = () => {
                   </div>
                 </div>
 
+                {/* Desktop logo badge — shows on center card */}
                 {isCenter && (
-                  <div className="absolute -bottom-[75px] left-1/2 -translate-x-1/2 w-[160px] h-[160px] bg-[#D9D9D9] rounded-full flex items-center justify-center shadow-lg border-4 border-[#EAEAEA] z-30">
-                    <span className="text-black text-xs font-medium">
-                      [company logo/photo]
-                    </span>
+                  <div className="absolute -bottom-[75px] left-1/2 -translate-x-1/2 w-[160px] h-[160px] bg-[#D9D9D9] rounded-full flex items-center justify-center shadow-lg border-4 border-[#EAEAEA] z-30 overflow-hidden">
+                    {item.logo ? (
+                      <img
+                        src={item.logo}
+                        alt={item.name}
+                        className="w-full h-full object-contain p-3"
+                      />
+                    ) : (
+                      <span className="text-black text-xs font-medium">
+                        [company logo/photo]
+                      </span>
+                    )}
                   </div>
                 )}
               </div>

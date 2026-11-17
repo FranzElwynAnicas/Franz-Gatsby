@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 
-const CoursesHero = () => {
+const CoursesHero = ({ p1, p2, p3, videoUrl }) => {
   const videoRef = useRef(null);
   const [playing, setPlaying] = useState(false);
 
@@ -24,7 +24,7 @@ const CoursesHero = () => {
   return (
     <section className="w-full bg-[#F7F7F7] pt-32 pb-16 lg:pb-24 xl:pt-48 px-6 md:px-12 flex justify-center overflow-hidden">
       <div className="w-full max-w-[1400px] flex flex-col">
-        {/* HEADING */}
+        {/* HEADING (Keep as is, complex styling) */}
         <h1
           className="mb-8 lg:mb-12 xl:mb-16 text-[40px] xl:text-[80px] max-w-[1050px] xl:max-w-[1400px]"
           style={{
@@ -74,9 +74,10 @@ const CoursesHero = () => {
           </span>
         </h1>
 
-        {/* Content Area — stacked below lg, two-column from lg up */}
+        {/* Content Area */}
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_598px] gap-10 lg:gap-16 xl:gap-20 items-start">
-          {/* Text Paragraphs — black until xl, #526E87 from xl up */}
+          
+          {/* DYNAMIC PARAGRAPHS */}
           <div
             className="space-y-6 max-w-[700px] order-2 lg:order-1 text-black xl:text-[#526E87]"
             style={{
@@ -88,22 +89,13 @@ const CoursesHero = () => {
             }}
           >
             <p>
-              The creative industries are more popular than ever. More people
-              are empowered to shoot and edit their own material, and the number
-              of content creators, photographers and videographers increase
-              yearly.
+              {p1 || "The creative industries are more popular than ever. More people are empowered to shoot and edit their own material, and the number of content creators, photographers and videographers increase yearly."}
             </p>
             <p>
-              At Pocket, we have a wealth of skills and experience to share, and
-              are offering a new range of 1:1 bespoke in-person training courses
-              from our London studio. We'll build your perfect one day course,
-              covering everything you need for video production, photography or
-              video editing. With the massive number of online and remote
-              courses out there, these offer a definite step-up.
+              {p2 || "At Pocket, we have a wealth of skills and experience to share, and are offering a new range of 1:1 bespoke in-person training courses from our London studio. We'll build your perfect one day course, covering everything you need for video production, photography or video editing. With the massive number of online and remote courses out there, these offer a definite step-up."}
             </p>
             <p>
-              How can we help with the first, or the next steps of your creative
-              journey?
+              {p3 || "How can we help with the first, or the next steps of your creative journey?"}
             </p>
           </div>
 
@@ -113,7 +105,7 @@ const CoursesHero = () => {
               <video
                 ref={videoRef}
                 className="w-full h-full object-cover cursor-pointer"
-                src="/videos/hero.mp4"
+                src={videoUrl || "/videos/hero.mp4"}
                 loop
                 playsInline
                 onClick={togglePlay}

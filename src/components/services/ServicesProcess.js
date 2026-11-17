@@ -1,37 +1,15 @@
 import * as React from "react";
 import { useState, useRef } from "react";
-import { GatsbyImage, getImage } from "gatsby-plugin-image";
-import { graphql, useStaticQuery } from "gatsby";
+
+import preProdFallback from "../../images/pre-production.png";
+import prodFallback from "../../images/camera.png";
+import postProdFallback from "../../images/post-production.png";
 
 const ServicesProcess = ({ 
-  p1Title, p1Subtitle, p1Text,
-  p2Title, p2Subtitle, p2Text,
-  p3Title, p3Subtitle, p3Text 
+  p1Title, p1Subtitle, p1Text, p1Image,
+  p2Title, p2Subtitle, p2Text, p2Image,
+  p3Title, p3Subtitle, p3Text, p3Image
 }) => {
-  const data = useStaticQuery(graphql`
-    query ServicesProcessImagesQuery {
-      preProdImg: file(relativePath: { eq: "pre-production.png" }) {
-        childImageSharp {
-          gatsbyImageData(layout: CONSTRAINED, width: 1147, height: 528, placeholder: BLURRED)
-        }
-      }
-      prodImg: file(relativePath: { eq: "camera.png" }) {
-        childImageSharp {
-          gatsbyImageData(layout: CONSTRAINED, width: 1147, height: 528, placeholder: BLURRED)
-        }
-      }
-      postProdImg: file(relativePath: { eq: "post-production.png" }) {
-        childImageSharp {
-          gatsbyImageData(layout: CONSTRAINED, width: 1147, height: 528, placeholder: BLURRED)
-        }
-      }
-    }
-  `);
-
-  const preProdImage = getImage(data.preProdImg);
-  const prodImage = getImage(data.prodImg);
-  const postProdImage = getImage(data.postProdImg);
-
   // Mobile Carousel State
   const [slideIndex, setSlideIndex] = useState(0);
   const dragStartX = useRef(null);
@@ -66,7 +44,7 @@ const ServicesProcess = ({
     dragStartX.current = null;
   };
 
-  // Reusable typographic components (Black on Mobile, #526E87 on Desktop)
+  // Reusable typographic components
   const StepTitle = ({ children }) => (
     <h3 
       className="font-extrabold mb-3 text-black lg:text-[#526E87]"
@@ -94,27 +72,27 @@ const ServicesProcess = ({
     </p>
   );
 
-  // Dynamic steps array using the props from WordPress
+  // Dynamic steps array — ACF image URL or local fallback
   const steps = [
     {
       title: p1Title || "Pre-production",
       subtitle: p1Subtitle || "Meeting & Planning",
       text: p1Text || "Lorem ipsum dolor sit amet consectetur. Morbi mi elit vulputate aliquet amet. Consectetur imperdiet ac tortor urna. Amet convallis cras amet tortor massa odio consectetur. Nunc egestas euismod odio ullamcorper. Risus pharetra massa quam tincidunt odio senectus nunc pulvinar nisl. Commodo mattis quis mauris libero aliquet nunc quis aliquam. Ultricies.",
-      image: preProdImage,
+      image: p1Image || preProdFallback,
       alt: "Pre-production planning",
     },
     {
       title: p2Title || "Production",
       subtitle: p2Subtitle || "Lights, Camera, Action",
       text: p2Text || "Lorem ipsum dolor sit amet consectetur. Morbi mi elit vulputate aliquet amet. Consectetur imperdiet ac tortor urna. Amet convallis cras amet tortor massa odio consectetur. Nunc egestas euismod odio ullamcorper. Risus pharetra massa quam tincidunt odio senectus nunc pulvinar nisl. Commodo mattis quis mauris libero aliquet nunc quis aliquam. Ultricies.",
-      image: prodImage,
+      image: p2Image || prodFallback,
       alt: "Production camera setup",
     },
     {
       title: p3Title || "Post-production",
       subtitle: p3Subtitle || "Review & Edit",
       text: p3Text || "Lorem ipsum dolor sit amet consectetur. Morbi mi elit vulputate aliquet amet. Consectetur imperdiet ac tortor urna. Amet convallis cras amet tortor massa odio consectetur. Nunc egestas euismod odio ullamcorper. Risus pharetra massa quam tincidunt odio senectus nunc pulvinar nisl. Commodo mattis quis mauris libero aliquet nunc quis aliquam. Ultricies.",
-      image: postProdImage,
+      image: p3Image || postProdFallback,
       alt: "Post-production editing",
     }
   ];
@@ -133,9 +111,7 @@ const ServicesProcess = ({
         </h2>
       </div>
 
-      {/* ============================================================ */}
-      {/* MOBILE — Swipeable Carousel                                    */}
-      {/* ============================================================ */}
+      {/* MOBILE — Swipeable Carousel */}
       <div className="lg:hidden">
         <div
           className="relative overflow-hidden"
@@ -170,13 +146,11 @@ const ServicesProcess = ({
 
               const ImageContent = (
                 <div className="w-full">
-                  {step.image && (
-                    <GatsbyImage
-                      image={step.image}
-                      alt={step.alt}
-                      className="w-full h-[200px] object-cover"
-                    />
-                  )}
+                  <img
+                    src={step.image}
+                    alt={step.alt}
+                    className="w-full h-[200px] object-cover"
+                  />
                 </div>
               );
 
@@ -204,12 +178,10 @@ const ServicesProcess = ({
         </div>
       </div>
 
-      {/* ============================================================ */}
-      {/* DESKTOP — Fluid Edge-to-Edge Layout                            */}
-      {/* ============================================================ */}
+      {/* DESKTOP — Fluid Edge-to-Edge Layout */}
       <div className="hidden lg:block w-full">
         
-        {/* Row 1: Pre-production Text & Pre-production Image (Right) */}
+        {/* Row 1 */}
         <div className="flex items-center mb-24 w-full">
           <div className="w-[40%] flex justify-end pr-12 xl:pr-24 pl-6">
             <div className="max-w-[450px] w-full">
@@ -219,26 +191,22 @@ const ServicesProcess = ({
             </div>
           </div>
           <div className="w-[60%] flex justify-start ml-auto">
-            {steps[0].image && (
-              <GatsbyImage
-                image={steps[0].image}
-                alt={steps[0].alt}
-                className="w-[calc(50vw+300px)] h-[528px] object-cover max-w-full rounded-r-sm" 
-              />
-            )}
+            <img
+              src={steps[0].image}
+              alt={steps[0].alt}
+              className="w-[calc(50vw+300px)] h-[528px] object-cover max-w-full rounded-r-sm"
+            />
           </div>
         </div>
 
-        {/* Row 2: Camera Image (Left) & Production Text */}
+        {/* Row 2 */}
         <div className="flex items-center mb-24 w-full">
           <div className="w-[60%] flex justify-end mr-auto">
-            {steps[1].image && (
-              <GatsbyImage
-                image={steps[1].image}
-                alt={steps[1].alt}
-                className="w-[calc(50vw+300px)] h-[528px] object-cover max-w-full rounded-l-sm"
-              />
-            )}
+            <img
+              src={steps[1].image}
+              alt={steps[1].alt}
+              className="w-[calc(50vw+300px)] h-[528px] object-cover max-w-full rounded-l-sm"
+            />
           </div>
           <div className="w-[40%] flex justify-start pl-12 xl:pl-24 pr-6">
             <div className="max-w-[450px] w-full">
@@ -249,7 +217,7 @@ const ServicesProcess = ({
           </div>
         </div>
 
-        {/* Row 3: Post-production Text & Post-production Image (Right) */}
+        {/* Row 3 */}
         <div className="flex items-center w-full">
           <div className="w-[40%] flex justify-end pr-12 xl:pr-24 pl-6">
             <div className="max-w-[450px] w-full">
@@ -259,13 +227,11 @@ const ServicesProcess = ({
             </div>
           </div>
           <div className="w-[60%] flex justify-start ml-auto">
-            {steps[2].image && (
-              <GatsbyImage
-                image={steps[2].image}
-                alt={steps[2].alt}
-                className="w-[calc(50vw+300px)] h-[528px] object-cover max-w-full rounded-r-sm"
-              />
-            )}
+            <img
+              src={steps[2].image}
+              alt={steps[2].alt}
+              className="w-[calc(50vw+300px)] h-[528px] object-cover max-w-full rounded-r-sm"
+            />
           </div>
         </div>
 

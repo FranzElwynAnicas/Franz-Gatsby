@@ -23,20 +23,13 @@ module.exports = {
     {
       resolve: "gatsby-source-wordpress",
       options: {
-        url: "https://dev-franz-wordpress-cms.pantheonsite.io/graphql",
-        
-        // 👇 Stops Gatsby from trying to download images (Pantheon blocks them with 403)
-        type: {
-          MediaItem: {
-            createFileNodes: false,
+        url: "https://wp.anicasfranz.shop/graphql",
+        debug: {
+          graphql: {
+            writeQueriesToDisk: true,
           },
         },
-        
-        // 👇 Protects against images embedded inside blog post content
-        html: {
-          createStaticFiles: false,
-        },
       },
-    },
+    }
   ],
 };

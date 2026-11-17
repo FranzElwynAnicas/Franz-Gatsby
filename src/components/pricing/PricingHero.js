@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 
-const PricingHero = ({ topText, title, p1, p2 }) => {
+const PricingHero = ({ topText, title, p1, p2, videoUrl }) => {
   const videoRef = useRef(null);
   const [isMuted, setIsMuted] = useState(true);
 
@@ -102,7 +102,7 @@ const PricingHero = ({ topText, title, p1, p2 }) => {
             <video
               ref={videoRef}
               className="w-full h-full object-cover"
-              src="/videos/hero.mp4"
+              src={videoUrl || "/videos/hero.mp4"}
               autoPlay
               muted={isMuted}
               loop

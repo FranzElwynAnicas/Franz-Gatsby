@@ -19,7 +19,7 @@ const staticImages = [
   img7, img8, img9, img10, img1, img2,
 ];
 
-const tiles = [
+const fallbackTiles = [
   { id: 1,  label: "Client 1", isHoverCycle: true },
   { id: 2,  label: "Client 2",  src: staticImages[0] },
   { id: 3,  label: "Client 3",  src: staticImages[1] },
@@ -59,7 +59,6 @@ const HoverCycleTile = ({ images, label, onOpen }) => {
   }, []);
 
   return (
-    // Changed to w-full on mobile, fixed 185px on desktop
     <div className="w-full md:w-[185px] shrink-0">
       <button
         type="button"
@@ -165,8 +164,20 @@ const Lightbox = ({ item, onClose }) => {
   );
 };
 
-const WorksBeautyPhotography = ({ photoGridHeading }) => {
+const WorksBeautyPhotography = ({ photoGridHeading, photoItems }) => {
   const [activeItem, setActiveItem] = useState(null);
+
+  // Use ACF photoItems if they have any image, else fallback
+  const hasAcf = photoItems?.some((p) => p.image);
+  const tiles = hasAcf
+    ? photoItems
+        .filter((p) => p.image)
+        .map((p, idx) => ({
+          id: idx + 1,
+          label: p.label || `Client ${idx + 1}`,
+          src: p.image,
+        }))
+    : fallbackTiles;
 
   return (
     <section
@@ -174,10 +185,8 @@ const WorksBeautyPhotography = ({ photoGridHeading }) => {
       className="relative w-full bg-pocketWhite overflow-hidden"
       style={{ scrollMarginTop: "140px" }}
     >
-      {/* Changed massive left padding to px-6 on mobile */}
       <div className="px-6 md:pl-[14.4%] md:pr-[5%] pt-16 md:pt-[260px] pb-16 md:pb-24">
         
-        {/* Big "Photography ↓" heading */}
         <h2
           className="font-extrabold tracking-[-0.05em] mb-10 md:mb-20 text-5xl md:text-[clamp(64px,6.25vw,120px)]"
           style={{
@@ -188,7 +197,6 @@ const WorksBeautyPhotography = ({ photoGridHeading }) => {
           Photography ↓
         </h2>
 
-        {/* Sub-header row */}
         <div className="flex flex-col md:flex-row md:items-start justify-between mb-6 md:mb-10 gap-3 md:gap-0">
           <h3
             className="font-extrabold tracking-[-0.05em] text-3xl md:text-[40px]"
@@ -205,48 +213,42 @@ const WorksBeautyPhotography = ({ photoGridHeading }) => {
           </p>
         </div>
 
-        {/* Tiles — 
-            Mobile: CSS Grid (2 cols) 
-            Desktop: Flex layout (matching original pairs) 
-        */}
         <div className="w-full">
-          {/* Mobile Grid Layout (Visible only on small screens) */}
+          {/* Mobile Grid Layout */}
           <div className="grid grid-cols-2 gap-x-4 gap-y-8 md:hidden">
             {tiles.map((tile) => (
               <TileRenderer key={tile.id} tile={tile} onOpen={setActiveItem} />
             ))}
           </div>
 
-          {/* Desktop Flex Layout (Hidden on mobile, exact replica of original) */}
+          {/* Desktop Flex Layout — fixed row positions, safe if fewer tiles */}
           <div className="hidden md:block">
-            {/* Row 1 */}
             <div className="flex" style={{ marginBottom: "40px" }}>
-              <TileRenderer tile={tiles[0]} onOpen={setActiveItem} />
-              <div style={{ width: "20px" }} />
-              <TileRenderer tile={tiles[1]} onOpen={setActiveItem} />
-              <div style={{ width: "98px" }} />
-              <TileRenderer tile={tiles[2]} onOpen={setActiveItem} />
-              <div style={{ width: "20px" }} />
-              <TileRenderer tile={tiles[3]} onOpen={setActiveItem} />
-              <div style={{ width: "98px" }} />
-              <TileRenderer tile={tiles[4]} onOpen={setActiveItem} />
-              <div style={{ width: "20px" }} />
-              <TileRenderer tile={tiles[5]} onOpen={setActiveItem} />
+              {tiles[0] && <TileRenderer tile={tiles[0]} onOpen={setActiveItem} />}
+              {tiles[0] && tiles[1] && <div style={{ width: "20px" }} />}
+              {tiles[1] && <TileRenderer tile={tiles[1]} onOpen={setActiveItem} />}
+              {tiles[1] && tiles[2] && <div style={{ width: "98px" }} />}
+              {tiles[2] && <TileRenderer tile={tiles[2]} onOpen={setActiveItem} />}
+              {tiles[2] && tiles[3] && <div style={{ width: "20px" }} />}
+              {tiles[3] && <TileRenderer tile={tiles[3]} onOpen={setActiveItem} />}
+              {tiles[3] && tiles[4] && <div style={{ width: "98px" }} />}
+              {tiles[4] && <TileRenderer tile={tiles[4]} onOpen={setActiveItem} />}
+              {tiles[4] && tiles[5] && <div style={{ width: "20px" }} />}
+              {tiles[5] && <TileRenderer tile={tiles[5]} onOpen={setActiveItem} />}
             </div>
 
-            {/* Row 2 */}
             <div className="flex">
-              <TileRenderer tile={tiles[6]}  onOpen={setActiveItem} />
-              <div style={{ width: "20px" }} />
-              <TileRenderer tile={tiles[7]}  onOpen={setActiveItem} />
-              <div style={{ width: "98px" }} />
-              <TileRenderer tile={tiles[8]}  onOpen={setActiveItem} />
-              <div style={{ width: "20px" }} />
-              <TileRenderer tile={tiles[9]}  onOpen={setActiveItem} />
-              <div style={{ width: "98px" }} />
-              <TileRenderer tile={tiles[10]} onOpen={setActiveItem} />
-              <div style={{ width: "20px" }} />
-              <TileRenderer tile={tiles[11]} onOpen={setActiveItem} />
+              {tiles[6] && <TileRenderer tile={tiles[6]} onOpen={setActiveItem} />}
+              {tiles[6] && tiles[7] && <div style={{ width: "20px" }} />}
+              {tiles[7] && <TileRenderer tile={tiles[7]} onOpen={setActiveItem} />}
+              {tiles[7] && tiles[8] && <div style={{ width: "98px" }} />}
+              {tiles[8] && <TileRenderer tile={tiles[8]} onOpen={setActiveItem} />}
+              {tiles[8] && tiles[9] && <div style={{ width: "20px" }} />}
+              {tiles[9] && <TileRenderer tile={tiles[9]} onOpen={setActiveItem} />}
+              {tiles[9] && tiles[10] && <div style={{ width: "98px" }} />}
+              {tiles[10] && <TileRenderer tile={tiles[10]} onOpen={setActiveItem} />}
+              {tiles[10] && tiles[11] && <div style={{ width: "20px" }} />}
+              {tiles[11] && <TileRenderer tile={tiles[11]} onOpen={setActiveItem} />}
             </div>
           </div>
         </div>

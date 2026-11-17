@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 
-const categories = [
+// Hardcoded categories fallback
+const defaultCategories = [
   { label: "Beauty", value: "Beauty" },
   { label: "Company", value: "Company" },
   { label: "Food", value: "Food" },
@@ -9,10 +10,11 @@ const categories = [
   { label: "Jewellery", value: "Jewellery" },
 ];
 
-const dummyDescription = "Our professional video production services are used to promote beauty and cosmetics products. We can do this by creating brand films, delivering lifestyle content, covering cosmetic product launches and beauty events, and more!";
+// Hardcoded dummy description fallback
+const defaultDescription = "Our professional video production services are used to promote beauty and cosmetics products. We can do this by creating brand films, delivering lifestyle content, covering cosmetic product launches and beauty events, and more!";
 
-// Carousel data mapped to your specific videos
-const portfolioData = [
+// Hardcoded fallback carousel data (used when ACF is empty)
+const fallbackPortfolioData = [
   {
     id: 1,
     title: "James Read Tan",
@@ -35,15 +37,26 @@ const portfolioData = [
   },
 ];
 
-const VideographyPortfolio = () => {
+const VideographyPortfolio = ({ 
+  heading, 
+  description, 
+  portfolioData: acfPortfolioData,
+  categories = defaultCategories 
+}) => {
+  // Use ACF portfolio if any item has content, else fallback
+  const hasAcfData = acfPortfolioData?.some((p) => p.title || p.videoSrc);
+  const portfolioData = hasAcfData
+    ? acfPortfolioData.filter((p) => p.title || p.videoSrc)
+    : fallbackPortfolioData;
+
   const videoRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
-  const [activeTab, setActiveTab] = useState("Beauty");
+  const [activeTab, setActiveTab] = useState(categories[0]?.value || "Beauty");
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  const currentVideo = portfolioData[currentIndex];
+  const currentVideo = portfolioData[currentIndex] || portfolioData[0];
 
   const togglePlay = () => {
     if (videoRef.current) {
@@ -77,7 +90,7 @@ const VideographyPortfolio = () => {
     <section className="w-full bg-[#179CBD] py-16 md:py-24 px-4 md:px-8 flex justify-center overflow-hidden">
       <div className="w-full max-w-[1440px] flex flex-col items-center">
         
-        {/* Top Heading */}
+        {/* Top Heading (Dynamic) */}
         <h2 
           className="text-white text-center mb-8 max-w-[1000px]"
           style={{
@@ -88,7 +101,7 @@ const VideographyPortfolio = () => {
             letterSpacing: "-0.05em",
           }}
         >
-          A Snapshot of our Video Production Portfolio
+          {heading || "A Snapshot of our Video Production Portfolio"}
         </h2>
 
         {/* =========================================
@@ -170,7 +183,7 @@ const VideographyPortfolio = () => {
           {/* Video Area */}
           <div className="relative w-full aspect-[4/3] md:aspect-video md:h-[680px] bg-black">
             <video
-              key={currentVideo.videoSrc} // Forces re-render when video changes
+              key={currentVideo.videoSrc} 
               ref={videoRef}
               src={currentVideo.videoSrc}
               className="w-full h-full object-cover"
@@ -252,7 +265,7 @@ const VideographyPortfolio = () => {
               </h3>
             </div>
 
-            {/* Right: Description Box */}
+            {/* Right: Description Box (Dynamic ACF Description) */}
             <div className="w-full min-[1350px]:w-[65%] p-6 md:p-12 bg-[#179CBD] flex flex-col justify-center items-center min-[1350px]:items-start text-center min-[1350px]:text-left">
               <h4 
                 className="text-white mb-2"
@@ -266,7 +279,7 @@ const VideographyPortfolio = () => {
               >
                 Beauty and Cosmetics Video
               </h4>
-              <p 
+              <div
                 style={{
                   fontFamily: "Inter, sans-serif",
                   fontWeight: 500,
@@ -276,8 +289,12 @@ const VideographyPortfolio = () => {
                   color: "#FFFFFF"
                 }}
               >
-                {dummyDescription}
-              </p>
+                {description ? (
+                   <div dangerouslySetInnerHTML={{ __html: description }} />
+                ) : (
+                   <p>{defaultDescription}</p>
+                )}
+              </div>
             </div>
           </div>
 

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
-const accordionData = [
+// Fallback data — used when ACF is empty
+const fallbackAccordionData = [
   {
     id: "understanding",
     title: (
@@ -69,8 +70,34 @@ const accordionData = [
   },
 ];
 
-const HowWeWorkAccordion = () => {
-  const [openId, setOpenId] = useState("understanding");
+const HowWeWorkAccordion = ({ accordionData: wpData }) => {
+  // Transform ACF data into the shape this component renders.
+  // Falls back per-item: if an ACF item is empty, use the matching fallback.
+  const buildData = () => {
+    if (!wpData || wpData.length === 0) return fallbackAccordionData;
+
+    const hasAnyAcf =
+      wpData.some((item) => item.title || item.content);
+
+    if (!hasAnyAcf) return fallbackAccordionData;
+
+    return wpData.map((item, idx) => ({
+      id: item.id || `item-${idx + 1}`,
+      title: item.title || fallbackAccordionData[idx]?.title,
+      content: item.content ? (
+        <div dangerouslySetInnerHTML={{ __html: item.content }} />
+      ) : (
+        fallbackAccordionData[idx]?.content
+      ),
+    }));
+  };
+
+  const dataToRender = buildData();
+
+  // Initial open: first rendered item's id
+  const [openId, setOpenId] = useState(
+    dataToRender.length > 0 ? dataToRender[0].id : null
+  );
 
   const toggleAccordion = (id) => {
     setOpenId(openId === id ? null : id);
@@ -91,7 +118,7 @@ const HowWeWorkAccordion = () => {
       </div>
 
       <div className="relative z-10 w-full max-w-[1280px] mx-auto px-4 md:px-12 flex flex-col gap-4 md:gap-10">
-        {accordionData.map((item) => {
+        {dataToRender.map((item) => {
           const isOpen = openId === item.id;
 
           return (
@@ -100,7 +127,6 @@ const HowWeWorkAccordion = () => {
               <button
                 onClick={() => toggleAccordion(item.id)}
                 className={`flex items-center justify-between text-left w-full p-4 md:p-0 transition-colors duration-300 ${
-                  /* Mobile: All boxes are yellow. Desktop: Only open box is yellow */
                   isOpen ? "bg-[#FCBE17] text-black" : "bg-[#FCBE17] md:bg-transparent text-black md:text-white"
                 }`}
               >

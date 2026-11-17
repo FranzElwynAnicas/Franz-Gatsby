@@ -33,8 +33,14 @@ const PAGES = [
 ];
 
 const AboutWhoWeWorkWith = ({
-  whoHeading, whoParagraph1, whoParagraph2, whoParagraph3,
-  whoRotatingNames, whoTestimonialsUrl, whoTestimonialsCta,
+  whoHeading,
+  whoParagraph1,
+  whoParagraph2,
+  whoParagraph3Prefix,
+  whoParagraph3Suffix,
+  whoRotatingNames,
+  whoTestimonialsUrl,
+  whoTestimonialsCta,
 }) => {
   const [page, setPage] = useState(0);
   const [nameIndex, setNameIndex] = useState(0);
@@ -61,6 +67,46 @@ const AboutWhoWeWorkWith = ({
   const testimonialsLink = whoTestimonialsUrl || "https://www.pocketcreatives.co.uk/testimonials/";
   const ctaText = whoTestimonialsCta || "View Testimonials";
 
+  // Third paragraph: prefix + rotating badge + suffix.
+  // If both ACF prefix/suffix are empty, use hardcoded defaults.
+  const hasP3 = whoParagraph3Prefix || whoParagraph3Suffix;
+  const p3Prefix = whoParagraph3Prefix || "We're very proud to have worked with known clients such as";
+  const p3Suffix = whoParagraph3Suffix || "and many more emerging names that you'll come to know very soon.";
+
+  // Rotating badge — reused for mobile & desktop with size differences
+  const RotatingBadge = ({ mobile }) => (
+    <span
+      className="inline-flex items-center justify-center align-middle mx-1 bg-pocketYellow text-black"
+      style={
+        mobile
+          ? { minWidth: "140px", height: "26px", borderRadius: "2px", padding: "0 8px" }
+          : { width: "160px", height: "28px", borderRadius: "2px" }
+      }
+    >
+      <span
+        className="font-bold whitespace-nowrap"
+        style={{
+          fontSize: mobile ? "16px" : "18px",
+          letterSpacing: "-0.05em",
+          lineHeight: "1.2",
+          opacity: enterFade ? 0 : 1,
+          transition: enterFade ? "none" : "opacity 2000ms cubic-bezier(0.22, 1, 0.36, 1)",
+        }}
+      >
+        {namesList[nameIndex]}
+      </span>
+    </span>
+  );
+
+  // Third paragraph block — works whether ACF prefix/suffix are set or not
+  const Paragraph3 = ({ mobile }) => (
+    <p>
+      {p3Prefix}{" "}
+      <RotatingBadge mobile={mobile} />{" "}
+      {p3Suffix}
+    </p>
+  );
+
   return (
     <section className="w-full bg-pocketTeal">
       {/* MOBILE & TABLET */}
@@ -70,20 +116,20 @@ const AboutWhoWeWorkWith = ({
         </h2>
 
         <div className="flex flex-col gap-6 text-white text-[16px] md:text-[18px] font-medium leading-[1.4] tracking-[-0.05em]">
-          {whoParagraph1 ? <div className="wordpress-content" dangerouslySetInnerHTML={{ __html: whoParagraph1 }} /> : <p>We have provided video and photography services to a huge variety of clients in our history, from crowdfunders and startups through to more established names and global businesses. We love that mix, and being entrusted with the visuals for clients of any size is extremely satisfying.</p>}
-          {whoParagraph2 ? <div className="wordpress-content" dangerouslySetInnerHTML={{ __html: whoParagraph2 }} /> : <p>We work with most clients directly, and we're also able to provide our services to agencies and other creative companies who don't have access to video and photography services in house.</p>}
-          {whoParagraph3 ? (
-            <div className="wordpress-content" dangerouslySetInnerHTML={{ __html: whoParagraph3 }} />
+          {whoParagraph1 ? (
+            <div className="wordpress-content" dangerouslySetInnerHTML={{ __html: whoParagraph1 }} />
           ) : (
-            <p>
-              We're very proud to have worked with known clients such as{" "}
-              <span className="inline-flex items-center justify-center align-middle mx-1 bg-pocketYellow text-black" style={{ minWidth: "140px", height: "26px", borderRadius: "2px", padding: "0 8px" }}>
-                <span className="font-bold whitespace-nowrap" style={{ fontSize: "16px", letterSpacing: "-0.05em", lineHeight: "1.2", opacity: enterFade ? 0 : 1, transition: enterFade ? "none" : "opacity 2000ms cubic-bezier(0.22, 1, 0.36, 1)" }}>
-                  {namesList[nameIndex]}
-                </span>
-              </span>{" "}
-              and many more emerging names that you'll come to know very soon.
-            </p>
+            <p>We have provided video and photography services to a huge variety of clients in our history, from crowdfunders and startups through to more established names and global businesses. We love that mix, and being entrusted with the visuals for clients of any size is extremely satisfying.</p>
+          )}
+          {whoParagraph2 ? (
+            <div className="wordpress-content" dangerouslySetInnerHTML={{ __html: whoParagraph2 }} />
+          ) : (
+            <p>We work with most clients directly, and we're also able to provide our services to agencies and other creative companies who don't have access to video and photography services in house.</p>
+          )}
+          {hasP3 ? (
+            <Paragraph3 mobile />
+          ) : (
+            <Paragraph3 mobile />
           )}
         </div>
 
@@ -103,21 +149,17 @@ const AboutWhoWeWorkWith = ({
 
           <div className="grid grid-cols-2 gap-10 xl:gap-16 items-start">
             <div className="flex flex-col gap-6 xl:gap-8 text-white text-[18px] xl:text-[20px] font-medium leading-[1.3] xl:leading-[1.2] tracking-[-0.05em]">
-              {whoParagraph1 ? <div className="wordpress-content" dangerouslySetInnerHTML={{ __html: whoParagraph1 }} /> : <p>We have provided video and photography services to a huge variety of clients in our history, from crowdfunders and startups through to more established names and global businesses. We love that mix, and being entrusted with the visuals for clients of any size is extremely satisfying.</p>}
-              {whoParagraph2 ? <div className="wordpress-content" dangerouslySetInnerHTML={{ __html: whoParagraph2 }} /> : <p>We work with most clients directly, and we're also able to provide our services to agencies and other creative companies who don't have access to video and photography services in house.</p>}
-              {whoParagraph3 ? (
-                <div className="wordpress-content" dangerouslySetInnerHTML={{ __html: whoParagraph3 }} />
+              {whoParagraph1 ? (
+                <div className="wordpress-content" dangerouslySetInnerHTML={{ __html: whoParagraph1 }} />
               ) : (
-                <p>
-                  We're very proud to have worked with known clients such as{" "}
-                  <span className="inline-flex items-center justify-center align-middle mx-1 bg-pocketYellow text-black" style={{ width: "160px", height: "28px", borderRadius: "2px" }}>
-                    <span className="font-bold whitespace-nowrap" style={{ fontSize: "18px", letterSpacing: "-0.05em", lineHeight: "1.2", opacity: enterFade ? 0 : 1, transition: enterFade ? "none" : "opacity 2000ms cubic-bezier(0.22, 1, 0.36, 1)" }}>
-                      {namesList[nameIndex]}
-                    </span>
-                  </span>{" "}
-                  and many more emerging names that you'll come to know very soon.
-                </p>
+                <p>We have provided video and photography services to a huge variety of clients in our history, from crowdfunders and startups through to more established names and global businesses. We love that mix, and being entrusted with the visuals for clients of any size is extremely satisfying.</p>
               )}
+              {whoParagraph2 ? (
+                <div className="wordpress-content" dangerouslySetInnerHTML={{ __html: whoParagraph2 }} />
+              ) : (
+                <p>We work with most clients directly, and we're also able to provide our services to agencies and other creative companies who don't have access to video and photography services in house.</p>
+              )}
+              <Paragraph3 />
             </div>
 
             <div className="flex flex-col gap-4">

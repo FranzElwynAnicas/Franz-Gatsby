@@ -1,6 +1,6 @@
 import * as React from "react";
 
-const ContactHero = () => {
+const ContactHero = ({ heading, text1, text2, text3 }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
   };
@@ -21,7 +21,7 @@ const ContactHero = () => {
                 fontSize: "clamp(48px, 5.2vw, 84px)" 
               }}
             >
-              Grab a latte and let's have a chat
+              {heading || "Grab a latte and let's have a chat"}
             </h1>
 
             <div 
@@ -34,9 +34,9 @@ const ContactHero = () => {
                 letterSpacing: "-0.03em"
               }}
             >
-              <p>Want to talk about your new project with our video and photography agency team?</p>
-              <p>We aim to reply within 1 hour during normal working hours, so we can get you that quote and any more information as quickly as possible.</p>
-              <p>We'd love to hear from you!</p>
+              <p>{text1 || "Want to talk about your new project with our video and photography agency team?"}</p>
+              <p>{text2 || "We aim to reply within 1 hour during normal working hours, so we can get you that quote and any more information as quickly as possible."}</p>
+              <p>{text3 || "We'd love to hear from you!"}</p>
             </div>
 
             {/* Mobile Only Button */}
@@ -65,7 +65,7 @@ const ContactHero = () => {
           <div className="hidden lg:block w-full">
             <form onSubmit={handleSubmit} className="w-full flex flex-col">
               
-              {/* Top Row: 3 Inputs - Stacks on lg, becomes 3 cols on xl */}
+              {/* Top Row: 3 Inputs */}
               <div className="grid grid-cols-1 xl:grid-cols-3 gap-4 lg:gap-5 mb-5 w-full">
                 
                 {/* Name Box */}
@@ -77,10 +77,7 @@ const ContactHero = () => {
                     type="text" 
                     placeholder="John Doe" 
                     className="w-full bg-white text-[16px] text-black outline-none focus:ring-2 focus:ring-[#FCBE17] rounded-none"
-                    style={{
-                      height: "60px",
-                      padding: "0 20px"
-                    }}
+                    style={{ height: "60px", padding: "0 20px" }}
                   />
                 </div>
 
@@ -93,10 +90,7 @@ const ContactHero = () => {
                     type="email" 
                     placeholder="johndoe@example.com" 
                     className="w-full bg-white text-[16px] text-black outline-none focus:ring-2 focus:ring-[#FCBE17] rounded-none"
-                    style={{
-                      height: "60px",
-                      padding: "0 20px"
-                    }}
+                    style={{ height: "60px", padding: "0 20px" }}
                   />
                 </div>
 
@@ -108,10 +102,7 @@ const ContactHero = () => {
                   <input 
                     type="tel" 
                     className="w-full bg-white text-[16px] text-black outline-none focus:ring-2 focus:ring-[#FCBE17] rounded-none"
-                    style={{
-                      height: "60px",
-                      padding: "0 20px"
-                    }}
+                    style={{ height: "60px", padding: "0 20px" }}
                   />
                 </div>
 
@@ -124,10 +115,7 @@ const ContactHero = () => {
                 </label>
                 <textarea 
                   className="w-full bg-white text-[16px] text-black outline-none focus:ring-2 focus:ring-[#FCBE17] resize-none rounded-none"
-                  style={{
-                    height: "320px",
-                    padding: "30px"
-                  }}
+                  style={{ height: "320px", padding: "30px" }}
                   defaultValue="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut id elit a lectus dignissim porta at sit amet ipsum. Mauris euismod placerat elementum. Ut scelerisque leo mauris, a lobortis enim aliquam quis. Fusce aliquam ornare pharetra. Curabitur eros ligula, egestas at lacinia vitae, rutrum quis mauris."
                 />
               </div>
@@ -137,10 +125,7 @@ const ContactHero = () => {
                 <button 
                   type="submit"
                   className="bg-[#FCBE17] text-black font-extrabold hover:bg-yellow-500 transition-colors flex items-center justify-center rounded-2xl w-full sm:w-auto"
-                  style={{
-                    minWidth: "188px",
-                    height: "54px"
-                  }}
+                  style={{ minWidth: "188px", height: "54px" }}
                 >
                   Send
                 </button>

@@ -16,12 +16,33 @@ import AboutServices from "../components/about/AboutServices";
 import AboutWorks from "../components/about/AboutWorks";
 import AboutWhyWorkWithUs from "../components/about/AboutWhyWorkWithUs";
 import AboutVideoSection from "../components/about/AboutVideoSection";
-import AboutWhoWeWorkWith from "../components/about/AboutWhoWeWorkWith"; 
+import AboutWhoWeWorkWith from "../components/about/AboutWhoWeWorkWith";
 import AboutOurStory from "../components/about/AboutOurStory";
 
 const AboutPage = ({ data }) => {
   const [isContactOpen, setIsContactOpen] = useState(false);
   const acf = data?.wpPage?.aboutPageContent || {};
+
+  // ---- Services (grouped) ----
+  const videoService = acf.videoservice || {};
+  const photoService = acf.photoService || {};
+
+  // ---- Why Items (grouped) ----
+  const whyItems = acf.whyItems || {};
+
+  // ---- Who Paragraphs (grouped) ----
+  const whoParagraphs = acf.whoparagraphs || {};
+
+  // ---- Works Slides (grouped) → build an array for AboutWorks ----
+  const worksSlidesGroup = acf.worksSlides || {};
+  const worksSlides = [1, 2, 3, 4]
+    .map((n) => ({
+      tag: worksSlidesGroup[`slide${n}Tag`],
+      subtitle: worksSlidesGroup[`slide${n}Subtitle`],
+      description: worksSlidesGroup[`slide${n}Description`],
+      mediaUrl: worksSlidesGroup[`slide${n}Media`]?.node?.mediaItemUrl,
+    }))
+    .filter((s) => s.tag || s.subtitle || s.description || s.mediaUrl);
 
   return (
     <main className="w-full bg-pocketWhite">
@@ -31,7 +52,7 @@ const AboutPage = ({ data }) => {
         heroHeadingText={acf.heroHeading}
         heroColorWord1={acf.heroWord1}
         heroColorWord2={acf.heroWord2}
-        heroVideoUrl={acf.heroVideoUrl}
+        heroVideoUrl={acf.heroVideo?.node?.mediaItemUrl}
         heroBodyCopy={acf.heroBodyCopy}
         heroCtaLabel={acf.heroCtaLabel}
       />
@@ -44,41 +65,45 @@ const AboutPage = ({ data }) => {
       />
 
       <AboutServices
-        videoHeading={acf.servicesVideoHeading}
-        videoBody={acf.servicesVideoBody}
-        videoImage={acf.servicesVideoImage?.node?.sourceUrl}
-        photoHeading={acf.servicesPhotoHeading}
-        photoBody={acf.servicesPhotoBody}
-        photoImage={acf.servicesPhotoImage?.node?.sourceUrl}
+        videoHeading={videoService.servicesVideoHeading}
+        videoBody={videoService.servicesVideoBody}
+        videoImage={videoService.servicesVideoImage?.node?.sourceUrl}
+        photoHeading={photoService.servicesPhotoHeading}
+        photoBody={photoService.servicesPhotoBody}
+        photoImage={photoService.servicesPhotoImage?.node?.sourceUrl}
       />
 
-      <AboutWorks worksHeading={acf.worksHeading} />
+      <AboutWorks
+        worksHeading={acf.worksHeading}
+        slides={worksSlides}
+      />
 
       <AboutWhyWorkWithUs
         whyHeading={acf.whyHeading}
         whyIntroParagraph={acf.whyIntroParagraph}
-        item1Title={acf.item1Title}
-        item1Desc={acf.item1Desc}
-        item2Title={acf.item2Title}
-        item2Desc={acf.item2Desc}
-        item3Title={acf.item3Title}
-        item3Desc={acf.item3Desc}
-        item4Title={acf.item4Title}
-        item4Desc={acf.item4Desc}
-        item5Title={acf.item5Title}
-        item5Desc={acf.item5Desc}
+        item1Title={whyItems.item1Title}
+        item1Desc={whyItems.item1Desc}
+        item2Title={whyItems.item2Title}
+        item2Desc={whyItems.item2Desc}
+        item3Title={whyItems.item3Title}
+        item3Desc={whyItems.item3Desc}
+        item4Title={whyItems.item4Title}
+        item4Desc={whyItems.item4Desc}
+        item5Title={whyItems.item5Title}
+        item5Desc={whyItems.item5Desc}
       />
 
       <AboutVideoSection
         videoSectionHeading={acf.videoSectionHeading}
-        videoSectionVideoUrl={acf.videoSectionVideoUrl}
+        videoSectionVideoUrl={acf.videoSectionVideo?.node?.mediaItemUrl}
       />
 
       <AboutWhoWeWorkWith
         whoHeading={acf.whoHeading}
-        whoParagraph1={acf.whoParagraph1}
-        whoParagraph2={acf.whoParagraph2}
-        whoParagraph3={acf.whoParagraph3}
+        whoParagraph1={whoParagraphs.whoParagraph1}
+        whoParagraph2={whoParagraphs.whoParagraph2}
+        whoParagraph3Prefix={whoParagraphs.whoParagraph3Prefix}
+        whoParagraph3Suffix={whoParagraphs.whoParagraph3Suffix}
         whoRotatingNames={acf.whoRotatingNames}
         whoTestimonialsUrl={acf.whoTestimonialsUrl}
         whoTestimonialsCta={acf.whoTestimonialsCta}
@@ -105,7 +130,7 @@ export const query = graphql`
         heroHeading
         heroWord1
         heroWord2
-        heroVideoUrl
+        heroVideo { node { mediaItemUrl } }
         heroBodyCopy
         heroCtaLabel
 
@@ -115,43 +140,70 @@ export const query = graphql`
         introImage { node { sourceUrl } }
         introBadgeText
 
-        # Services
-        servicesVideoHeading
-        servicesVideoBody
-        servicesVideoImage { node { sourceUrl } }
-        servicesPhotoHeading
-        servicesPhotoBody
-        servicesPhotoImage { node { sourceUrl } }
+        # Services (grouped)
+        videoservice {
+          servicesVideoHeading
+          servicesVideoBody
+          servicesVideoImage { node { sourceUrl } }
+        }
+        photoService {
+          servicesPhotoHeading
+          servicesPhotoBody
+          servicesPhotoImage { node { sourceUrl } }
+        }
 
-        # Works
+        # Works (grouped slides)
         worksHeading
+        worksSlides {
+          slide1Tag
+          slide1Subtitle
+          slide1Description
+          slide1Media { node { mediaItemUrl } }
+          slide2Tag
+          slide2Subtitle
+          slide2Description
+          slide2Media { node { mediaItemUrl } }
+          slide3Tag
+          slide3Subtitle
+          slide3Description
+          slide3Media { node { mediaItemUrl } }
+          slide4Tag
+          slide4Subtitle
+          slide4Description
+          slide4Media { node { mediaItemUrl } }
+        }
 
-        # Why Work With Us
+        # Why Work With Us (grouped items)
         whyHeading
         whyIntroParagraph
-        item1Title
-        item1Desc
-        item2Title
-        item2Desc
-        item3Title
-        item3Desc
-        item4Title
-        item4Desc
-        item5Title
-        item5Desc
+        whyItems {
+          item1Title
+          item1Desc
+          item2Title
+          item2Desc
+          item3Title
+          item3Desc
+          item4Title
+          item4Desc
+          item5Title
+          item5Desc
+        }
 
         # Video Section
         videoSectionHeading
-        videoSectionVideoUrl
+        videoSectionVideo { node { mediaItemUrl } }
 
-        # Who We Work With
+        # Who We Work With (grouped paragraphs)
         whoHeading
-        whoParagraph1
-        whoParagraph2
-        whoParagraph3
         whoRotatingNames
         whoTestimonialsUrl
         whoTestimonialsCta
+        whoparagraphs {
+          whoParagraph1
+          whoParagraph2
+          whoParagraph3Prefix
+          whoParagraph3Suffix
+        }
 
         # Our Story
         storyHeading

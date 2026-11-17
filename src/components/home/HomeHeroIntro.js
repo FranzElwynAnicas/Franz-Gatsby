@@ -3,7 +3,7 @@ import logo from "../../images/logo-pocket-wordmark.png";
 import photographer1 from "../../images/photographer-1.png";
 import photographer2 from "../../images/photographer-2.png";
 
-const HomeHeroIntro = ({ heroTitle }) => {
+const HomeHeroIntro = ({ heroTitle, videoUrl }) => {
   const videoRef = useRef(null);
   const [playing, setPlaying] = useState(false);
 
@@ -44,12 +44,11 @@ const HomeHeroIntro = ({ heroTitle }) => {
         {/* Divider */}
         <div className="border-b border-pocketGrey my-5 md:my-6 w-full"></div>
 
-        {/* Intro text - Now Dynamic from WordPress */}
+        {/* Intro text */}
         <h1 className="text-[28px] md:text-[32px] lg:text-[42px] font-normal leading-[1.3] md:leading-[1.4] tracking-[-0.02em] w-full break-words">
           {heroTitle ? (
             <div dangerouslySetInnerHTML={{ __html: heroTitle }} />
           ) : (
-            // Fallback to your original hardcoded Figma design if WP is empty
             <>
               <span className="block md:inline">
                 <span className="text-pocketBlack font-normal">A</span>{" "}
@@ -58,7 +57,7 @@ const HomeHeroIntro = ({ heroTitle }) => {
               </span>
               <span className="block md:inline">
                 <span className="text-pocketBlack font-bold">Production</span>{" "}
-                <span className="text-pocketBlack font-normal">and</span>{" "}
+                <span className="text-pocketBlack font-normal">and</span>
                 <span className="text-pocketBlack font-bold">Photography</span>
               </span>
               <span className="block md:inline">
@@ -82,7 +81,7 @@ const HomeHeroIntro = ({ heroTitle }) => {
 
         {/* Hero video */}
         <div className="mt-3 w-full aspect-[4/3] md:aspect-[16/9] relative overflow-hidden rounded-[4px] bg-pocketGrey/30">
-          <video ref={videoRef} className="w-full h-full object-cover cursor-pointer" src="/videos/hero.mp4" loop playsInline onClick={togglePlay} />
+          <video ref={videoRef} className="w-full h-full object-cover cursor-pointer" src={videoUrl || "/videos/hero.mp4"} loop playsInline onClick={togglePlay} />
           {!playing && (
             <button onClick={handlePlay} aria-label="Play video" className="absolute inset-0 flex items-center justify-center bg-black/10 hover:bg-black/20 transition-colors">
               <div className="w-16 h-16 md:w-24 md:h-24 bg-pocketTeal rounded-full flex items-center justify-center hover:scale-105 transition-transform">

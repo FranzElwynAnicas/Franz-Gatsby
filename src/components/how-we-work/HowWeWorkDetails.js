@@ -2,11 +2,14 @@ import React from "react";
 import how1Img from "../../images/How1.png";
 import how2Img from "../../images/How2.png";
 
-const HowWeWorkDetails = () => {
+const HowWeWorkDetails = ({
+  d1Title, d1Text1, d1Text2, d1Text3, d1Image,
+  d2Title, d2Text1, d2Text2, d2Image,
+}) => {
   return (
     <section className="relative w-full bg-[#F7F7F7] py-16 md:py-32 overflow-hidden">
       
-      {/* The Exact SVG "2" in the background (Hidden on mobile) */}
+      {/* The Exact SVG "2" in the background (Keep as is) */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[691px] h-[945px] pointer-events-none -z-10 hidden lg:block">
         <svg width="691" height="945" viewBox="0 0 691 945" fill="none" xmlns="http://www.w3.org/2000/svg">
           <mask id="stroke0_3702_4543" maskUnits="userSpaceOnUse" x="-0.21582" y="-0.34082" width="691" height="945" fill="black">
@@ -19,72 +22,28 @@ const HowWeWorkDetails = () => {
 
       <div className="w-full flex flex-col gap-16 md:gap-32">
         
-        {/* =========================================
-            SECTION 1: Yes, you can join us for the shoot!
-        ========================================= */}
+        {/* SECTION 1 */}
         <div className="flex flex-col lg:flex-row items-center w-full">
           
-          {/* Image - Left (Added px-6 for mobile, removed on desktop) */}
           <div className="w-full lg:w-1/2 xl:w-[755px] max-h-[529px] shrink-0 relative z-10 px-6 lg:px-0">
-            <img
-              src={how1Img}
-              alt="Behind the scenes filming"
-              className="w-full h-full lg:h-[529px] object-cover"
-            />
+            <img src={d1Image || how1Img} alt="Behind the scenes filming" className="w-full h-full lg:h-[529px] object-cover" />
           </div>
 
-          {/* Text - Right */}
           <div className="w-full lg:w-1/2 xl:w-auto xl:flex-1 flex justify-center lg:justify-start px-6 md:px-12 lg:pl-12 xl:pl-32 lg:pr-12 mt-8 lg:mt-0">
             <div className="w-full max-w-[780px]">
-              <h2 
-                className="mb-4 md:mb-6 text-black xl:text-[#526E87]"
-                style={{ 
-                  fontFamily: "Inter, sans-serif", 
-                  fontWeight: 800, 
-                  fontSize: "clamp(28px, 3vw, 40px)",
-                  lineHeight: "100%",
-                  letterSpacing: "-0.05em",
-                }}
-              >
-                Yes, you can join us for the shoot!
+              <h2 className="mb-4 md:mb-6 text-black xl:text-[#526E87]" style={{ fontFamily: "Inter, sans-serif", fontWeight: 800, fontSize: "clamp(28px, 3vw, 40px)", lineHeight: "100%", letterSpacing: "-0.05em" }}>
+                {d1Title || "Yes, you can join us for the shoot!"}
               </h2>
               
               <div className="space-y-4 md:space-y-6">
-                <p 
-                  className="text-left lg:text-justify text-black xl:text-[#526E87]"
-                  style={{ 
-                    fontFamily: "Inter, sans-serif", 
-                    fontWeight: 500, 
-                    fontSize: "clamp(16px, 1.5vw, 21px)",
-                    lineHeight: "130%",
-                    letterSpacing: "-0.05em",
-                  }}
-                >
-                  Crazily, we still hear stories about clients being banned from attending shoots when working with some other agencies or production companies. It just doesn't make sense to us. We love having clients with us on set, and here's why... If the shot isn't as you like, you can tell us and we can change it. As simple as it is brilliant! We can avoid all of those difficult conversations in the edit about "wishing that cup was placed just a bit more to the left..." and just fix it there and then.
+                <p className="text-left lg:text-justify text-black xl:text-[#526E87]" style={{ fontFamily: "Inter, sans-serif", fontWeight: 500, fontSize: "clamp(16px, 1.5vw, 21px)", lineHeight: "130%", letterSpacing: "-0.05em" }}>
+                  {d1Text1 || "Crazily, we still hear stories about clients being banned from attending shoots when working with some other agencies or production companies. It just doesn't make sense to us. We love having clients with us on set, and here's why... If the shot isn't as you like, you can tell us and we can change it. As simple as it is brilliant! We can avoid all of those difficult conversations in the edit about 'wishing that cup was placed just a bit more to the left...' and just fix it there and then."}
                 </p>
-                <p 
-                  className="text-left lg:text-justify text-black xl:text-[#526E87]"
-                  style={{ 
-                    fontFamily: "Inter, sans-serif", 
-                    fontWeight: 500, 
-                    fontSize: "clamp(16px, 1.5vw, 21px)",
-                    lineHeight: "130%",
-                    letterSpacing: "-0.05em",
-                  }}
-                >
-                  The beauty of anything creative is that there's no right and wrong, just loads of grey between the black and white. Whether something looks right is often perception, and as you're the client, we're here to make sure that the work we produce looks right to you.
+                <p className="text-left lg:text-justify text-black xl:text-[#526E87]" style={{ fontFamily: "Inter, sans-serif", fontWeight: 500, fontSize: "clamp(16px, 1.5vw, 21px)", lineHeight: "130%", letterSpacing: "-0.05em" }}>
+                  {d1Text2 || "The beauty of anything creative is that there's no right and wrong, just loads of grey between the black and white. Whether something looks right is often perception, and as you're the client, we're here to make sure that the work we produce looks right to you."}
                 </p>
-                <p 
-                  className="text-left lg:text-justify text-black xl:text-[#526E87]"
-                  style={{ 
-                    fontFamily: "Inter, sans-serif", 
-                    fontWeight: 500, 
-                    fontSize: "clamp(16px, 1.5vw, 21px)",
-                    lineHeight: "130%",
-                    letterSpacing: "-0.05em",
-                  }}
-                >
-                  And who doesn't like those orgasmic sounds of pleasure when that shot is EXACTLY as you like it? Believe it or not, most creatives suffer with imposter syndrome - we question every one of our own decisions, but take tremendous pride in delivering high quality work. That little noise you make when you like what you see on the screen means the world.
+                <p className="text-left lg:text-justify text-black xl:text-[#526E87]" style={{ fontFamily: "Inter, sans-serif", fontWeight: 500, fontSize: "clamp(16px, 1.5vw, 21px)", lineHeight: "130%", letterSpacing: "-0.05em" }}>
+                  {d1Text3 || "And who doesn't like those orgasmic sounds of pleasure when that shot is EXACTLY as you like it? Believe it or not, most creatives suffer with imposter syndrome - we question every one of our own decisions, but take tremendous pride in delivering high quality work. That little noise you make when you like what you see on the screen means the world."}
                 </p>
               </div>
             </div>
@@ -92,63 +51,28 @@ const HowWeWorkDetails = () => {
 
         </div>
 
-        {/* =========================================
-            SECTION 2: If it's right first time, something's wrong
-        ========================================= */}
+        {/* SECTION 2 */}
         <div className="flex flex-col-reverse lg:flex-row items-center w-full">
           
-          {/* Text - Left */}
           <div className="w-full lg:w-1/2 xl:w-auto xl:flex-1 flex justify-center lg:justify-end px-6 md:px-12 lg:pl-12 xl:pl-12 lg:pr-12 xl:pr-32 mt-8 lg:mt-0">
             <div className="w-full max-w-[780px]">
-              <h2 
-                className="mb-4 md:mb-6 text-black xl:text-[#526E87]"
-                style={{ 
-                  fontFamily: "Inter, sans-serif", 
-                  fontWeight: 800, 
-                  fontSize: "clamp(28px, 3vw, 40px)",
-                  lineHeight: "100%",
-                  letterSpacing: "-0.05em",
-                }}
-              >
-                If it's right first time, something's wrong
+              <h2 className="mb-4 md:mb-6 text-black xl:text-[#526E87]" style={{ fontFamily: "Inter, sans-serif", fontWeight: 800, fontSize: "clamp(28px, 3vw, 40px)", lineHeight: "100%", letterSpacing: "-0.05em" }}>
+                {d2Title || "If it's right first time, something's wrong"}
               </h2>
               
               <div className="space-y-4 md:space-y-6">
-                <p 
-                  className="text-left lg:text-justify text-black xl:text-[#526E87]"
-                  style={{ 
-                    fontFamily: "Inter, sans-serif", 
-                    fontWeight: 500, 
-                    fontSize: "clamp(16px, 1.5vw, 21px)",
-                    lineHeight: "130%",
-                    letterSpacing: "-0.05em",
-                  }}
-                >
-                  With a million and one ways to edit a video or a still image, the distance between right and wrong gets further apart. One great aspect of working digitally is that you get to move things, delete things, put things back as they were four versions ago, all with relative ease.
+                <p className="text-left lg:text-justify text-black xl:text-[#526E87]" style={{ fontFamily: "Inter, sans-serif", fontWeight: 500, fontSize: "clamp(16px, 1.5vw, 21px)", lineHeight: "130%", letterSpacing: "-0.05em" }}>
+                  {d2Text1 || "With a million and one ways to edit a video or a still image, the distance between right and wrong gets further apart. One great aspect of working digitally is that you get to move things, delete things, put things back as they were four versions ago, all with relative ease."}
                 </p>
-                <p 
-                  className="text-left lg:text-justify text-black xl:text-[#526E87]"
-                  style={{ 
-                    fontFamily: "Inter, sans-serif", 
-                    fontWeight: 500, 
-                    fontSize: "clamp(16px, 1.5vw, 21px)",
-                    lineHeight: "130%",
-                    letterSpacing: "-0.05em",
-                  }}
-                >
-                  We don't expect you to know whether you're happy until you've seen it, and if you don't love it, we can change it. Your budget will have included time for review and for us to deliver updated versions back to you, so the pressures off. Unless you're on a particularly tight deadline, in which case, scrap all of the above, WE NEED TO KNOW NOW :)
+                <p className="text-left lg:text-justify text-black xl:text-[#526E87]" style={{ fontFamily: "Inter, sans-serif", fontWeight: 500, fontSize: "clamp(16px, 1.5vw, 21px)", lineHeight: "130%", letterSpacing: "-0.05em" }}>
+                  {d2Text2 || "We don't expect you to know whether you're happy until you've seen it, and if you don't love it, we can change it. Your budget will have included time for review and for us to deliver updated versions back to you, so the pressures off. Unless you're on a particularly tight deadline, in which case, scrap all of the above, WE NEED TO KNOW NOW :)"}
                 </p>
               </div>
             </div>
           </div>
 
-          {/* Image - Right (Added px-6 for mobile, removed on desktop) */}
           <div className="w-full lg:w-1/2 xl:w-[718px] max-h-[529px] shrink-0 relative z-10 flex justify-end px-6 lg:px-0">
-            <img
-              src={how2Img}
-              alt="Reviewing edits and feedback"
-              className="w-full h-full lg:h-[529px] object-cover"
-            />
+            <img src={d2Image || how2Img} alt="Reviewing edits and feedback" className="w-full h-full lg:h-[529px] object-cover" />
           </div>
 
         </div>

@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { Link } from "gatsby";
 
-const VideographyHero = () => {
+const VideographyHero = ({ title, subtitle, videoUrl }) => {
   const videoRef = useRef(null);
   const [playing, setPlaying] = useState(false);
 
@@ -35,34 +35,34 @@ const VideographyHero = () => {
             className="text-black mb-2 md:mb-4"
             style={{
               fontFamily: "Inter, sans-serif",
-              fontWeight: 700, // Changed to Bold as per specs
-              fontSize: "clamp(42px, 8vw, 120px)", // Exact 120px on desktop
+              fontWeight: 700, 
+              fontSize: "clamp(42px, 8vw, 120px)", 
               lineHeight: "100%",
               letterSpacing: "-0.05em"
             }}
           >
-            Video Production Services
+            {title || "Video Production Services"}
           </h1>
           <p 
             className="text-black"
             style={{
               fontFamily: "Inter, sans-serif",
-              fontWeight: 700, // Changed to Bold as per specs
-              fontSize: "clamp(20px, 3vw, 40px)", // Exact 40px on desktop
+              fontWeight: 700, 
+              fontSize: "clamp(20px, 3vw, 40px)", 
               lineHeight: "100%",
               letterSpacing: "-0.05em"
             }}
           >
-            by POCKET CREATIVES
+            {subtitle || "by POCKET CREATIVES"}
           </p>
         </div>
 
-        {/* Video Banner - Exact 1411x495 on desktop */}
+        {/* Video Banner - ACF video with fallback */}
         <div className="relative w-full aspect-[4/3] md:aspect-video md:h-[495px] overflow-hidden mb-2 bg-black/10">
           <video
             ref={videoRef}
             className="w-full h-full object-cover cursor-pointer"
-            src="/videos/hero.mp4"
+            src={videoUrl || "/videos/hero.mp4"}
             loop
             playsInline
             onClick={togglePlay}
@@ -83,13 +83,13 @@ const VideographyHero = () => {
           )}
         </div>
         
-        {/* Video Instruction Text */}
+        {/* Video Instruction Text (Hardcoded) */}
         <p 
           className="text-black mb-8 md:mb-10 font-medium text-left"
           style={{ 
             fontFamily: "Inter, sans-serif",
             fontWeight: 500,
-            fontSize: "clamp(12px, 1.5vw, 16px)", // Exact 16px on desktop
+            fontSize: "clamp(12px, 1.5vw, 16px)", 
             lineHeight: "200%",
             letterSpacing: "-0.05em"
           }}
@@ -100,14 +100,14 @@ const VideographyHero = () => {
         {/* Two Column Text Area */}
         <div className="flex flex-col md:grid md:grid-cols-[1.4fr_1fr] gap-8 md:gap-16 items-start">
           
-          {/* Left Side Text */}
+          {/* Left Side Text (Hardcoded) */}
           <div className="w-full text-left flex flex-col gap-4">
             <h2 
               className="text-black"
               style={{
                 fontFamily: "Inter, sans-serif",
                 fontWeight: 700,
-                fontSize: "clamp(24px, 3vw, 40px)", // Exact 40px on desktop
+                fontSize: "clamp(24px, 3vw, 40px)", 
                 lineHeight: "100%",
                 letterSpacing: "-0.05em"
               }}
@@ -119,7 +119,7 @@ const VideographyHero = () => {
               style={{
                 fontFamily: "Inter, sans-serif",
                 fontWeight: 500,
-                fontSize: "clamp(16px, 1.5vw, 20px)", // Exact 20px on desktop
+                fontSize: "clamp(16px, 1.5vw, 20px)", 
                 lineHeight: "100%",
                 letterSpacing: "-0.05em"
               }}
@@ -128,7 +128,7 @@ const VideographyHero = () => {
             </p>
           </div>
           
-          {/* Right Side Text & Button */}
+          {/* Right Side Text & Button (Hardcoded) */}
           <div className="flex flex-col items-center md:items-end justify-between h-full w-full text-center md:text-right mt-6 md:mt-0">
             <p 
               className="text-black mb-6 max-w-[320px]"

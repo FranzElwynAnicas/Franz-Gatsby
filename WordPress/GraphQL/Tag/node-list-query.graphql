@@ -1,0 +1,122 @@
+query NODE_LIST_QUERY($first: Int!, $after: String) {
+  tags(first: $first, after: $after) {
+    nodes {
+      contentNodes(first: 100) {
+        nodes {
+          contentType {
+            node {
+              __typename
+              id
+            }
+          }
+
+          contentTypeName
+          databaseId
+          date
+          dateGmt
+          desiredSlug
+          enclosure
+          guid
+          id
+          isComment
+          isContentNode
+          isFrontPage
+          isPostsPage
+          isTermNode
+
+          lastEditedBy {
+            node {
+              __typename
+              id
+            }
+          }
+
+          link
+          modified
+          modifiedGmt
+          slug
+          status
+
+          template {
+            templateName
+
+            __typename
+          }
+
+          uri
+
+          __typename
+
+          ... on MediaItem {
+            id
+          }
+
+          ... on Page {
+            id
+          }
+
+          ... on Post {
+            id
+          }
+
+          ... on GraphqlDocument {
+            id
+          }
+        }
+
+        pageInfo {
+          endCursor
+          hasNextPage
+          hasPreviousPage
+          startCursor
+        }
+      }
+
+      count
+      databaseId
+      description
+      id
+      isComment
+      isContentNode
+      isFrontPage
+      isPostsPage
+      isTermNode
+      link
+      name
+
+      posts(first: 100) {
+        nodes {
+          __typename
+          id
+        }
+
+        pageInfo {
+          endCursor
+          hasNextPage
+          hasPreviousPage
+          startCursor
+        }
+      }
+
+      slug
+      tagId
+
+      taxonomy {
+        node {
+          __typename
+          id
+        }
+      }
+
+      taxonomyName
+      termGroupId
+      termTaxonomyId
+      uri
+      __typename
+    }
+    pageInfo {
+      hasNextPage
+      endCursor
+    }
+  }
+}

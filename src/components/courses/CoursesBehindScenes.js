@@ -1,13 +1,22 @@
 import React, { useRef, useState } from "react";
 
-const videos = [
-  "/videos/lighting.mp4",
-  "/videos/review.mp4",
-  "/videos/pricing.mp4",
-  "/videos/hazzy.mp4",
-];
+const CoursesBehindScenes = ({
+  behindHeading,
+  behindP1,
+  behindP2,
+  video1,
+  video2,
+  video3,
+  video4,
+}) => {
+  // Build the video array from ACF props, falling back to hardcoded defaults
+  const videos = [
+    video1 || "/videos/lighting.mp4",
+    video2 || "/videos/review.mp4",
+    video3 || "/videos/pricing.mp4",
+    video4 || "/videos/hazzy.mp4",
+  ];
 
-const CoursesBehindScenes = () => {
   const videoRef = useRef(null);
   const [currentVideo, setCurrentVideo] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -38,7 +47,7 @@ const CoursesBehindScenes = () => {
       
       <div className="w-full max-w-[1440px] px-6 md:px-12 flex flex-col items-center">
         
-        {/* Heading */}
+        {/* DYNAMIC HEADING */}
         <h2 
           className="mb-6 md:mb-10 text-center whitespace-nowrap"
           style={{
@@ -50,10 +59,10 @@ const CoursesBehindScenes = () => {
             color: "#000000",
           }}
         >
-          Want to see us at work?
+          {behindHeading || "Want to see us at work?"}
         </h2>
 
-        {/* Paragraphs */}
+        {/* DYNAMIC PARAGRAPHS */}
         <div 
           className="w-full max-w-[1060px] mx-auto mb-8 md:mb-12 space-y-4 text-left md:text-center"
           style={{
@@ -66,17 +75,16 @@ const CoursesBehindScenes = () => {
           }}
         >
           <p>
-            If you hadn't already guessed, we love what we do, and we're proud of the video production projects that our team have delivered.
+            {behindP1 || "If you hadn't already guessed, we love what we do, and we're proud of the video production projects that our team have delivered."}
           </p>
           <p>
-            Have a look at some of these <strong>behind the scenes</strong> videos to see what it's like to be on set with us.
+            {behindP2 || "Have a look at some of these behind the scenes videos to see what it's like to be on set with us."}
           </p>
         </div>
 
         {/* Video Carousel */}
         <div className="relative w-full max-w-[1300px] flex items-center justify-center">
           
-          {/* Left Arrow - Hidden on Mobile */}
           <button 
             onClick={handlePrev}
             className="hidden md:block absolute left-0 md:-left-6 z-20 p-2 hover:opacity-75 transition-opacity"
@@ -87,7 +95,6 @@ const CoursesBehindScenes = () => {
             </svg>
           </button>
 
-          {/* Video Container */}
           <div className="w-full max-w-[1060px] aspect-[4/3] md:aspect-video md:h-[618px] bg-black/10 relative overflow-hidden shadow-lg">
             <video
               key={videos[currentVideo]} 
@@ -114,7 +121,6 @@ const CoursesBehindScenes = () => {
             )}
           </div>
 
-          {/* Right Arrow - Hidden on Mobile */}
           <button 
             onClick={handleNext}
             className="hidden md:block absolute right-0 md:-right-6 z-20 p-2 hover:opacity-75 transition-opacity"
@@ -126,7 +132,6 @@ const CoursesBehindScenes = () => {
           </button>
         </div>
 
-        {/* Video Instruction Text */}
         <p 
           className="mt-3 text-left w-full max-w-[1060px]"
           style={{ 
@@ -141,7 +146,6 @@ const CoursesBehindScenes = () => {
           *Click on Video to toggle sound
         </p>
 
-        {/* Mobile Controls (Pill Buttons) */}
         <div className="flex md:hidden items-center justify-center gap-4 mt-6">
           <button 
             onClick={handlePrev}

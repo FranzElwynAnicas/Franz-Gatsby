@@ -1,0 +1,108 @@
+query PREVIEW_QUERY($id: ID!) {
+  graphqlDocument(id: $id, idType: ID, asPreview: true) {
+    alias
+
+    ancestors(first: 100) {
+      nodes {
+        __typename
+        id
+      }
+
+      pageInfo {
+        endCursor
+        hasNextPage
+        hasPreviousPage
+        startCursor
+      }
+    }
+
+    content
+
+    contentType {
+      node {
+        __typename
+        id
+      }
+    }
+
+    contentTypeName
+    databaseId
+    date
+    dateGmt
+    description
+    desiredSlug
+    enclosure
+    grant
+
+    graphqlDocumentGroups(first: 100) {
+      nodes {
+        __typename
+        id
+      }
+
+      pageInfo {
+        endCursor
+        hasNextPage
+        hasPreviousPage
+        startCursor
+      }
+    }
+
+    graphqlDocumentId
+    guid
+    hasPassword
+    id
+    isComment
+    isContentNode
+    isFrontPage
+    isPostsPage
+    isTermNode
+
+    lastEditedBy {
+      node {
+        __typename
+        id
+      }
+    }
+
+    link
+    maxAgeHeader
+    modified
+    modifiedGmt
+
+    wpParent: parent {
+      node {
+        __typename
+        id
+      }
+    }
+
+    password
+    slug
+    status
+
+    template {
+      templateName
+
+      __typename
+    }
+
+    terms(first: 100) {
+      nodes {
+        __typename
+        id
+      }
+
+      pageInfo {
+        endCursor
+        hasNextPage
+        hasPreviousPage
+        startCursor
+      }
+    }
+
+    title
+    uri
+    __typename
+  }
+}

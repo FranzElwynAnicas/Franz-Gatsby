@@ -1,0 +1,156 @@
+query NODE_LIST_QUERY($first: Int!, $after: String) {
+  contentTypes(first: $first, after: $after) {
+    nodes {
+      archivePath
+      canExport
+
+      connectedTaxonomies(first: 100) {
+        nodes {
+          __typename
+          id
+        }
+
+        pageInfo {
+          endCursor
+          hasNextPage
+          hasPreviousPage
+          startCursor
+        }
+      }
+
+      contentNodes(first: 100) {
+        nodes {
+          contentType {
+            node {
+              __typename
+              id
+            }
+          }
+
+          contentTypeName
+          databaseId
+          date
+          dateGmt
+          desiredSlug
+          enclosure
+          guid
+          id
+          isComment
+          isContentNode
+          isFrontPage
+          isPostsPage
+          isTermNode
+
+          lastEditedBy {
+            node {
+              __typename
+              id
+            }
+          }
+
+          link
+          modified
+          modifiedGmt
+          slug
+          status
+
+          template {
+            templateName
+
+            __typename
+          }
+
+          uri
+
+          __typename
+
+          ... on MediaItem {
+            id
+          }
+
+          ... on Page {
+            id
+          }
+
+          ... on Post {
+            id
+          }
+
+          ... on GraphqlDocument {
+            id
+          }
+        }
+
+        pageInfo {
+          endCursor
+          hasNextPage
+          hasPreviousPage
+          startCursor
+        }
+      }
+
+      deleteWithUser
+      description
+      excludeFromSearch
+      graphqlPluralName
+      graphqlSingleName
+      hasArchive
+      hierarchical
+      id
+      isComment
+      isContentNode
+      isFrontPage
+      isPostsPage
+      isTermNode
+      label
+
+      labels {
+        addNew
+        addNewItem
+        allItems
+        archives
+        attributes
+        editItem
+        featuredImage
+        filterItemsList
+        insertIntoItem
+        itemsList
+        itemsListNavigation
+        menuName
+        name
+        newItem
+        notFound
+        notFoundInTrash
+        parentItemColon
+        removeFeaturedImage
+        searchItems
+        setFeaturedImage
+        singularName
+        uploadedToThisItem
+        useFeaturedImage
+        viewItem
+        viewItems
+      }
+
+      menuIcon
+      menuPosition
+      name
+      public
+      publiclyQueryable
+      restBase
+      restControllerClass
+      showInAdminBar
+      showInGraphql
+      showInMenu
+      showInNavMenus
+      showInRest
+      showUi
+      uri
+      __typename
+    }
+    pageInfo {
+      hasNextPage
+      endCursor
+    }
+  }
+}

@@ -62,7 +62,8 @@ const FlowerTagSvg = () => (
 
 const PricingModular = ({ 
   modularHeading, b1, b2, b3, 
-  c1Title, c1Text, c2Title, c2Text 
+  c1Title, c1Text, c2Title, c2Text,
+  videoUrl,
 }) => {
   const [playing, setPlaying] = useState(false);
   const videoRef = useRef(null);
@@ -127,10 +128,10 @@ const PricingModular = ({
             <video
               ref={videoRef}
               className="w-full h-full object-cover"
-              src="/videos/pricing.mp4"
+              src={videoUrl || "/videos/pricing.mp4"}
               loop
               playsInline
-              poster="/images/videoproduction.png"
+              poster={videoUrl ? undefined : "/images/videoproduction.png"}
             />
             {!playing && (
               <div className="absolute inset-0 flex items-center justify-center bg-black/10 hover:bg-black/20 transition-colors">

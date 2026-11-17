@@ -10,7 +10,12 @@ import p6 from "../../images/p6.png";
 import p7 from "../../images/p7.png";
 import p8 from "../../images/p8.png";
 
-const PhotographyAbout = () => {
+const PhotographyAbout = ({ 
+  yellowPill, 
+  text1, text2, text3, text4,
+  gridImage1, gridImage2, gridImage3, gridImage4,
+  gridImage5, gridImage6, gridImage7, gridImage8,
+}) => {
   return (
     <section className="w-full bg-[#F7F7F7] py-16 md:py-24 px-6 md:px-12 flex justify-center overflow-hidden">
       <div className="w-full max-w-[1280px]">
@@ -34,7 +39,7 @@ const PhotographyAbout = () => {
                 className="font-extrabold text-[40px] md:text-[64px] tracking-[-0.02em] md:pl-[30px]"
                 style={{ fontFamily: "Inter, sans-serif" }}
               >
-                Photography
+                {yellowPill || "Photography"}
               </h2>
             </div>
             
@@ -43,20 +48,28 @@ const PhotographyAbout = () => {
               style={{ fontFamily: "Inter, sans-serif", color: "#526E87", fontWeight: 500 }}
             >
               <p>
-                Our professional photography services are <span className="text-[#179CBD] font-bold">flexible and affordably priced</span>, so that you can scale up or down depending on your requirements. We create eye-catching results for use in advertising campaigns, product listings and e-commerce, and for social media.
+                {text1 ? (
+                  text1
+                ) : (
+                  <>
+                    Our professional photography services are{" "}
+                    <span className="text-[#179CBD] font-bold">flexible and affordably priced</span>
+                    , so that you can scale up or down depending on your requirements. We create eye-catching results for use in advertising campaigns, product listings and e-commerce, and for social media.
+                  </>
+                )}
               </p>
               <p>
-                Here, you'll see our extensive portfolio. It covers a range of subjects so whatever you're here for, we're sure you'll find something to pique your interest.
+                {text2 || "Here, you'll see our extensive portfolio. It covers a range of subjects so whatever you're here for, we're sure you'll find something to pique your interest."}
               </p>
             </div>
           </div>
 
           {/* Right: Top 2x2 Image Grid (Tablet/Desktop Only) */}
           <div className="hidden md:grid grid-cols-2 gap-4 w-full">
-            <img src={p1} alt="Photography grid 1" className="w-full h-[301.54px] object-cover" />
-            <img src={p2} alt="Photography grid 2" className="w-full h-[301.54px] object-cover" />
-            <img src={p3} alt="Photography grid 3" className="w-full h-[301.54px] object-cover" />
-            <img src={p4} alt="Photography grid 4" className="w-full h-[301.54px] object-cover" />
+            <img src={gridImage1 || p1} alt="Photography grid 1" className="w-full h-[301.54px] object-cover" />
+            <img src={gridImage2 || p2} alt="Photography grid 2" className="w-full h-[301.54px] object-cover" />
+            <img src={gridImage3 || p3} alt="Photography grid 3" className="w-full h-[301.54px] object-cover" />
+            <img src={gridImage4 || p4} alt="Photography grid 4" className="w-full h-[301.54px] object-cover" />
           </div>
 
         </div>
@@ -65,14 +78,14 @@ const PhotographyAbout = () => {
             MOBILE ONLY: 2 Rows, 4 Columns Image Grid
         ========================================= */}
         <div className="grid md:hidden grid-cols-4 gap-1.5 w-full mb-8">
-          <img src={p1} alt="Photography grid 1" className="w-full aspect-square object-cover" />
-          <img src={p2} alt="Photography grid 2" className="w-full aspect-square object-cover" />
-          <img src={p3} alt="Photography grid 3" className="w-full aspect-square object-cover" />
-          <img src={p4} alt="Photography grid 4" className="w-full aspect-square object-cover" />
-          <img src={p5} alt="Photography grid 5" className="w-full aspect-square object-cover" />
-          <img src={p6} alt="Photography grid 6" className="w-full aspect-square object-cover" />
-          <img src={p7} alt="Photography grid 7" className="w-full aspect-square object-cover" />
-          <img src={p8} alt="Photography grid 8" className="w-full aspect-square object-cover" />
+          <img src={gridImage1 || p1} alt="Photography grid 1" className="w-full aspect-square object-cover" />
+          <img src={gridImage2 || p2} alt="Photography grid 2" className="w-full aspect-square object-cover" />
+          <img src={gridImage3 || p3} alt="Photography grid 3" className="w-full aspect-square object-cover" />
+          <img src={gridImage4 || p4} alt="Photography grid 4" className="w-full aspect-square object-cover" />
+          <img src={gridImage5 || p5} alt="Photography grid 5" className="w-full aspect-square object-cover" />
+          <img src={gridImage6 || p6} alt="Photography grid 6" className="w-full aspect-square object-cover" />
+          <img src={gridImage7 || p7} alt="Photography grid 7" className="w-full aspect-square object-cover" />
+          <img src={gridImage8 || p8} alt="Photography grid 8" className="w-full aspect-square object-cover" />
         </div>
 
         {/* =========================================
@@ -82,10 +95,10 @@ const PhotographyAbout = () => {
           
           {/* Left: Bottom Image Grid */}
           <div className="grid grid-cols-2 gap-4 -mt-24 w-full">
-            <img src={p5} alt="Photography grid 5" className="w-full h-[301.54px] object-cover" />
-            <img src={p6} alt="Photography grid 6" className="w-full h-[301.54px] object-cover" />
-            <img src={p7} alt="Photography grid 7" className="w-full h-[301.54px] object-cover" />
-            <img src={p8} alt="Photography grid 8" className="w-full h-[301.54px] object-cover" />
+            <img src={gridImage5 || p5} alt="Photography grid 5" className="w-full h-[301.54px] object-cover" />
+            <img src={gridImage6 || p6} alt="Photography grid 6" className="w-full h-[301.54px] object-cover" />
+            <img src={gridImage7 || p7} alt="Photography grid 7" className="w-full h-[301.54px] object-cover" />
+            <img src={gridImage8 || p8} alt="Photography grid 8" className="w-full h-[301.54px] object-cover" />
           </div>
 
           {/* Right: Text & Services Banner */}
@@ -95,13 +108,15 @@ const PhotographyAbout = () => {
               style={{ fontFamily: "Inter, sans-serif", color: "#526E87", fontWeight: 500 }}
             >
               <p>
-                Our photography agency is commissioned by a wonderfully diverse range of clients including food producers, beauty brands, new product releases, events needing expert coverage, fashion brands and jewellery & watch brands.
+                {text3 || "Our photography agency is commissioned by a wonderfully diverse range of clients including food producers, beauty brands, new product releases, events needing expert coverage, fashion brands and jewellery & watch brands."}
               </p>
               <p>
-                We work with clients of all sizes, making the most of your budget to reach your goals. We're here to build a strong working relationship, where you want to come back to us time and again because you trust what we can deliver.
+                {text4 || "We work with clients of all sizes, making the most of your budget to reach your goals. We're here to build a strong working relationship, where you want to come back to us time and again because you trust what we can deliver."}
               </p>
               <p>
-                We have now opened our brand new <span className="text-[#179CBD] font-bold">photography studio in London Waterloo</span>, which gives us a great space to base our photography services from – and makes booking new projects easier than ever.
+                We have now opened our brand new{" "}
+                <span className="text-[#179CBD] font-bold">photography studio in London Waterloo</span>
+                , which gives us a great space to base our photography services from – and makes booking new projects easier than ever.
               </p>
             </div>
             
@@ -133,13 +148,15 @@ const PhotographyAbout = () => {
             style={{ fontFamily: "Inter, sans-serif", color: "#526E87", fontWeight: 500 }}
           >
             <p>
-              Our photography agency is commissioned by a wonderfully diverse range of clients including food producers, beauty brands, new product releases, events needing expert coverage, fashion brands and jewellery & watch brands.
+              {text3 || "Our photography agency is commissioned by a wonderfully diverse range of clients including food producers, beauty brands, new product releases, events needing expert coverage, fashion brands and jewellery & watch brands."}
             </p>
             <p>
-              We work with clients of all sizes, making the most of your budget to reach your goals. We're here to build a strong working relationship, where you want to come back to us time and again because you trust what we can deliver.
+              {text4 || "We work with clients of all sizes, making the most of your budget to reach your goals. We're here to build a strong working relationship, where you want to come back to us time and again because you trust what we can deliver."}
             </p>
             <p>
-              We have now opened our brand new <span className="text-[#179CBD] font-bold">photography studio in London Waterloo</span>, which gives us a great space to base our photography services from – and makes booking new projects easier than ever.
+              We have now opened our brand new{" "}
+              <span className="text-[#179CBD] font-bold">photography studio in London Waterloo</span>
+              , which gives us a great space to base our photography services from – and makes booking new projects easier than ever.
             </p>
           </div>
           

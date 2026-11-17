@@ -1,8 +1,8 @@
 import React from "react";
 
 const ServicesCategoryBlock = ({
-  title = "Aaaand Action: Video Production",
-  paragraph, // <-- Added this to receive the text from WordPress
+  title,
+  paragraph,
   links = [
     { label: "Videography", to: "#category-video-production" },
     { label: "Photography", to: "#photography" },
@@ -30,7 +30,7 @@ const ServicesCategoryBlock = ({
             fontSize: "clamp(48px, 7.5vw, 120px)",
           }}
         >
-          {title}
+          {title || "Aaaand Action: Video Production"}
         </h2>
 
         {/* Content layout */}

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
-const courseBoxes = [
+// Original hardcoded content — used as fallback when ACF is empty
+const FALLBACK_BOXES = [
   {
     id: 1,
     title: "Those new to the industry might be interested in",
@@ -30,8 +31,43 @@ const courseBoxes = [
   },
 ];
 
-const CoursesExamples = () => {
+const CoursesExamples = ({ examples }) => {
   const [activeBox, setActiveBox] = useState(null);
+
+  // Build course boxes from ACF if data exists; otherwise use hardcoded fallback
+  const hasAcfData =
+    examples?.courseBox1?.title ||
+    examples?.courseBox1?.details ||
+    examples?.courseBox2?.title ||
+    examples?.courseBox2?.details ||
+    examples?.courseBox3?.title ||
+    examples?.courseBox3?.details;
+
+  const courseBoxes = hasAcfData
+    ? [
+        {
+          id: 1,
+          title: examples?.courseBox1?.title || FALLBACK_BOXES[0].title,
+          details: examples?.courseBox1?.details
+            ? examples.courseBox1.details.split("\n").filter(Boolean)
+            : FALLBACK_BOXES[0].details,
+        },
+        {
+          id: 2,
+          title: examples?.courseBox2?.title || FALLBACK_BOXES[1].title,
+          details: examples?.courseBox2?.details
+            ? examples.courseBox2.details.split("\n").filter(Boolean)
+            : FALLBACK_BOXES[1].details,
+        },
+        {
+          id: 3,
+          title: examples?.courseBox3?.title || FALLBACK_BOXES[2].title,
+          details: examples?.courseBox3?.details
+            ? examples.courseBox3.details.split("\n").filter(Boolean)
+            : FALLBACK_BOXES[2].details,
+        },
+      ]
+    : FALLBACK_BOXES;
 
   // Logic to perfectly anchor the clicked box while pushing the others
   const getJustify = () => {
@@ -43,7 +79,7 @@ const CoursesExamples = () => {
   return (
     <section className="w-full bg-[#F7F7F7] py-16 md:py-24 flex flex-col items-center overflow-hidden">
       <div className="w-full flex flex-col items-center">
-        {/* Heading — black until xl, #526E87 at xl+ */}
+        {/* Heading */}
         <h2
           className="text-black xl:text-[#526E87] text-center mb-12 md:mb-20 max-w-[1000px] px-6"
           style={{
@@ -57,9 +93,7 @@ const CoursesExamples = () => {
           Example Courses
         </h2>
 
-        {/* Container for the Boxes */}
         <div className="w-full flex pb-8 overflow-hidden px-6 md:px-12">
-          {/* Mobile: flex-col (stacked) | Tablet/Desktop (lg+): flex-row */}
           <div
             className={`flex flex-col lg:flex-row items-stretch transition-all duration-500 w-full gap-6 md:gap-8 justify-center ${getJustify()}`}
           >
@@ -92,7 +126,6 @@ const CoursesExamples = () => {
                         {box.title}
                       </h3>
 
-                      {/* Arrow directly next to the text */}
                       <div className="mb-[6px] shrink-0">
                         <svg
                           width="34"
@@ -117,10 +150,8 @@ const CoursesExamples = () => {
                   <div
                     className={`
                       h-[418px] bg-[#179CBD] flex flex-col overflow-hidden transition-all duration-500 ease-in-out
-                      /* Mobile Sliding Overlay */
                       absolute top-0 left-0 w-full z-20 p-8 md:p-10
                       ${isOpen ? "translate-x-0 opacity-100" : "translate-x-full opacity-0 pointer-events-none"}
-                      /* Tablet/Desktop Expanding Panel */
                       lg:relative lg:translate-x-0 lg:top-auto lg:left-auto
                       ${isOpen ? "lg:w-[680px] lg:opacity-100" : "lg:w-0 lg:opacity-0 lg:p-0"}
                     `}
@@ -147,7 +178,6 @@ const CoursesExamples = () => {
                       </div>
                     </div>
 
-                    {/* Back Arrow */}
                     <button
                       onClick={(e) => {
                         e.stopPropagation();

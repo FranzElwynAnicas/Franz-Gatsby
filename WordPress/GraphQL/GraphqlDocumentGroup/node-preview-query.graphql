@@ -1,0 +1,116 @@
+query PREVIEW_QUERY($id: ID!) {
+  graphqlDocumentGroup(id: $id, idType: ID, asPreview: true) {
+    contentNodes(first: 100) {
+      nodes {
+        contentType {
+          node {
+            __typename
+            id
+          }
+        }
+
+        contentTypeName
+        databaseId
+        date
+        dateGmt
+        desiredSlug
+        enclosure
+        guid
+        id
+        isComment
+        isContentNode
+        isFrontPage
+        isPostsPage
+        isTermNode
+
+        lastEditedBy {
+          node {
+            __typename
+            id
+          }
+        }
+
+        link
+        modified
+        modifiedGmt
+        slug
+        status
+
+        template {
+          templateName
+
+          __typename
+        }
+
+        uri
+
+        __typename
+
+        ... on MediaItem {
+          id
+        }
+
+        ... on Page {
+          id
+        }
+
+        ... on Post {
+          id
+        }
+
+        ... on GraphqlDocument {
+          id
+        }
+      }
+
+      pageInfo {
+        endCursor
+        hasNextPage
+        hasPreviousPage
+        startCursor
+      }
+    }
+
+    count
+    databaseId
+    description
+    graphqlDocumentGroupId
+
+    graphqlDocuments(first: 100) {
+      nodes {
+        __typename
+        id
+      }
+
+      pageInfo {
+        endCursor
+        hasNextPage
+        hasPreviousPage
+        startCursor
+      }
+    }
+
+    id
+    isComment
+    isContentNode
+    isFrontPage
+    isPostsPage
+    isTermNode
+    link
+    name
+    slug
+
+    taxonomy {
+      node {
+        __typename
+        id
+      }
+    }
+
+    taxonomyName
+    termGroupId
+    termTaxonomyId
+    uri
+    __typename
+  }
+}

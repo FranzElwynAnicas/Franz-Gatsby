@@ -1,13 +1,13 @@
 import React from "react";
 
 const ServicesCategoryBlock3 = ({
-  title = "We've got it covered: The Whole Package",
-  paragraph, // <-- Dynamic paragraph from WordPress
+  title,
+  paragraph,
   links = [
     { label: "Video Production", to: "#category-video-production" },
     { label: "Photography", to: "#photography" },
   ],
-  bgColor = "bg-[#F6B81E]", // The yellow color
+  bgColor = "bg-[#F6B81E]",
 }) => {
   const handleClick = (e, to) => {
     e.preventDefault();
@@ -17,7 +17,7 @@ const ServicesCategoryBlock3 = ({
 
   return (
     <section
-      id="the-rest" // <-- ID for the anchor link
+      id="the-rest"
       className={`relative w-full ${bgColor} min-h-screen flex flex-col justify-center pt-32 pb-16 lg:py-0`}
       style={{ scrollMarginTop: "0px" }}
     >
@@ -30,7 +30,7 @@ const ServicesCategoryBlock3 = ({
             fontSize: "clamp(48px, 7.5vw, 120px)",
           }}
         >
-          {title}
+          {title || "We've got it covered: The Whole Package"}
         </h2>
 
         {/* Content layout */}
